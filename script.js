@@ -217,11 +217,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const roleEl = document.querySelector('.role-rotate-text');
   if (roleEl) {
     const roles = [
-      'Data Scientist',
       'AI Engineer',
-      'ML Researcher',
-      'Analytics Strategist',
-      'BI Developer'
+      'Machine Learning Engineer',
+      'Data Scientist',
+      'Business Intelligence Analyst',
+      'Digital Transformation Analyst',
+      'Data Analyst',
+      'Systems Engineer',
+      'Marketing Analytics Engineer',
+      'AI Workflow Engineer'
     ];
     let roleIndex = 0;
     let charIndex = 0;
