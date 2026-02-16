@@ -12,10 +12,10 @@ document.addEventListener('DOMContentLoaded', () => {
   if (heroName) {
     const glyphSets = [
       '█▓▒░▄▀■□▪▫',
-      '01',
+      '0110100101',
       '⠁⠂⠄⡀⢀⠈⠐⠠⡁⢁',
-      '╔╗╚╝║═╬╣╠╩╦',
-      'ΞΣΠΩΔΦΨΛ',
+      '╔╗╚╝║═╬╣╠╩╦├┤┬┴┼',
+      'ΞΣΠΩΔΦΨΛABCDEFGHXYZ',
     ];
     const allGlyphs = glyphSets.join('');
     const originalHTML = heroName.innerHTML;
