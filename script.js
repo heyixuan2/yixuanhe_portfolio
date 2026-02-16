@@ -1,29 +1,420 @@
 /* ============================================
-   ADAM HE PORTFOLIO — Shared JavaScript
+   YIXUAN HE PORTFOLIO — Advanced Animations
    ============================================ */
 
-// --- Intersection Observer for fade-in animations ---
 document.addEventListener('DOMContentLoaded', () => {
+
+  // ==========================================
+  // 1. TECH MOSAIC NAME REVEAL
+  //    Wraps chars in-place, no layout shift
+  // ==========================================
+  const heroName = document.querySelector('.hero-name');
+  if (heroName) {
+    const glyphSets = [
+      '█▓▒░▄▀■□▪▫',
+      '01',
+      '⠁⠂⠄⡀⢀⠈⠐⠠⡁⢁',
+      '╔╗╚╝║═╬╣╠╩╦',
+      'ΞΣΠΩΔΦΨΛ',
+    ];
+    const allGlyphs = glyphSets.join('');
+    const originalHTML = heroName.innerHTML;
+
+    heroName.style.transform = 'none';
+
+    // Wrap every visible character in a span, preserving structure (.outline etc)
+    function wrapChars(node) {
+      Array.from(node.childNodes).forEach(child => {
+        if (child.nodeType === Node.TEXT_NODE) {
+          const text = child.textContent;
+          if (!text.trim()) return;
+          const frag = document.createDocumentFragment();
+          for (const ch of text) {
+            if (ch === ' ' || ch === '\n') {
+              frag.appendChild(document.createTextNode(ch));
+            } else {
+              const s = document.createElement('span');
+              s.className = 'mc';
+              s.dataset.f = ch;
+              s.textContent = allGlyphs[Math.floor(Math.random() * allGlyphs.length)];
+              frag.appendChild(s);
+            }
+          }
+          child.replaceWith(frag);
+        } else if (child.nodeType === Node.ELEMENT_NODE && !child.classList.contains('mc')) {
+          wrapChars(child);
+        }
+      });
+    }
+
+    setTimeout(() => {
+      wrapChars(heroName);
+      heroName.classList.add('mosaic-active');
+
+      const chars = heroName.querySelectorAll('.mc');
+      const totalDuration = 1200;
+      const staggerBase = totalDuration / chars.length;
+
+      chars.forEach((span, i) => {
+        const final = span.dataset.f;
+        const resolveAt = 300 + (i * staggerBase * 0.6) + Math.random() * 200;
+        const cycleInterval = 50;
+        let elapsed = 0;
+
+        const timer = setInterval(() => {
+          elapsed += cycleInterval;
+          const phase = Math.min(Math.floor(elapsed / (resolveAt / glyphSets.length)), glyphSets.length - 1);
+          const set = glyphSets[phase];
+          span.textContent = set[Math.floor(Math.random() * set.length)];
+          span.style.opacity = 0.3 + Math.random() * 0.7;
+          // Mix of black, white, and blue for mosaic feel
+          const colorRoll = Math.random();
+          if (colorRoll < 0.45) {
+            span.style.color = 'var(--text-primary)';
+          } else if (colorRoll < 0.7) {
+            span.style.color = '#ccc';
+          } else {
+            span.style.color = 'var(--accent-blue)';
+          }
+
+          if (elapsed >= resolveAt) {
+            clearInterval(timer);
+            span.textContent = final;
+            span.style.opacity = '1';
+            // Brief blue flash, then fade to final color
+            const isOutline = !!span.closest('.outline');
+            span.style.color = 'var(--accent-blue)';
+            span.style.textShadow = '0 0 12px rgba(37,99,235,0.6)';
+            span.style.transition = 'color 0.4s ease, text-shadow 0.4s ease, -webkit-text-stroke-color 0.4s ease';
+            if (isOutline) {
+              span.style.webkitTextStroke = '0px var(--text-primary)';
+            }
+            requestAnimationFrame(() => {
+              setTimeout(() => {
+                if (isOutline) {
+                  span.style.color = 'transparent';
+                  span.style.webkitTextStroke = '1.5px var(--text-primary)';
+                } else {
+                  span.style.color = 'var(--text-primary)';
+                }
+                span.style.textShadow = 'none';
+              }, 80);
+            });
+          }
+        }, cycleInterval);
+      });
+
+      // After all resolved, clean up: restore original HTML
+      setTimeout(() => {
+        heroName.classList.remove('mosaic-active');
+        heroName.innerHTML = originalHTML;
+      }, totalDuration + 500);
+    }, 400);
+  }
+
+  // ==========================================
+  // 1b. ROTATING ROLE TEXT (Typewriter)
+  // ==========================================
+  const roleEl = document.querySelector('.role-rotate-text');
+  if (roleEl) {
+    const roles = [
+      'Data Scientist',
+      'AI Engineer',
+      'ML Researcher',
+      'Analytics Strategist',
+      'BI Developer'
+    ];
+    let roleIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    let typingSpeed = 100;
+
+    function typeRole() {
+      const current = roles[roleIndex];
+
+      if (!isDeleting) {
+        roleEl.textContent = current.substring(0, charIndex + 1);
+        charIndex++;
+        if (charIndex === current.length) {
+          isDeleting = false;
+          setTimeout(() => { isDeleting = true; typeRole(); }, 2000);
+          return;
+        }
+        typingSpeed = 80 + Math.random() * 60;
+      } else {
+        roleEl.textContent = current.substring(0, charIndex - 1);
+        charIndex--;
+        if (charIndex === 0) {
+          isDeleting = false;
+          roleIndex = (roleIndex + 1) % roles.length;
+          typingSpeed = 400;
+        } else {
+          typingSpeed = 40;
+        }
+      }
+      setTimeout(typeRole, typingSpeed);
+    }
+
+    setTimeout(typeRole, 1200);
+  }
+
+  // ==========================================
+  // 1c. STATS BAR COUNTER ANIMATION
+  // ==========================================
+  const statNumbers = document.querySelectorAll('.stat-number[data-target]');
+  if (statNumbers.length) {
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const target = parseInt(el.getAttribute('data-target'));
+          const duration = 1200;
+          const start = performance.now();
+
+          function tick(now) {
+            const elapsed = now - start;
+            const progress = Math.min(elapsed / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 4);
+            el.textContent = Math.floor(eased * target);
+            if (progress < 1) requestAnimationFrame(tick);
+            else el.textContent = target;
+          }
+          requestAnimationFrame(tick);
+          statsObserver.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+    statNumbers.forEach(el => statsObserver.observe(el));
+  }
+
+  // ==========================================
+  // 2. TERMINAL TYPING EFFECT
+  //    Types out lines one by one
+  // ==========================================
+  function typeTerminal(terminalBody) {
+    const lines = terminalBody.querySelectorAll('div, br');
+    const originalContent = terminalBody.innerHTML;
+    terminalBody.innerHTML = '';
+    terminalBody.style.opacity = '1';
+
+    let delay = 0;
+    const lineElements = originalContent.split('\n').filter(l => l.trim());
+
+    terminalBody.innerHTML = '';
+
+    // Re-insert with staggered reveal
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = originalContent;
+    const children = Array.from(tempDiv.childNodes);
+
+    children.forEach((child, i) => {
+      const wrapper = document.createElement('div');
+      wrapper.style.opacity = '0';
+      wrapper.style.transform = 'translateY(8px)';
+      wrapper.style.transition = `opacity 0.3s ease ${i * 0.12}s, transform 0.3s ease ${i * 0.12}s`;
+
+      if (child.nodeType === 3) {
+        wrapper.textContent = child.textContent;
+      } else {
+        wrapper.appendChild(child.cloneNode(true));
+      }
+
+      terminalBody.appendChild(wrapper);
+
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          wrapper.style.opacity = '1';
+          wrapper.style.transform = 'translateY(0)';
+        }, 50);
+      });
+    });
+  }
+
+  const terminalBodies = document.querySelectorAll('.terminal-body');
+  terminalBodies.forEach(terminal => {
+    terminal.style.opacity = '0';
+    const termObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          typeTerminal(entry.target);
+          termObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    termObserver.observe(terminal);
+  });
+
+  // ==========================================
+  // 3. SCROLL-TRIGGERED FADE-IN (Enhanced)
+  //    Different animations per element type
+  // ==========================================
   const fadeElements = document.querySelectorAll('.fade-in');
-
-  const observerOptions = {
-    root: null,
-    rootMargin: '0px 0px -60px 0px',
-    threshold: 0.1
-  };
-
-  const observer = new IntersectionObserver((entries) => {
+  const fadeObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
+        fadeObserver.unobserve(entry.target);
       }
     });
-  }, observerOptions);
+  }, { rootMargin: '0px 0px -60px 0px', threshold: 0.1 });
+  fadeElements.forEach(el => fadeObserver.observe(el));
 
-  fadeElements.forEach(el => observer.observe(el));
+  // Staggered reveal for grid children
+  const grids = document.querySelectorAll('.grid-2, .grid-3, .skills-grid');
+  grids.forEach(grid => {
+    const gridObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const children = entry.target.children;
+          Array.from(children).forEach((child, i) => {
+            child.style.opacity = '0';
+            child.style.transform = 'translateY(30px)';
+            child.style.transition = `opacity 0.5s cubic-bezier(0.4,0,0.2,1) ${i * 0.1}s, transform 0.5s cubic-bezier(0.4,0,0.2,1) ${i * 0.1}s`;
+            requestAnimationFrame(() => {
+              setTimeout(() => {
+                child.style.opacity = '1';
+                child.style.transform = 'translateY(0)';
+              }, 50);
+            });
+          });
+          gridObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    gridObserver.observe(grid);
+  });
 
-  // --- Mobile Navigation Toggle ---
+  // Timeline progressive reveal
+  const timelineItems = document.querySelectorAll('.timeline-item');
+  timelineItems.forEach((item, i) => {
+    item.style.opacity = '0';
+    item.style.transform = 'translateX(-20px)';
+    item.style.transition = `opacity 0.6s ease ${i * 0.15}s, transform 0.6s ease ${i * 0.15}s`;
+
+    const tlObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateX(0)';
+          tlObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    tlObserver.observe(item);
+  });
+
+  // ==========================================
+  // 4. 3D CARD TILT EFFECT
+  // ==========================================
+  const tiltCards = document.querySelectorAll('.card, .cert-card');
+  tiltCards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateX = (y - centerY) / 20;
+      const rotateY = (centerX - x) / 20;
+
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+      card.style.background = `radial-gradient(600px circle at ${x}px ${y}px, rgba(37,99,235,0.04), var(--bg-card))`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+      card.style.background = 'var(--bg-card)';
+    });
+  });
+
+  // ==========================================
+  // 5. MAGNETIC BUTTON EFFECT
+  // ==========================================
+  const buttons = document.querySelectorAll('.btn');
+  buttons.forEach(btn => {
+    btn.addEventListener('mousemove', (e) => {
+      const rect = btn.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+    });
+
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = 'translate(0, 0)';
+      btn.style.transition = 'transform 0.3s ease';
+    });
+
+    btn.addEventListener('mouseenter', () => {
+      btn.style.transition = 'none';
+    });
+  });
+
+  // ==========================================
+  // 6. COUNTER ANIMATION
+  //    For stat numbers (90%, 140+, 80%+)
+  // ==========================================
+  function animateCounter(el) {
+    const text = el.textContent;
+    const match = text.match(/(\d+)/);
+    if (!match) return;
+
+    const target = parseInt(match[1]);
+    const suffix = text.replace(match[1], '');
+    const duration = 1500;
+    const start = performance.now();
+
+    function tick(now) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = Math.floor(eased * target);
+      el.textContent = current + suffix;
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  // Observe stat cards
+  document.querySelectorAll('.card [style*="font-size: 2rem"]').forEach(el => {
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateCounter(entry.target);
+          counterObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    counterObserver.observe(el);
+  });
+
+  // ==========================================
+  // 7. CURSOR GLOW FOLLOWER
+  //    Subtle light following cursor
+  // ==========================================
+  const cursorGlow = document.createElement('div');
+  cursorGlow.classList.add('cursor-glow');
+  document.body.appendChild(cursorGlow);
+
+  let mouseX = 0, mouseY = 0;
+  let glowX = 0, glowY = 0;
+
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  function animateGlow() {
+    glowX += (mouseX - glowX) * 0.08;
+    glowY += (mouseY - glowY) * 0.08;
+    cursorGlow.style.left = glowX + 'px';
+    cursorGlow.style.top = glowY + 'px';
+    requestAnimationFrame(animateGlow);
+  }
+  animateGlow();
+
+  // ==========================================
+  // 8. MOBILE NAVIGATION
+  // ==========================================
   const navToggle = document.querySelector('.nav-toggle');
   const navLinks = document.querySelector('.nav-links');
 
@@ -32,8 +423,6 @@ document.addEventListener('DOMContentLoaded', () => {
       navLinks.classList.toggle('open');
       navToggle.classList.toggle('active');
     });
-
-    // Close menu when a link is clicked
     navLinks.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         navLinks.classList.remove('open');
@@ -42,54 +431,51 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- Nav scroll effect ---
+  // ==========================================
+  // 9. NAV SHRINK ON SCROLL
+  // ==========================================
   const nav = document.querySelector('.nav');
-  let lastScrollY = 0;
-
   window.addEventListener('scroll', () => {
-    const currentScrollY = window.scrollY;
-
-    if (currentScrollY > 100) {
+    if (window.scrollY > 80) {
+      nav.style.height = '52px';
       nav.style.borderBottomColor = 'rgba(200, 200, 200, 0.8)';
+      nav.style.boxShadow = '0 1px 20px rgba(0,0,0,0.04)';
     } else {
+      nav.style.height = '64px';
       nav.style.borderBottomColor = 'rgba(200, 200, 200, 0.3)';
+      nav.style.boxShadow = 'none';
     }
-
-    lastScrollY = currentScrollY;
   }, { passive: true });
 
-  // --- Smooth cursor glow effect on project cards ---
-  const cards = document.querySelectorAll('.project-card, .card');
+  // ==========================================
+  // 10. PARALLAX GRID BACKGROUND
+  // ==========================================
+  const gridBg = document.querySelector('.grid-bg');
+  if (gridBg) {
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY;
+      gridBg.style.transform = `translateY(${scrolled * 0.15}px)`;
+    }, { passive: true });
+  }
 
-  cards.forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-
-      card.style.background = `radial-gradient(600px circle at ${x}px ${y}px, rgba(0,0,0,0.02), var(--bg-card))`;
-    });
-
-    card.addEventListener('mouseleave', () => {
-      card.style.background = 'var(--bg-card)';
+  // ==========================================
+  // 11. TAG HOVER RIPPLE
+  // ==========================================
+  document.querySelectorAll('.tag').forEach(tag => {
+    tag.addEventListener('click', function(e) {
+      const ripple = document.createElement('span');
+      ripple.classList.add('tag-ripple');
+      const rect = this.getBoundingClientRect();
+      ripple.style.left = (e.clientX - rect.left) + 'px';
+      ripple.style.top = (e.clientY - rect.top) + 'px';
+      this.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 600);
     });
   });
 
-  // --- Typing effect for terminal (optional enhancement) ---
-  const terminalOutputs = document.querySelectorAll('.terminal-body');
-  terminalOutputs.forEach(terminal => {
-    terminal.style.opacity = '0';
-    terminal.style.transition = 'opacity 0.6s ease';
+  // ==========================================
+  // 12. SMOOTH PAGE LOAD SEQUENCE
+  // ==========================================
+  document.body.classList.add('page-loaded');
 
-    const terminalObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          terminalObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.3 });
-
-    terminalObserver.observe(terminal);
-  });
 });
