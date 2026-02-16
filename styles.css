@@ -684,12 +684,6 @@ img {
   aspect-ratio: 3/4;
   object-fit: cover;
   border-radius: 12px;
-  filter: grayscale(100%) contrast(1.05);
-  transition: filter var(--transition-slow);
-}
-
-.about-photo:hover {
-  filter: grayscale(30%) contrast(1.05);
 }
 
 .about-photo-border {
