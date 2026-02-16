@@ -51,6 +51,13 @@ document.addEventListener('DOMContentLoaded', () => {
       wrapChars(heroName);
       heroName.classList.add('mosaic-active');
 
+      // Add scanline as a real element; track when it started
+      const scanline = document.createElement('div');
+      scanline.className = 'mosaic-scanline';
+      heroName.appendChild(scanline);
+      const scanlineStart = performance.now();
+      const scanlineCycle = 800; // matches CSS 0.8s
+
       const chars = heroName.querySelectorAll('.mc');
       const totalDuration = 1200;
       const staggerBase = totalDuration / chars.length;
@@ -104,11 +111,103 @@ document.addEventListener('DOMContentLoaded', () => {
         }, cycleInterval);
       });
 
-      // After all resolved, clean up: restore original HTML
+      // After all resolved, let scanline finish its current cycle then remove
       setTimeout(() => {
-        heroName.classList.remove('mosaic-active');
-        heroName.innerHTML = originalHTML;
-      }, totalDuration + 500);
+        const elapsed = performance.now() - scanlineStart;
+        const msIntoCurrentCycle = elapsed % scanlineCycle;
+        const msUntilCycleEnd = scanlineCycle - msIntoCurrentCycle;
+
+        // Wait for cycle to finish (scanline reaches bottom at opacity 0.3)
+        setTimeout(() => {
+          // Stop repeating — freeze at end-of-cycle position
+          scanline.style.animation = 'none';
+          scanline.style.opacity = '0';
+          scanline.style.transition = 'opacity 0.15s ease';
+
+          setTimeout(() => {
+            heroName.classList.remove('mosaic-active');
+            heroName.innerHTML = originalHTML;
+          }, 200);
+        }, msUntilCycleEnd);
+      }, totalDuration + 100);
+
+      // Start idle glitch after full cleanup
+      setTimeout(() => {
+
+        // Idle glitch: randomly flicker 1-2 chars every few seconds
+        function idleGlitch() {
+          const text = heroName.textContent;
+          const textNodes = [];
+
+          // Collect all text nodes
+          function walk(node) {
+            if (node.nodeType === Node.TEXT_NODE && node.textContent.trim()) {
+              textNodes.push(node);
+            } else if (node.nodeType === Node.ELEMENT_NODE) {
+              Array.from(node.childNodes).forEach(walk);
+            }
+          }
+          walk(heroName);
+
+          if (!textNodes.length) return;
+
+          // Pick a random text node and a random char in it
+          const node = textNodes[Math.floor(Math.random() * textNodes.length)];
+          const str = node.textContent;
+          const validIndices = [];
+          for (let i = 0; i < str.length; i++) {
+            if (str[i] !== ' ' && str[i] !== '\n') validIndices.push(i);
+          }
+          if (!validIndices.length) return;
+
+          const idx = validIndices[Math.floor(Math.random() * validIndices.length)];
+          const originalChar = str[idx];
+
+          // Split text node into 3 parts: before, glitch span, after
+          const before = str.substring(0, idx);
+          const after = str.substring(idx + 1);
+
+          const beforeNode = document.createTextNode(before);
+          const afterNode = document.createTextNode(after);
+          const glitchSpan = document.createElement('span');
+          glitchSpan.style.color = 'var(--accent-blue)';
+          glitchSpan.style.transition = 'color 0.3s ease';
+          glitchSpan.textContent = allGlyphs[Math.floor(Math.random() * allGlyphs.length)];
+
+          const parent = node.parentNode;
+          parent.insertBefore(beforeNode, node);
+          parent.insertBefore(glitchSpan, node);
+          parent.insertBefore(afterNode, node);
+          parent.removeChild(node);
+
+          // Flicker a couple glyphs then restore
+          let flicks = 0;
+          const maxFlicks = 2 + Math.floor(Math.random() * 3);
+          const flickInterval = setInterval(() => {
+            flicks++;
+            glitchSpan.textContent = allGlyphs[Math.floor(Math.random() * allGlyphs.length)];
+            if (flicks >= maxFlicks) {
+              clearInterval(flickInterval);
+              glitchSpan.textContent = originalChar;
+              glitchSpan.style.color = 'inherit';
+              // After transition, merge back into a clean text node
+              setTimeout(() => {
+                const merged = document.createTextNode(before + originalChar + after);
+                parent.insertBefore(merged, beforeNode);
+                parent.removeChild(beforeNode);
+                parent.removeChild(glitchSpan);
+                parent.removeChild(afterNode);
+              }, 350);
+            }
+          }, 70);
+        }
+
+        // Run idle glitch every 3–6 seconds
+        setInterval(() => {
+          idleGlitch();
+        }, 3000 + Math.random() * 3000);
+
+      }, totalDuration + 1200);
     }, 400);
   }
 
