@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects — Yixuan He (Adam)</title>
+  <meta name="description" content="Projects by Yixuan He (Adam) — Data science case studies, machine learning models, and systems engineering work.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="grid-bg"></div>
+  <div class="glow-orb glow-orb-2"></div>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo"><span>$</span> yixuan.he</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="projects.html" class="active">Projects</a></li>
+      <li><a href="experience.html">Experience</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="assets/Yixuan_He_Resume.pdf" target="_blank" class="nav-resume-btn">Resume</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="page-container">
+
+    <section class="section">
+      <div class="section-label fade-in">Projects</div>
+      <h1 class="section-title fade-in fade-in-delay-1">Selected work &<br>case studies.</h1>
+      <p class="fade-in fade-in-delay-2" style="color: var(--text-secondary); max-width: 600px; margin-bottom: 60px; font-size: 1rem; line-height: 1.7;">
+        A collection of academic and personal projects spanning data science, machine learning, and systems engineering. More projects and GitHub links coming soon.
+      </p>
+
+      <!-- Projects Grid -->
+      <div class="grid-2 fade-in fade-in-delay-3">
+
+        <!-- Project 1: Police Incident Modeling -->
+        <a href="project-police.html" class="project-card" style="text-decoration: none; color: inherit;">
+          <div class="project-number">01 / DSAN 5000</div>
+          <h3>Police Incident Patterns & Response Time Modeling</h3>
+          <div class="project-org">Georgetown University — Fall 2025</div>
+          <p>
+            Comprehensive analysis of police dispatch patterns and emergency response times in Montgomery County, MD. Built predictive models for call priorities and disposition outcomes using real-world dispatch data.
+          </p>
+          <ul class="highlight-list">
+            <li>Regression modeling on dispatch-to-arrival response times</li>
+            <li>Binary classification of high-priority emergency calls</li>
+            <li>Spatial clustering to identify incident hotspots</li>
+            <li>Interactive Quarto-based data storytelling website</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">R</span>
+            <span class="tag">Quarto</span>
+            <span class="tag">Clustering</span>
+            <span class="tag">Regression</span>
+            <span class="tag">Classification</span>
+            <span class="tag">EDA</span>
+          </div>
+        </a>
+
+        <!-- Project 2: Flight Disruptions -->
+        <a href="project-dca.html" class="project-card" style="text-decoration: none; color: inherit;">
+          <div class="project-number">02 / DSAN 5200</div>
+          <h3>Drivers of Flight Disruptions at DCA Airport</h3>
+          <div class="project-org">Georgetown University — Fall 2025</div>
+          <p>
+            Data analytics project examining factors causing flight delays and cancellations at Reagan National Airport. Integrated 2023–2024 FAA operational data with METAR weather data and holiday calendars.
+          </p>
+          <ul class="highlight-list">
+            <li>Integrated FAA flight data with 15+ hourly weather variables</li>
+            <li>Statistical hypothesis testing on delay drivers</li>
+            <li>Power BI interactive dashboards for stakeholder insights</li>
+            <li>Delay breakdown analysis: carrier, weather, NAS, security</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">R</span>
+            <span class="tag">Power BI</span>
+            <span class="tag">FAA Data</span>
+            <span class="tag">METAR</span>
+            <span class="tag">Hypothesis Testing</span>
+          </div>
+        </a>
+
+        <!-- Project 3: HUBBLE -->
+        <a href="project-hubble.html" class="project-card" style="text-decoration: none; color: inherit;">
+          <div class="project-number">03 / CORNELL SYSEN</div>
+          <h3>HUBBLE — Wearable Heating Device</h3>
+          <div class="project-org">Cornell University — June 2024</div>
+          <p>
+            Led systems engineering and marketing for "Hubble," a rechargeable magnetically-attached wearable heating device. Managed cross-functional coordination across mechanical, electrical, and marketing teams.
+          </p>
+          <ul class="highlight-list">
+            <li>Complete SysML modeling: Use Case, BDD, FMEA, AHP, QFD</li>
+            <li>Brand identity development: naming, logo, color palette</li>
+            <li>Business Model Canvas with 500+ survey responses analyzed</li>
+            <li>End-to-end systems engineering lifecycle documentation</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">SysML</span>
+            <span class="tag">CATIA Magic</span>
+            <span class="tag">FMEA</span>
+            <span class="tag">Branding</span>
+            <span class="tag">Survey Analysis</span>
+          </div>
+        </a>
+
+        <!-- Project 4: Mercedes-Benz AI -->
+        <a href="project-mercedes.html" class="project-card" style="text-decoration: none; color: inherit;">
+          <div class="project-number">04 / PROFESSIONAL</div>
+          <h3>AI-Powered CV Screening & HR Analytics</h3>
+          <div class="project-org">Mercedes-Benz — Summer 2025</div>
+          <p>
+            Architected an AI-powered CV screening prototype leveraging Dify AI, Python, and Power BI. Built a fully automated pipeline from candidate extraction to AI-driven scoring, cutting manual screening time by 90%.
+          </p>
+          <ul class="highlight-list">
+            <li>Enterprise API integrations: Google Cloud, OpenAI, Azure</li>
+            <li>Automated OAuth2 authentication for real-time dashboards</li>
+            <li>M365 training adopted by 140+ HR professionals</li>
+            <li>Presented to Mercedes-Benz Board Member</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">Python</span>
+            <span class="tag">Dify AI</span>
+            <span class="tag">Power BI</span>
+            <span class="tag">Azure</span>
+            <span class="tag">OpenAI</span>
+          </div>
+        </a>
+
+        <!-- Project 5: Placeholder for future -->
+        <div class="project-card" style="border-style: dashed; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 300px; text-align: center;">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color: var(--text-muted); margin-bottom: 16px;">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 8v8M8 12h8"/>
+          </svg>
+          <h3 style="font-size: 1rem; color: var(--text-muted); margin-bottom: 8px;">More Coming Soon</h3>
+          <p style="color: var(--text-muted); font-size: 0.85rem; max-width: 260px;">
+            GitHub repositories, personal projects, and open-source contributions will be added here.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>&copy; 2026 Yixuan He (Adam). Built with precision.</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

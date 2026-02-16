@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Police Incident Modeling — Yixuan He (Adam)</title>
+  <meta name="description" content="Police dispatch patterns and emergency response time modeling in Montgomery County, MD. By Yixuan He (Adam).">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="grid-bg"></div>
+
+  <nav class="nav">
+    <a href="index.html" class="nav-logo"><span>$</span> yixuan.he</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="experience.html">Experience</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="assets/Yixuan_He_Resume.pdf" target="_blank" class="nav-resume-btn">Resume</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="page-container">
+    <section class="section">
+
+      <a href="projects.html" class="project-back fade-in">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back to Projects
+      </a>
+
+      <div class="project-detail-hero fade-in fade-in-delay-1">
+        <div class="project-number">01 / DSAN 5000 — GEORGETOWN UNIVERSITY</div>
+        <h1>Police Incident Patterns & Response Time Modeling</h1>
+        <div class="project-org">Fall 2025 — Data Science & Analytics</div>
+        <p>
+          A comprehensive analysis of police dispatch patterns and emergency response times in Montgomery County, Maryland. This project investigates what factors drive dispatch-to-arrival times, how response times vary by time, location, and call type, and builds predictive models for call priorities and disposition outcomes.
+        </p>
+        <div class="tags">
+          <span class="tag">R</span>
+          <span class="tag">Quarto</span>
+          <span class="tag">Clustering</span>
+          <span class="tag">Regression</span>
+          <span class="tag">Classification</span>
+          <span class="tag">EDA</span>
+          <span class="tag">Data Storytelling</span>
+        </div>
+      </div>
+
+      <!-- Placeholder: Main Visualization -->
+      <div class="img-placeholder fade-in fade-in-delay-2">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span>Project overview visualization — Add screenshot here</span>
+        <span style="font-size: 0.65rem; color: var(--border-accent);">Recommended: 1200 x 675px</span>
+      </div>
+
+      <!-- Data & Methodology -->
+      <div class="project-section fade-in">
+        <h2>Data Source</h2>
+        <p>
+          Real-world police dispatch data from Montgomery County's open data API, covering incident records with call types, priority levels, timestamps, geographic coordinates, and disposition outcomes.
+        </p>
+      </div>
+
+      <div class="grid-2 fade-in">
+        <div class="img-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>EDA visualization</span>
+        </div>
+        <div class="img-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>Spatial clustering map</span>
+        </div>
+      </div>
+
+      <div class="project-section fade-in" style="margin-top: 48px;">
+        <h2>Methodology & Approach</h2>
+        <ul>
+          <li>Exploratory Data Analysis with visualizations showing incident distribution by call type, priority, timing, and geography</li>
+          <li>Unsupervised learning (clustering) to identify spatial and temporal incident patterns and hotspots</li>
+          <li>Regression modeling on dispatch-to-arrival response times to understand key delay factors</li>
+          <li>Binary classification of high-priority emergency calls for resource allocation optimization</li>
+          <li>Multiclass classification of incident disposition outcomes</li>
+        </ul>
+      </div>
+
+      <div class="grid-2 fade-in">
+        <div class="img-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>Model results / performance</span>
+        </div>
+        <div class="img-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>Key findings visualization</span>
+        </div>
+      </div>
+
+      <div class="project-section fade-in" style="margin-top: 48px;">
+        <h2>Key Outcomes</h2>
+        <ul>
+          <li>Interactive Quarto-based data storytelling website with multiple sections: Home, Data Collection, Data Cleaning, EDA, Unsupervised Learning, Supervised Learning</li>
+          <li>Identified key factors driving response time variability across different call types and geographic areas</li>
+          <li>Spatial clustering revealed distinct incident hotspot patterns with actionable insights for dispatch optimization</li>
+          <li>Comprehensive report with visualizations designed for non-technical stakeholder communication</li>
+        </ul>
+      </div>
+
+      <div style="margin-top: 40px;" class="fade-in">
+        <a href="projects.html" class="btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          All Projects
+        </a>
+      </div>
+
+    </section>
+
+    <footer class="footer">
+      <p>&copy; 2026 Yixuan He (Adam). Built with precision.</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
