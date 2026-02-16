@@ -5,6 +5,23 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   // ==========================================
+  // 0. TIME-BASED GREETING
+  // ==========================================
+  const greetingEl = document.getElementById('greeting');
+  if (greetingEl) {
+    const hour = new Date().getHours();
+    if (hour >= 5 && hour < 12) {
+      greetingEl.textContent = 'Good morning';
+    } else if (hour >= 12 && hour < 17) {
+      greetingEl.textContent = 'Good afternoon';
+    } else if (hour >= 17 && hour < 21) {
+      greetingEl.textContent = 'Good evening';
+    } else {
+      greetingEl.textContent = 'Good evening';
+    }
+  }
+
+  // ==========================================
   // 1. TECH MOSAIC NAME REVEAL
   //    Wraps chars in-place, no layout shift
   // ==========================================
@@ -88,22 +105,13 @@ document.addEventListener('DOMContentLoaded', () => {
             clearInterval(timer);
             span.textContent = final;
             span.style.opacity = '1';
-            // Brief blue flash, then fade to final color
-            const isOutline = !!span.closest('.outline');
+            // Brief blue flash, then fade to final black
             span.style.color = 'var(--accent-blue)';
             span.style.textShadow = '0 0 12px rgba(37,99,235,0.6)';
-            span.style.transition = 'color 0.4s ease, text-shadow 0.4s ease, -webkit-text-stroke-color 0.4s ease';
-            if (isOutline) {
-              span.style.webkitTextStroke = '0px var(--text-primary)';
-            }
+            span.style.transition = 'color 0.4s ease, text-shadow 0.4s ease';
             requestAnimationFrame(() => {
               setTimeout(() => {
-                if (isOutline) {
-                  span.style.color = 'transparent';
-                  span.style.webkitTextStroke = '1.5px var(--text-primary)';
-                } else {
-                  span.style.color = 'var(--text-primary)';
-                }
+                span.style.color = 'var(--text-primary)';
                 span.style.textShadow = 'none';
               }, 80);
             });
