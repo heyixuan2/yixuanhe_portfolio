@@ -143,8 +143,14 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => {
 
         // Idle glitch: randomly flicker 1-2 chars every few seconds
+        let glitchRunning = false;
+
         function idleGlitch() {
-          const text = heroName.textContent;
+          if (glitchRunning) return;
+          glitchRunning = true;
+
+          // Snapshot the full original text so we can always restore cleanly
+          const fullText = heroName.textContent;
           const textNodes = [];
 
           // Collect all text nodes
@@ -157,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }
           walk(heroName);
 
-          if (!textNodes.length) return;
+          if (!textNodes.length) { glitchRunning = false; return; }
 
           // Pick a random text node and a random char in it
           const node = textNodes[Math.floor(Math.random() * textNodes.length)];
@@ -166,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
           for (let i = 0; i < str.length; i++) {
             if (str[i] !== ' ' && str[i] !== '\n') validIndices.push(i);
           }
-          if (!validIndices.length) return;
+          if (!validIndices.length) { glitchRunning = false; return; }
 
           const idx = validIndices[Math.floor(Math.random() * validIndices.length)];
           const originalChar = str[idx];
@@ -198,13 +204,30 @@ document.addEventListener('DOMContentLoaded', () => {
               clearInterval(flickInterval);
               glitchSpan.textContent = originalChar;
               glitchSpan.style.color = 'inherit';
-              // After transition, merge back into a clean text node
+              // After transition, merge nodes back safely
               setTimeout(() => {
-                const merged = document.createTextNode(before + originalChar + after);
-                parent.insertBefore(merged, beforeNode);
-                parent.removeChild(beforeNode);
-                parent.removeChild(glitchSpan);
-                parent.removeChild(afterNode);
+                try {
+                  // Rebuild the full string from the 3 sibling nodes
+                  const merged = document.createTextNode(before + originalChar + after);
+                  if (beforeNode.parentNode === parent) parent.removeChild(beforeNode);
+                  if (glitchSpan.parentNode === parent) parent.removeChild(glitchSpan);
+                  if (afterNode.parentNode === parent) parent.removeChild(afterNode);
+                  // Insert merged node where the group was
+                  // Find the right position — use the next sibling if available
+                  parent.normalize(); // merge adjacent text nodes first
+                  // Re-walk to find where to insert
+                  const existingNodes = Array.from(parent.childNodes);
+                  if (existingNodes.length === 0) {
+                    parent.appendChild(merged);
+                  } else {
+                    // Just set the parent's innerHTML back to the original
+                    heroName.innerHTML = originalHTML;
+                  }
+                } catch (e) {
+                  // Safety fallback: restore original HTML
+                  heroName.innerHTML = originalHTML;
+                }
+                glitchRunning = false;
               }, 350);
             }
           }, 70);
@@ -588,5 +611,171 @@ document.addEventListener('DOMContentLoaded', () => {
   // 12. SMOOTH PAGE LOAD SEQUENCE
   // ==========================================
   document.body.classList.add('page-loaded');
+
+  // ==========================================
+  // 13. NEURAL NETWORK BACKGROUND
+  // ==========================================
+  const neuralCanvas = document.getElementById('neural-bg');
+  if (neuralCanvas) {
+    const ctx = neuralCanvas.getContext('2d');
+    let mouseX = -1000, mouseY = -1000;
+
+    const PARTICLE_COUNT = 20;
+    const CONNECTION_DIST = 180;
+    let particles = [];
+
+    function resizeCanvas() {
+      neuralCanvas.width = window.innerWidth;
+      neuralCanvas.height = window.innerHeight;
+    }
+
+    function createParticles() {
+      particles = [];
+      for (let i = 0; i < PARTICLE_COUNT; i++) {
+        const px = Math.random() * neuralCanvas.width;
+        const py = Math.random() * neuralCanvas.height;
+        particles.push({
+          x: px,
+          y: py,
+          homeX: px,
+          homeY: py,
+          vx: (Math.random() - 0.5) * 0.4,
+          vy: (Math.random() - 0.5) * 0.4,
+          radius: 1.5 + Math.random() * 1.5
+        });
+      }
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, neuralCanvas.width, neuralCanvas.height);
+      const W = neuralCanvas.width;
+      const H = neuralCanvas.height;
+
+      // Update particle positions
+      for (const p of particles) {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0) { p.x = 0; p.vx *= -1; }
+        if (p.x > W) { p.x = W; p.vx *= -1; }
+        if (p.y < 0) { p.y = 0; p.vy *= -1; }
+        if (p.y > H) { p.y = H; p.vy *= -1; }
+
+        // Mouse interaction
+        const dmx = p.x - mouseX;
+        const dmy = p.y - mouseY;
+        const md = Math.sqrt(dmx * dmx + dmy * dmy);
+
+        if (mouseX > 0 && mouseY > 0) {
+          if (md < 200 && md > 50) {
+            // Attract toward cursor but stop at ~50px (don't clump)
+            const force = (1 - md / 200) * 0.04;
+            p.vx -= (dmx / md) * force;
+            p.vy -= (dmy / md) * force;
+          } else if (md < 50) {
+            // Repel if too close — keeps them spread around cursor
+            const force = (1 - md / 50) * 0.15;
+            p.vx += (dmx / md) * force;
+            p.vy += (dmy / md) * force;
+          }
+        }
+
+        // Gentle friction after mouse interactions only
+        p.vx *= 0.999;
+        p.vy *= 0.999;
+
+        // Random nudge keeps them wandering
+        p.vx += (Math.random() - 0.5) * 0.01;
+        p.vy += (Math.random() - 0.5) * 0.01;
+
+        // Clamp max velocity
+        const speed = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
+        if (speed > 0.5) {
+          p.vx = (p.vx / speed) * 0.5;
+          p.vy = (p.vy / speed) * 0.5;
+        }
+      }
+
+      // Check if dark theme is active for stronger visibility
+      const isDark = document.documentElement.classList.contains('dark-theme');
+      const lineAlphaBase = isDark ? 0.20 : 0.14;
+      const nodeAlpha = isDark ? 0.33 : 0.25;
+      const lineW = isDark ? 0.8 : 0.7;
+      const nodeW = isDark ? 1.0 : 0.9;
+
+      // Draw connections
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < CONNECTION_DIST) {
+            const alpha = (1 - dist / CONNECTION_DIST) * lineAlphaBase;
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `rgba(37, 99, 235, ${alpha})`;
+            ctx.lineWidth = lineW;
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Draw nodes (outline only)
+      for (const p of particles) {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(37, 99, 235, ${nodeAlpha})`;
+        ctx.lineWidth = nodeW;
+        ctx.stroke();
+      }
+
+      // Draw lines from mouse cursor to nearby nodes
+      const MOUSE_CONNECT_DIST = 200;
+      if (mouseX > 0 && mouseY > 0) {
+        for (const p of particles) {
+          const dx = p.x - mouseX;
+          const dy = p.y - mouseY;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < MOUSE_CONNECT_DIST) {
+            const alpha = (1 - dist / MOUSE_CONNECT_DIST) * (isDark ? 0.25 : 0.18);
+            ctx.beginPath();
+            ctx.moveTo(mouseX, mouseY);
+            ctx.lineTo(p.x, p.y);
+            ctx.strokeStyle = `rgba(37, 99, 235, ${alpha})`;
+            ctx.lineWidth = isDark ? 0.7 : 0.6;
+            ctx.stroke();
+          }
+        }
+      }
+
+      requestAnimationFrame(draw);
+    }
+
+    resizeCanvas();
+    createParticles();
+    requestAnimationFrame(draw);
+
+    window.addEventListener('resize', () => {
+      resizeCanvas();
+      createParticles();
+    });
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+
+    document.addEventListener('mouseleave', () => {
+      mouseX = -1000;
+      mouseY = -1000;
+    });
+  }
+
+  // 14. Theme persistence (terminal commands are inline in index.html)
+  try {
+    if (localStorage.getItem('portfolio-theme') === 'dark') {
+      document.documentElement.classList.add('dark-theme');
+    }
+  } catch(e) {}
 
 });

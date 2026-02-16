@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>if(localStorage.getItem('portfolio-theme')==='dark')document.documentElement.classList.add('dark-theme');</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DCA Flight Disruptions — Yixuan He (Adam)</title>
   <meta name="description" content="Analysis of flight delay and cancellation drivers at Reagan National Airport (DCA) using FAA and weather data. By Yixuan He (Adam).">
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/favicon.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <canvas id="neural-bg"></canvas>
 
   <div class="grid-bg"></div>
 
@@ -19,10 +21,9 @@
     <ul class="nav-links">
       <li><a href="./">Home</a></li>
       <li><a href="about.html">About</a></li>
-      <li><a href="projects.html">Projects</a></li>
       <li><a href="experience.html">Experience</a></li>
+      <li><a href="projects.html">Projects</a></li>
       <li><a href="contact.html">Contact</a></li>
-      <li><a href="assets/Yixuan_He_Resume.pdf" target="_blank" class="nav-resume-btn">Resume</a></li>
     </ul>
     <button class="nav-toggle" aria-label="Toggle navigation">
       <span></span><span></span><span></span>

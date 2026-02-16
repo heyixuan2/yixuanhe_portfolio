@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>if(localStorage.getItem('portfolio-theme')==='dark')document.documentElement.classList.add('dark-theme');</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact — Yixuan He (Adam)</title>
   <meta name="description" content="Get in touch with Yixuan He (Adam) — Email, LinkedIn, GitHub, and phone. Open to data science and AI opportunities.">
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/favicon.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <canvas id="neural-bg"></canvas>
 
   <div class="grid-bg"></div>
   <div class="glow-orb glow-orb-1"></div>
@@ -22,10 +24,9 @@
     <ul class="nav-links">
       <li><a href="./">Home</a></li>
       <li><a href="about.html">About</a></li>
-      <li><a href="projects.html">Projects</a></li>
       <li><a href="experience.html">Experience</a></li>
+      <li><a href="projects.html">Projects</a></li>
       <li><a href="contact.html" class="active">Contact</a></li>
-      <li><a href="assets/Yixuan_He_Resume.pdf" target="_blank" class="nav-resume-btn">Resume</a></li>
     </ul>
     <button class="nav-toggle" aria-label="Toggle navigation">
       <span></span><span></span><span></span>
@@ -75,6 +76,16 @@
                 <div class="contact-link-value">github.com/heyixuan2</div>
               </div>
             </a>
+
+            <div class="contact-link">
+              <svg class="contact-link-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M8.691 2.188C3.891 2.188 0 5.476 0 9.534c0 2.22 1.17 4.205 3.002 5.55a1.06 1.06 0 01.398.833l.01.554c.018.47.267.905.66 1.123a1.236 1.236 0 001.317-.066l.627-.437a1.058 1.058 0 01.748-.145c.59.124 1.209.19 1.847.19h.126a6.743 6.743 0 01-.237-1.768c0-3.74 3.578-6.774 7.991-6.774h.126c-.455-3.797-4.2-6.706-8.624-6.706zm-2.73 4.42a1.133 1.133 0 110 2.267 1.133 1.133 0 010-2.267zm4.07 0a1.133 1.133 0 110 2.267 1.133 1.133 0 010-2.267zM16.489 10.57c-3.845 0-6.964 2.648-6.964 5.914 0 3.267 3.119 5.914 6.964 5.914.567 0 1.118-.058 1.645-.168a.923.923 0 01.652.126l.543.38a1.075 1.075 0 001.145.057.986.986 0 00.574-.977l-.008-.482a.923.923 0 01.346-.725C23.073 19.76 24 18.066 24 16.184c0-3.266-3.119-5.914-6.964-5.914h-.547zm-2.297 3.858a.985.985 0 110 1.97.985.985 0 010-1.97zm3.844 0a.985.985 0 110 1.97.985.985 0 010-1.97z"/>
+              </svg>
+              <div>
+                <div class="contact-link-label">WeChat</div>
+                <div class="contact-link-value">HEYIXUAN23</div>
+              </div>
+            </div>
           </div>
         </div>
 
