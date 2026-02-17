@@ -867,6 +867,7 @@ img {
   margin-bottom: 40px;
   max-width: 860px;
   line-height: 1.7;
+  padding-left: 10px;
 }
 
 .hero-meta {
@@ -874,6 +875,7 @@ img {
   gap: 32px;
   margin-bottom: 40px;
   flex-wrap: wrap;
+  padding-left: 10px;
 }
 
 .hero-meta-vertical {
@@ -898,6 +900,7 @@ img {
   display: flex;
   gap: 16px;
   flex-wrap: wrap;
+  padding-left: 10px;
 }
 
 /* Subtle grid background */
@@ -1361,10 +1364,11 @@ img {
 
 /* --- Rotating Role Text --- */
 .role-rotate-wrapper {
-  display: inline-flex;
+  display: flex;
   align-items: baseline;
   font-weight: 600;
   color: var(--text-primary);
+  margin-bottom: -8px;
 }
 
 .role-rotate-text {
