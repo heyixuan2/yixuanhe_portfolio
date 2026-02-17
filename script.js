@@ -326,17 +326,19 @@ document.addEventListener('DOMContentLoaded', () => {
   //    Types out lines one by one
   // ==========================================
   function typeTerminal(terminalBody) {
-    const lines = terminalBody.querySelectorAll('div, br');
-    const originalContent = terminalBody.innerHTML;
-    terminalBody.innerHTML = '';
     terminalBody.style.opacity = '1';
 
-    let delay = 0;
-    const lineElements = originalContent.split('\n').filter(l => l.trim());
+    // Preserve interactive elements (form, hint) — don't destroy them
+    const preservedEls = [];
+    terminalBody.querySelectorAll('form, .terminal-hint').forEach(el => {
+      preservedEls.push(el);
+      el.remove();
+    });
 
+    const originalContent = terminalBody.innerHTML;
     terminalBody.innerHTML = '';
 
-    // Re-insert with staggered reveal
+    // Re-insert static content with staggered reveal
     const tempDiv = document.createElement('div');
     tempDiv.innerHTML = originalContent;
     const children = Array.from(tempDiv.childNodes);
@@ -359,6 +361,20 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
           wrapper.style.opacity = '1';
           wrapper.style.transform = 'translateY(0)';
+        }, 50);
+      });
+    });
+
+    // Re-append preserved interactive elements with fade-in
+    preservedEls.forEach((el, i) => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(8px)';
+      el.style.transition = `opacity 0.3s ease ${(children.length + i) * 0.12}s, transform 0.3s ease ${(children.length + i) * 0.12}s`;
+      terminalBody.appendChild(el);
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          el.style.opacity = '1';
+          el.style.transform = 'translateY(0)';
         }, 50);
       });
     });
@@ -614,7 +630,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ==========================================
   // 13. NEURAL NETWORK BACKGROUND
+  //     Isolated in try-catch so earlier errors don't kill it
   // ==========================================
+  try {
   const neuralCanvas = document.getElementById('neural-bg');
   if (neuralCanvas) {
     const ctx = neuralCanvas.getContext('2d');
@@ -770,6 +788,7 @@ document.addEventListener('DOMContentLoaded', () => {
       mouseY = -1000;
     });
   }
+  } catch(e) { console.warn('Neural network error:', e); }
 
   // 14. Theme persistence (terminal commands are inline in index.html)
   try {

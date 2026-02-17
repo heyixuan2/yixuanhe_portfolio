@@ -698,14 +698,23 @@ img {
 }
 
 .terminal-input {
-  background: transparent;
+  background: none;
+  background-color: transparent;
   border: none;
   outline: none;
   color: #e4e4e7;
   font-family: var(--font-mono);
   font-size: 0.85rem;
   flex: 1;
+  width: 100%;
+  padding: 0;
+  margin: 0;
   caret-color: #2563EB;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-shadow: none;
+  border-radius: 0;
 }
 
 .terminal-input::placeholder {
@@ -964,16 +973,16 @@ img {
 /* Skills section */
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
 }
 
 .skill-category h3 {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: var(--text-primary);
   margin-bottom: 14px;
   padding-bottom: 8px;
   border-bottom: 1px solid var(--border-color);
