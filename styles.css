@@ -59,7 +59,7 @@ html.dark-theme .grid-bg {
 }
 
 html.dark-theme .glow-orb {
-  opacity: 0.03;
+  opacity: 0;
 }
 
 html.dark-theme .nav {
@@ -525,6 +525,53 @@ img {
 .page-container {
   min-height: 100vh;
   padding-top: 64px;
+}
+
+/* --- Scroll-Snap Page (About) --- */
+.snap-page {
+  height: 100vh;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  padding-top: 0;
+}
+
+.snap-page .section {
+  position: relative;
+  min-height: 100vh;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px 40px 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* --- Snap Scroll Arrow --- */
+.snap-arrow {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0.5;
+  color: var(--text-secondary);
+  animation: arrowBounce 1.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.snap-arrow svg {
+  width: 28px;
+  height: 28px;
+  stroke-width: 2;
+}
+
+@keyframes arrowBounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(6px); }
 }
 
 /* --- Section Base --- */
@@ -1696,6 +1743,20 @@ body.page-loaded {
   .nav-toggle { display: flex; }
 
   .section { padding: 60px 20px; }
+
+  .snap-page {
+    height: auto;
+    overflow-y: visible;
+    scroll-snap-type: none;
+  }
+
+  .snap-page .section {
+    min-height: auto;
+    scroll-snap-align: none;
+    scroll-snap-stop: normal;
+    display: block;
+    padding: 60px 20px;
+  }
 
   .hero { padding: 60px 20px; }
 

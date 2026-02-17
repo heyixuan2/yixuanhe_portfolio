@@ -68,13 +68,6 @@ document.addEventListener('DOMContentLoaded', () => {
       wrapChars(heroName);
       heroName.classList.add('mosaic-active');
 
-      // Add scanline as a real element; track when it started
-      const scanline = document.createElement('div');
-      scanline.className = 'mosaic-scanline';
-      heroName.appendChild(scanline);
-      const scanlineStart = performance.now();
-      const scanlineCycle = 800; // matches CSS 0.8s
-
       const chars = heroName.querySelectorAll('.mc');
       const totalDuration = 1200;
       const staggerBase = totalDuration / chars.length;
@@ -119,25 +112,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }, cycleInterval);
       });
 
-      // After all resolved, let scanline finish its current cycle then remove
+      // After all resolved, clean up
       setTimeout(() => {
-        const elapsed = performance.now() - scanlineStart;
-        const msIntoCurrentCycle = elapsed % scanlineCycle;
-        const msUntilCycleEnd = scanlineCycle - msIntoCurrentCycle;
-
-        // Wait for cycle to finish (scanline reaches bottom at opacity 0.3)
-        setTimeout(() => {
-          // Stop repeating — freeze at end-of-cycle position
-          scanline.style.animation = 'none';
-          scanline.style.opacity = '0';
-          scanline.style.transition = 'opacity 0.15s ease';
-
-          setTimeout(() => {
-            heroName.classList.remove('mosaic-active');
-            heroName.innerHTML = originalHTML;
-          }, 200);
-        }, msUntilCycleEnd);
-      }, totalDuration + 100);
+        heroName.classList.remove('mosaic-active');
+        heroName.innerHTML = originalHTML;
+      }, totalDuration + 300);
 
       // Start idle glitch after full cleanup
       setTimeout(() => {
@@ -236,7 +215,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Run idle glitch every 3–6 seconds
         setInterval(() => {
           idleGlitch();
-        }, 3000 + Math.random() * 3000);
+        }, 5000 + Math.random() * 5000);
 
       }, totalDuration + 1200);
     }, 400);
@@ -715,10 +694,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Check if dark theme is active for stronger visibility
       const isDark = document.documentElement.classList.contains('dark-theme');
-      const lineAlphaBase = isDark ? 0.20 : 0.14;
-      const nodeAlpha = isDark ? 0.33 : 0.25;
-      const lineW = isDark ? 0.8 : 0.7;
-      const nodeW = isDark ? 1.0 : 0.9;
+      const lineAlphaBase = isDark ? 0.14 : 0.10;
+      const nodeAlpha = isDark ? 0.22 : 0.18;
+      const lineW = isDark ? 0.6 : 0.5;
+      const nodeW = isDark ? 0.8 : 0.7;
 
       // Draw connections
       for (let i = 0; i < particles.length; i++) {
@@ -760,7 +739,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.moveTo(mouseX, mouseY);
             ctx.lineTo(p.x, p.y);
             ctx.strokeStyle = `rgba(37, 99, 235, ${alpha})`;
-            ctx.lineWidth = isDark ? 0.7 : 0.6;
+            ctx.lineWidth = isDark ? 0.5 : 0.4;
             ctx.stroke();
           }
         }
