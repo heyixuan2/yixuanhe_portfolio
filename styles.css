@@ -1382,6 +1382,7 @@ img {
   font-weight: 400;
   animation: roleCursorBlink 0.7s step-end infinite;
   margin-left: 1px;
+  opacity: 0;
 }
 
 @keyframes roleCursorBlink {

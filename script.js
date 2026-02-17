@@ -253,22 +253,26 @@ document.addEventListener('DOMContentLoaded', () => {
           setTimeout(() => { isDeleting = true; typeRole(); }, 2000);
           return;
         }
-        typingSpeed = 80 + Math.random() * 60;
+        typingSpeed = 120 + Math.random() * 80;
       } else {
         roleEl.textContent = current.substring(0, charIndex - 1);
         charIndex--;
         if (charIndex === 0) {
           isDeleting = false;
           roleIndex = (roleIndex + 1) % roles.length;
-          typingSpeed = 400;
+          typingSpeed = 500;
         } else {
-          typingSpeed = 40;
+          typingSpeed = 60;
         }
       }
       setTimeout(typeRole, typingSpeed);
     }
 
-    setTimeout(typeRole, 1200);
+    setTimeout(() => {
+      const cursor = document.querySelector('.role-cursor');
+      if (cursor) cursor.style.opacity = '1';
+      typeRole();
+    }, 2200);
   }
 
   // ==========================================
