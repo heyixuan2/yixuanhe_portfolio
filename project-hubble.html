@@ -4,12 +4,82 @@
   <script>if(localStorage.getItem('portfolio-theme')==='dark')document.documentElement.classList.add('dark-theme');</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HUBBLE — Yixuan He (Adam)</title>
-  <meta name="description" content="Systems engineering and marketing lead for HUBBLE, a wearable heating device. Cornell University capstone project. By Yixuan He (Adam).">
+  <title>HUBBLE — Wearable Heating Device — Yixuan He (Adam)</title>
+  <meta name="description" content="Systems engineering and marketing for HUBBLE, a rechargeable magnetically-attached wearable heating device. Cornell M.Eng capstone project by Yixuan He (Adam).">
   <link rel="icon" href="assets/favicon.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <style>
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8rem;
+      margin-top: 16px;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+    .data-table thead th {
+      background: var(--bg-card);
+      color: var(--text-primary);
+      font-weight: 600;
+      text-align: left;
+      padding: 10px 12px;
+      border-bottom: 2px solid var(--border-color);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    .data-table tbody td {
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      vertical-align: top;
+      line-height: 1.5;
+    }
+    .data-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+    .data-table tbody tr:hover {
+      background: var(--accent-dim);
+    }
+    .data-table .total-row td {
+      font-weight: 600;
+      color: var(--text-primary);
+      border-top: 2px solid var(--border-color);
+      background: var(--bg-card);
+    }
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    .badge-high { background: #FEE2E2; color: #DC2626; }
+    .badge-medium { background: #FEF3C7; color: #D97706; }
+    .badge-low { background: #D1FAE5; color: #059669; }
+    .dark-theme .badge-high { background: rgba(220,38,38,0.15); color: #F87171; }
+    .dark-theme .badge-medium { background: rgba(217,119,6,0.15); color: #FBBF24; }
+    .dark-theme .badge-low { background: rgba(5,150,105,0.15); color: #34D399; }
+    .data-table .highlight-cell {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .table-caption {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+    .table-scroll {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+  </style>
 </head>
 <body>
   <canvas id="neural-bg"></canvas>
@@ -39,58 +109,310 @@
       </a>
 
       <div class="project-detail-hero fade-in fade-in-delay-1">
-        <div class="project-number">03 / CORNELL SYSEN — CORNELL UNIVERSITY</div>
-        <h1>HUBBLE — Wearable Heating Device</h1>
-        <div class="project-org">June 2024 — Systems Engineering Capstone</div>
+        <div class="project-org"><span>Cornell University</span><span>Jan 2024 — Jun 2024</span></div>
+        <h1>Hubble Magnetic Wearable Heating System</h1>
         <p>
-          Led the systems engineering and marketing team for "Hubble," a rechargeable device that magnetically attaches inside clothing to provide warmth — the name representing a "Hot Bubble." Managed cross-functional coordination across mechanical, electrical, and marketing teams throughout the full product development lifecycle.
+          Led systems engineering and marketing for a Cornell M.Eng capstone project developing "Hubble," a rechargeable magnetically-attached wearable heating device. Managed cross-functional coordination across mechanical, electrical, and marketing teams through the full product development lifecycle — from market research and concept generation through SysML modeling, prototyping, and design review.
         </p>
         <div class="tags">
           <span class="tag">SysML</span>
           <span class="tag">CATIA Magic</span>
           <span class="tag">FMEA</span>
-          <span class="tag">AHP</span>
           <span class="tag">QFD</span>
           <span class="tag">Branding</span>
           <span class="tag">Survey Analysis</span>
         </div>
       </div>
 
-      <div class="img-placeholder fade-in fade-in-delay-2">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-        <span>HUBBLE product concept / branding</span>
-        <span style="font-size: 0.65rem; color: var(--border-accent);">Recommended: 1200 x 675px</span>
+      <!-- Hero Image -->
+      <div class="fade-in fade-in-delay-2" style="margin: 48px 0;">
+        <img src="assets/projects/hubble/mockup-01.jpg" alt="HUBBLE product mockup" style="width: 90%; border-radius: 12px; border: 1px solid var(--border-color);">
       </div>
 
+      <!-- Overview -->
       <div class="project-section fade-in">
-        <h2>Systems Engineering</h2>
+        <h2>Overview</h2>
+        <p>
+          Hubble is a rechargeable, magnetically-attached wearable heating device designed to provide portable, targeted warmth for outdoor enthusiasts and cold-climate commuters. The project was developed as part of the Cornell M.Eng Systems Engineering capstone, with a 10-member cross-functional team spanning mechanical engineering, electrical engineering, and marketing.
+        </p>
+        <p style="margin-top: 16px;">
+          The project followed the full systems engineering lifecycle — beginning with stakeholder analysis and market research, progressing through concept generation and selection, and culminating in detailed SysML modeling, FMEA risk analysis, and physical prototyping. My contributions spanned two domains: I led the marketing workstream (brand identity, survey design, conjoint analysis, and business model development) and co-led the systems engineering modeling effort using CATIA Magic (use case diagrams, block definition diagrams, internal block diagrams, and AHP trade studies).
+        </p>
+        <div style="margin-top: 24px;">
+          <a href="assets/projects/hubble/full-report.pdf" target="_blank" class="btn" style="display: inline-flex; align-items: center; gap: 8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            View Full Report (PDF)
+          </a>
+        </div>
+      </div>
+
+      <!-- Originating Requirements -->
+      <div class="project-section fade-in" style="margin-top: 48px;">
+        <h2>Originating Requirements</h2>
+        <p>
+          Ten originating requirements were established through stakeholder analysis and market research, each tracing back to identified user needs. Every requirement was paired with an abstract function name, known issues, and a proposed resolution — ensuring full traceability from stakeholder needs to engineering specifications.
+        </p>
+        <div class="table-scroll" style="margin-top: 16px;">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="width: 50px;">ID</th>
+                <th>Requirement</th>
+                <th style="width: 120px;">Function</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="highlight-cell">OR.1</td><td>The MagnaHeat shall be capable of rapidly heating up to provide warmth</td><td>Rapid Heating</td></tr>
+              <tr><td class="highlight-cell">OR.2</td><td>The MagnaHeat shall be compatible with a range of clothing types</td><td>Versatility</td></tr>
+              <tr><td class="highlight-cell">OR.3</td><td>The MagnaHeat shall be designed for lightweight portability</td><td>Heat Resistant</td></tr>
+              <tr><td class="highlight-cell">OR.4</td><td>The MagnaHeat shall be durably constructed to withstand regular use</td><td>Durable</td></tr>
+              <tr><td class="highlight-cell">OR.5</td><td>The MagnaHeat shall include overheat protection and safety features</td><td>Safety</td></tr>
+              <tr><td class="highlight-cell">OR.6</td><td>The MagnaHeat shall ensure even heat distribution</td><td>Heat Distribution</td></tr>
+              <tr><td class="highlight-cell">OR.7</td><td>The MagnaHeat shall have adjustable temperature settings</td><td>Adjustable Temp</td></tr>
+              <tr><td class="highlight-cell">OR.8</td><td>The MagnaHeat shall offer extended battery life for prolonged use</td><td>Battery Life</td></tr>
+              <tr><td class="highlight-cell">OR.9</td><td>The MagnaHeat shall operate effectively at low temperatures</td><td>Low Temp Operation</td></tr>
+              <tr><td class="highlight-cell">OR.10</td><td>The MagnaHeat shall be both sweatproof and waterproof</td><td>Waterproof</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Use Cases -->
+      <div class="project-section fade-in" style="margin-top: 48px;">
+        <h2>Use Cases & Priority Classification</h2>
+        <p>
+          30 use cases were identified and classified by priority to capture all user interactions and system functions. These ranged from core heating operations and safety features to smart device integration and app connectivity. The priority classification directly informed the requirements weighting in the AHP and design trade-off decisions.
+        </p>
+        <div class="table-scroll" style="margin-top: 16px;">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="width: 35px;">#</th>
+                <th>Use Case</th>
+                <th style="width: 80px;">Priority</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>User attaches MagnaHeat to the inner lining of a jacket</td><td><span class="badge badge-high">High</span></td></tr>
+              <tr><td>2</td><td>Device detects ambient temperature and adjusts heat output automatically</td><td><span class="badge badge-high">High</span></td></tr>
+              <tr><td>3</td><td>User manually adjusts the temperature setting through machine controls</td><td><span class="badge badge-medium">Medium</span></td></tr>
+              <tr><td>4</td><td>Automatic shutdown after a predefined period to ensure safety</td><td><span class="badge badge-high">High</span></td></tr>
+              <tr><td>5</td><td>User uses the MagnaHeat through magnetic attachment</td><td><span class="badge badge-low">Low</span></td></tr>
+              <tr><td>6</td><td>User connects the MagnaHeat through a belt</td><td><span class="badge badge-low">Low</span></td></tr>
+              <tr><td>7</td><td>Battery low notification to user via device indicator</td><td><span class="badge badge-high">High</span></td></tr>
+              <tr><td>8</td><td>Safety cutoff in case of device malfunction or excessive temperature</td><td><span class="badge badge-high">High</span></td></tr>
+              <tr><td>9</td><td>Magnetic strength optimization to ensure the device stays in place</td><td><span class="badge badge-high">High</span></td></tr>
+              <tr><td>10</td><td>Compatibility check with different fabrics and clothing materials</td><td><span class="badge badge-medium">Medium</span></td></tr>
+              <tr><td>13</td><td>Device diagnostics and self-test on startup</td><td><span class="badge badge-high">High</span></td></tr>
+              <tr><td>15</td><td>Outdoor Enthusiast Uses MagnaHeat during Hiking</td><td><span class="badge badge-high">High</span></td></tr>
+              <tr><td>16</td><td>Adventurer Uses MagnaHeat's Water-resistant Feature in Snowy Conditions</td><td><span class="badge badge-high">High</span></td></tr>
+              <tr><td>18</td><td>Skier Adjusts MagnaHeat Through Gloves Using Simplified Controls</td><td><span class="badge badge-high">High</span></td></tr>
+              <tr><td>22</td><td>Healthcare Worker Uses MagnaHeat for Warmth During Long Shifts</td><td><span class="badge badge-high">High</span></td></tr>
+              <tr><td>23</td><td>Device should be ready to use within 5 minutes from turning on</td><td><span class="badge badge-high">High</span></td></tr>
+              <tr><td>24</td><td>Device should be able to last for at least 2 hours</td><td><span class="badge badge-high">High</span></td></tr>
+              <tr><td>30</td><td>Emergency stop feature accessible through the device and mobile app</td><td><span class="badge badge-high">High</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Decision Matrix -->
+      <div class="project-section fade-in" style="margin-top: 48px;">
+        <h2>Concept Selection — Decision Matrix</h2>
+        <p>
+          Six product concepts were evaluated against seven weighted criteria using a decision matrix. Normalized scores were multiplied by user-dependency weights derived from survey data to produce final weighted scores. Concept A (Hubble MagnaHeat) scored highest with a total of 392, validating the magnetic clip-on heating pod design.
+        </p>
+        <div class="table-scroll" style="margin-top: 16px;">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Criteria</th>
+                <th style="text-align: center;">Weight</th>
+                <th style="text-align: center;">A</th>
+                <th style="text-align: center;">B</th>
+                <th style="text-align: center;">C</th>
+                <th style="text-align: center;">D</th>
+                <th style="text-align: center;">E</th>
+                <th style="text-align: center;">F</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Portability</td><td style="text-align: center;">7</td><td style="text-align: center;">56</td><td style="text-align: center;">70</td><td style="text-align: center;">21</td><td style="text-align: center;">70</td><td style="text-align: center;">70</td><td style="text-align: center;">49</td></tr>
+              <tr><td>Ease of Use</td><td style="text-align: center;">7</td><td style="text-align: center;">63</td><td style="text-align: center;">70</td><td style="text-align: center;">49</td><td style="text-align: center;">70</td><td style="text-align: center;">63</td><td style="text-align: center;">56</td></tr>
+              <tr><td>Adjustable Temperature</td><td style="text-align: center;">8</td><td style="text-align: center;">72</td><td style="text-align: center;">16</td><td style="text-align: center;">64</td><td style="text-align: center;">8</td><td style="text-align: center;">8</td><td style="text-align: center;">24</td></tr>
+              <tr><td>Life Span</td><td style="text-align: center;">6</td><td style="text-align: center;">42</td><td style="text-align: center;">6</td><td style="text-align: center;">36</td><td style="text-align: center;">6</td><td style="text-align: center;">54</td><td style="text-align: center;">48</td></tr>
+              <tr><td>Weight</td><td style="text-align: center;">6</td><td style="text-align: center;">42</td><td style="text-align: center;">60</td><td style="text-align: center;">24</td><td style="text-align: center;">60</td><td style="text-align: center;">60</td><td style="text-align: center;">36</td></tr>
+              <tr><td>Design</td><td style="text-align: center;">5</td><td style="text-align: center;">45</td><td style="text-align: center;">25</td><td style="text-align: center;">30</td><td style="text-align: center;">20</td><td style="text-align: center;">35</td><td style="text-align: center;">40</td></tr>
+              <tr><td>Safety</td><td style="text-align: center;">9</td><td style="text-align: center;">72</td><td style="text-align: center;">63</td><td style="text-align: center;">45</td><td style="text-align: center;">54</td><td style="text-align: center;">90</td><td style="text-align: center;">81</td></tr>
+              <tr class="total-row"><td>Total</td><td></td><td style="text-align: center;" class="highlight-cell">392</td><td style="text-align: center;">310</td><td style="text-align: center;">269</td><td style="text-align: center;">288</td><td style="text-align: center;">380</td><td style="text-align: center;">334</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- System Architecture -->
+      <div class="project-section fade-in" style="margin-top: 48px;">
+        <h2>System Architecture & Subsystems</h2>
+        <p>
+          The system architecture was formally modeled in CATIA Magic using SysML, capturing requirements, structure, behavior, and interfaces across the full product system. The system was decomposed into 10 subsystems — each with defined interfaces, requirements, and failure modes.
+        </p>
+        <div class="table-scroll" style="margin-top: 16px;">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="width: 160px;">Subsystem</th>
+                <th>Function</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="highlight-cell">Internal Battery</td><td>Store sufficient electrical energy to power the heating element and control systems</td></tr>
+              <tr><td class="highlight-cell">Heating Element</td><td>Generate controlled heat when activated by the control unit</td></tr>
+              <tr><td class="highlight-cell">Control Unit</td><td>Regulate power flow and temperature based on user settings and sensor feedback</td></tr>
+              <tr><td class="highlight-cell">Attachment</td><td>Enable the device to be attached to clothing via magnetic or belt mechanisms</td></tr>
+              <tr><td class="highlight-cell">User Interface</td><td>Enable the user to adjust temperature, view battery level, and control the device</td></tr>
+              <tr><td class="highlight-cell">Circulation (Fan)</td><td>Circulate air to distribute heat evenly across the heating surface</td></tr>
+              <tr><td class="highlight-cell">Housing / Encasement</td><td>Protect internal components from external impact, moisture, and dust</td></tr>
+              <tr><td class="highlight-cell">Safety Sensors</td><td>Shut down the device if temperature exceeds safe thresholds</td></tr>
+              <tr><td class="highlight-cell">Connectivity Module*</td><td>Provide wireless communication capability with mobile app (Bluetooth/Wi-Fi)</td></tr>
+              <tr><td class="highlight-cell">External Battery*</td><td>Offer an optional external power source for extended operation</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- AHP -->
+      <div class="project-section fade-in" style="margin-top: 48px;">
+        <h2>Analytic Hierarchy Process (AHP)</h2>
+        <p>
+          The Analytic Hierarchy Process was used to establish priority weights for the product requirements. Pairwise comparisons between safety, battery life, effectiveness, price, and design produced a consistent priority ranking that guided all downstream design decisions. Effectiveness emerged as the highest-weighted criterion at 40%, followed by safety at 30%.
+        </p>
+
+        <div class="grid-2 fade-in" style="margin-top: 16px; align-items: start;">
+          <div>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Category</th>
+                  <th style="text-align: center;">Weight</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td class="highlight-cell">Effectiveness</td><td style="text-align: center;">40%</td></tr>
+                <tr><td class="highlight-cell">Safety</td><td style="text-align: center;">30%</td></tr>
+                <tr><td class="highlight-cell">Battery Life</td><td style="text-align: center;">15%</td></tr>
+                <tr><td class="highlight-cell">Price</td><td style="text-align: center;">15%</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Sub-Requirement</th>
+                  <th style="text-align: center;">Weight</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Adjustable heat settings</td><td style="text-align: center;">13.3%</td></tr>
+                <tr><td>Even heat distribution</td><td style="text-align: center;">13.3%</td></tr>
+                <tr><td>Lightweight portability</td><td style="text-align: center;">13.3%</td></tr>
+                <tr><td>Smart device integration</td><td style="text-align: center;">7.5%</td></tr>
+                <tr><td>Waterproof & heat-resistant</td><td style="text-align: center;">7.5%</td></tr>
+                <tr><td>Overheat protection</td><td style="text-align: center;">7.5%</td></tr>
+                <tr><td>Long battery life</td><td style="text-align: center;">7.5%</td></tr>
+                <tr><td>Sleek modern design</td><td style="text-align: center;">6.0%</td></tr>
+                <tr><td>Affordable value</td><td style="text-align: center;">3.0%</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- FMEA -->
+      <div class="project-section fade-in" style="margin-top: 48px;">
+        <h2>Failure Mode & Effects Analysis (FMEA)</h2>
+        <p>
+          A comprehensive FMEA was conducted across all subsystems to identify, assess, and mitigate potential failure modes. Each failure was evaluated for severity, occurrence likelihood, and a Risk Priority Number (RPN). Corrective actions were defined for every identified failure mode, with the three highest-risk items driving key design mitigations.
+        </p>
+        <div class="table-scroll" style="margin-top: 16px;">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="width: 40px;">ID</th>
+                <th style="width: 120px;">Subsystem</th>
+                <th>Failure Mode</th>
+                <th style="text-align: center; width: 50px;">Sev.</th>
+                <th style="text-align: center; width: 50px;">Occ.</th>
+                <th style="text-align: center; width: 50px;">RPN</th>
+                <th style="width: 80px;">Criticality</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="highlight-cell">F.1</td><td>Internal Battery</td><td>Battery Depletion / Short-Circuit</td><td style="text-align: center;">5</td><td style="text-align: center;">1</td><td style="text-align: center;">15</td><td><span class="badge badge-high">High</span></td></tr>
+              <tr><td class="highlight-cell">F.2</td><td>Heating Element</td><td>Overheating</td><td style="text-align: center;">5</td><td style="text-align: center;">2</td><td style="text-align: center;">15</td><td><span class="badge badge-high">High</span></td></tr>
+              <tr><td class="highlight-cell">F.3</td><td>Control Unit</td><td>Component Failure</td><td style="text-align: center;">3</td><td style="text-align: center;">2</td><td style="text-align: center;">10</td><td><span class="badge badge-medium">Medium</span></td></tr>
+              <tr><td class="highlight-cell">F.4</td><td>Attachment</td><td>Magnet Detached</td><td style="text-align: center;">3</td><td style="text-align: center;">1</td><td style="text-align: center;">6</td><td><span class="badge badge-low">Low</span></td></tr>
+              <tr><td class="highlight-cell">F.5</td><td>User Interface</td><td>Buttons Unresponsive / Port Failure</td><td style="text-align: center;">4</td><td style="text-align: center;">3</td><td style="text-align: center;">10</td><td><span class="badge badge-medium">Medium</span></td></tr>
+              <tr><td class="highlight-cell">F.6</td><td>Circulation (Fan)</td><td>Fan Failure</td><td style="text-align: center;">5</td><td style="text-align: center;">2</td><td style="text-align: center;">15</td><td><span class="badge badge-low">Low</span></td></tr>
+              <tr><td class="highlight-cell">F.7</td><td>Housing</td><td>Cracking or Warping</td><td style="text-align: center;">3</td><td style="text-align: center;">1</td><td style="text-align: center;">10</td><td><span class="badge badge-low">Low</span></td></tr>
+              <tr><td class="highlight-cell">F.8</td><td>Safety Sensors</td><td>Sensor Malfunction</td><td style="text-align: center;">4</td><td style="text-align: center;">2</td><td style="text-align: center;">10</td><td><span class="badge badge-high">High</span></td></tr>
+              <tr><td class="highlight-cell">F.10</td><td>Connectivity*</td><td>Connection Loss</td><td style="text-align: center;">1</td><td style="text-align: center;">2</td><td style="text-align: center;">6</td><td><span class="badge badge-high">High</span></td></tr>
+              <tr><td class="highlight-cell">F.11</td><td>External Battery*</td><td>Battery Depletion</td><td style="text-align: center;">1</td><td style="text-align: center;">1</td><td style="text-align: center;">6</td><td><span class="badge badge-low">Low</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Product Design -->
+      <div class="project-section fade-in" style="margin-top: 48px;">
+        <h2>Product Design</h2>
+        <p>
+          The design progressed through multiple prototype iterations, from early foam mockups to 3D-printed enclosures with integrated electronics. Finite Element Analysis (FEA) validated thermal performance, confirming the dual-zone heating configuration achieved target operating temperature within 90 seconds of activation while maintaining safe skin-contact surface temperatures.
+        </p>
+      </div>
+
+      <div class="grid-2 fade-in" style="margin-top: 24px; align-items: start;">
+        <div>
+          <img src="assets/projects/hubble/mockup-01.jpg" alt="HUBBLE product mockup" style="width: 100%; border-radius: 8px; border: 1px solid var(--border-color);">
+        </div>
+        <div>
+          <img src="assets/projects/hubble/product-design.png" alt="Product design rendering" style="width: 100%; border-radius: 8px; border: 1px solid var(--border-color);">
+        </div>
+      </div>
+
+      <!-- Branding & Business Model -->
+      <div class="project-section fade-in" style="margin-top: 48px;">
+        <h2>Branding & Business Model</h2>
+        <p>
+          I led the complete brand identity development for Hubble — from naming and logo design to color palette selection and packaging concepts. The brand positioning emphasized warmth, portability, and modern design, targeting young professionals and outdoor enthusiasts. Conjoint analysis from the survey data validated pricing and feature bundle preferences, informing the go-to-market strategy.
+        </p>
+        <p style="margin-top: 16px;">
+          A comprehensive Business Model Canvas was developed covering value propositions, customer segments, revenue streams, and key partnerships. The analysis identified a direct-to-consumer e-commerce model supplemented by outdoor retail partnerships as the optimal distribution strategy, with projected break-even within the first year of production.
+        </p>
+      </div>
+
+      <!-- Key Contributions -->
+      <div class="project-section fade-in" style="margin-top: 48px;">
+        <h2>Key Contributions</h2>
         <ul>
-          <li>Created comprehensive SysML models: Use Case Diagrams, Block Definition Diagrams, Internal Flow Diagrams</li>
-          <li>Decision Matrices, Behavioral Test Plans, Interface Matrices for system architecture validation</li>
-          <li>Analytical Hierarchy Process (AHP) and House of Quality (QFD) for requirements prioritization</li>
-          <li>Failure Mode and Effects Analysis (FMEA) for risk assessment and mitigation planning</li>
-          <li>Activity Diagrams modeling user workflows and device operational scenarios</li>
+          <li>Designed and analyzed a 219-response market survey using conjoint analysis and demographic segmentation to validate product-market fit</li>
+          <li>Built complete SysML architecture in CATIA Magic — Use Case, BDD, IBD, Activity, and State Machine diagrams — serving as the engineering backbone for cross-team coordination</li>
+          <li>Conducted FMEA with 10 failure modes identified and mitigated, and QFD matrix linking customer needs to engineering parameters</li>
+          <li>Developed full brand identity (naming, logo, color palette, packaging) and Business Model Canvas with financial projections</li>
+          <li>Managed cross-functional coordination between mechanical, electrical, and marketing sub-teams across a 10-member team over 6 months</li>
         </ul>
       </div>
 
-      <div class="grid-2 fade-in">
-        <div class="img-placeholder">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          <span>SysML diagram</span>
-        </div>
-        <div class="img-placeholder">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          <span>House of Quality / FMEA</span>
-        </div>
-      </div>
-
+      <!-- Tools & Methods -->
       <div class="project-section fade-in" style="margin-top: 48px;">
-        <h2>Marketing & Business Strategy</h2>
+        <h2>Tools & Methods</h2>
         <ul>
-          <li>Applied branding expertise to develop the complete brand identity: name "Hubble," logo, and color palette</li>
-          <li>Collected and analyzed 500+ survey responses to define target customers, sales channels, and key business elements</li>
-          <li>Developed the Business Model Canvas and conducted a detailed SWOT analysis</li>
-          <li>Led cross-functional communication between mechanical, electrical, and marketing teams</li>
+          <li>CATIA Magic for SysML modeling (Use Case, BDD, IBD, Activity, State Machine diagrams)</li>
+          <li>FMEA, QFD (House of Quality), and AHP for risk analysis and decision making</li>
+          <li>SolidWorks and FEA for mechanical design and thermal simulation</li>
+          <li>Qualtrics for survey design and data collection (219 responses)</li>
+          <li>Conjoint analysis for feature preference modeling and pricing strategy</li>
+          <li>Adobe Creative Suite for brand identity and packaging design</li>
         </ul>
       </div>
 

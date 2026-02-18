@@ -4,12 +4,75 @@
   <script>if(localStorage.getItem('portfolio-theme')==='dark')document.documentElement.classList.add('dark-theme');</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DCA Flight Disruptions — Yixuan He (Adam)</title>
+  <title>Drivers of Flight Disruptions at DCA — Yixuan He (Adam)</title>
   <meta name="description" content="Analysis of flight delay and cancellation drivers at Reagan National Airport (DCA) using FAA and weather data. By Yixuan He (Adam).">
   <link rel="icon" href="assets/favicon.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <style>
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8rem;
+      margin-top: 16px;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+    .data-table thead th {
+      background: var(--bg-card);
+      color: var(--text-primary);
+      font-weight: 600;
+      text-align: left;
+      padding: 10px 12px;
+      border-bottom: 2px solid var(--border-color);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    .data-table tbody td {
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      vertical-align: top;
+      line-height: 1.5;
+    }
+    .data-table tbody tr:last-child td { border-bottom: none; }
+    .data-table tbody tr:hover { background: var(--accent-dim); }
+    .data-table .highlight-cell {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .table-scroll {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .powerbi-placeholder {
+      width: 100%;
+      aspect-ratio: 16/9;
+      border: 2px dashed var(--border-color);
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: var(--bg-card);
+      color: var(--text-muted);
+      margin-top: 24px;
+    }
+    .powerbi-placeholder svg {
+      width: 48px;
+      height: 48px;
+      opacity: 0.4;
+    }
+    .powerbi-placeholder span { font-size: 0.85rem; }
+    .powerbi-placeholder .sub {
+      font-size: 0.7rem;
+      font-family: var(--font-mono);
+    }
+  </style>
 </head>
 <body>
   <canvas id="neural-bg"></canvas>
@@ -39,77 +102,198 @@
       </a>
 
       <div class="project-detail-hero fade-in fade-in-delay-1">
-        <div class="project-number">02 / DSAN 5200 — GEORGETOWN UNIVERSITY</div>
+        <div class="project-org"><span>Georgetown University</span><span>Sep 2025 — Dec 2025</span></div>
         <h1>Drivers of Flight Disruptions at DCA Airport</h1>
-        <div class="project-org">Fall 2025 — Data Analytics</div>
         <p>
-          A data analytics project examining factors that cause flight delays and cancellations at Ronald Reagan Washington National Airport (DCA). The project integrates 2023–2024 FAA flight operational data with METAR weather data and holiday calendars to identify disruption patterns and develop actionable insights.
+          A data analytics project examining factors that cause flight delays and cancellations at Ronald Reagan Washington National Airport (DCA). Integrated 2023–2024 FAA flight operational data with hourly METAR weather observations and holiday calendars, applying statistical hypothesis testing and time series analysis to identify key disruption drivers and build interactive Power BI dashboards for stakeholder decision-making.
         </p>
         <div class="tags">
           <span class="tag">R</span>
           <span class="tag">Power BI</span>
           <span class="tag">FAA Data</span>
-          <span class="tag">METAR Weather</span>
+          <span class="tag">METAR</span>
           <span class="tag">Hypothesis Testing</span>
-          <span class="tag">Data Integration</span>
+          <span class="tag">Time Series</span>
         </div>
       </div>
 
-      <!-- Placeholder: Power BI Dashboard -->
-      <div class="img-placeholder fade-in fade-in-delay-2" style="aspect-ratio: 16/9;">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-        <span>Power BI Dashboard — Add screenshot or embed here</span>
-        <span style="font-size: 0.65rem; color: var(--border-accent);">Power BI iframe or screenshot (1200 x 675px)</span>
+      <!-- Power BI Dashboard Placeholder -->
+      <div class="fade-in fade-in-delay-2">
+        <div class="powerbi-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="2" y="3" width="20" height="14" rx="2"/>
+            <path d="M8 21h8M12 17v4"/>
+            <path d="M7 8v5M10 10v3M13 7v6M16 9v4"/>
+          </svg>
+          <span>Power BI Interactive Dashboard</span>
+          <span class="sub">Embed will be added here</span>
+        </div>
       </div>
 
-      <div class="project-section fade-in">
-        <h2>Data Sources</h2>
+      <!-- Overview -->
+      <div class="project-section fade-in" style="margin-top: 48px;">
+        <h2>Overview</h2>
+        <p>
+          This project investigates the primary drivers behind flight disruptions at DCA, one of the busiest airports in the Washington D.C. metropolitan area. With over 300,000 flight records spanning May 2023 to December 2024, the analysis combines FAA Bureau of Transportation Statistics (BTS) data with METAR hourly weather observations from the Iowa Environmental Mesonet to quantify when, why, and how flights get delayed or cancelled.
+        </p>
+        <p style="margin-top: 16px;">
+          Seven research questions were tested using parametric and non-parametric methods — Welch's t-tests, one-way ANOVA with Tukey HSD post-hoc comparisons, Pearson's chi-squared tests, bootstrap resampling (B = 10,000), and ARIMA time series modeling — to move beyond descriptive patterns toward statistically validated conclusions about disruption drivers.
+        </p>
+      </div>
+
+      <!-- Data Sources -->
+      <div class="project-section fade-in" style="margin-top: 48px;">
+        <h2>Data Sources & Pipeline</h2>
+        <p>
+          The project integrates three primary data sources through a multi-step cleaning and merging pipeline built in R. Raw flight records from the FAA BTS were filtered to DCA-origin flights, cleaned of inconsistencies, and enriched with weather features and holiday flags.
+        </p>
+        <div class="table-scroll" style="margin-top: 16px;">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Data Source</th>
+                <th>Description</th>
+                <th style="text-align: center;">Records</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="highlight-cell">FAA BTS Flight Data</td><td>Monthly CSV files (May 2023 — Dec 2024), departure/arrival times, delay breakdowns by cause, cancellation codes</td><td style="text-align: center;">300K+</td></tr>
+              <tr><td class="highlight-cell">METAR Weather Data</td><td>Hourly observations from Iowa Environmental Mesonet — temperature, wind speed/direction, visibility, precipitation, pressure, humidity, sky conditions</td><td style="text-align: center;">15+ variables</td></tr>
+              <tr><td class="highlight-cell">Holiday Calendar</td><td>U.S. federal holidays and school break periods for seasonal analysis</td><td style="text-align: center;">Custom built</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Delay Overview -->
+      <div class="project-section fade-in" style="margin-top: 48px;">
+        <h2>Flight Delay Overview</h2>
+        <p>
+          Exploratory analysis revealed the delay distribution is heavily right-skewed: the median departure delay was approximately 0 minutes (most flights depart on time or early), but the mean was pulled upward by a long tail of severe delays. Decomposing delay minutes by FAA cause code, late aircraft arrival was the single largest contributor (~35–40% of total delay minutes), followed by carrier-specific delays (maintenance, crew) and NAS delays (air traffic congestion, ground stops).
+        </p>
+        <p style="margin-top: 16px;">
+          The probability of experiencing a severe delay (&gt;60 min) rose from 17.10% under normal conditions to 26.87% under adverse weather — a 57% relative increase. Meanwhile, the daily cancellation rate jumped from 0.82% on normal-weather days to 2.65% on adverse-weather days, representing a 3.2x multiplicative increase. Snow events were the most disruptive single condition: the cancellation rate surged to 24.58% on snow days — nearly 1 in 4 flights — compared to 1.45% baseline, a 17x increase.
+        </p>
+      </div>
+
+      <!-- Weather Correlation -->
+      <div class="project-section fade-in" style="margin-top: 48px;">
+        <h2>Weather Impact Analysis</h2>
+        <p>
+          Weather variables were joined to flight records by nearest-hour matching to METAR observations. A Welch's two-sample t-test compared mean departure delay between adverse-weather flights (visibility &lt; 3 mi, wind &gt; 20 kt, or active precipitation) and normal-condition flights. The test rejected the null hypothesis of equal means (p &lt; 0.001), with adverse-weather flights averaging significantly longer delays.
+        </p>
+        <p style="margin-top: 16px;">
+          Correlation analysis across 15+ weather features identified visibility (r = −0.18), wind speed (r = 0.12), and precipitation presence as the strongest individual predictors of delay duration. Rain events nearly doubled the cancellation rate from 1.45% to 2.85%, while snow pushed it to 24.58%. Bootstrap resampling (B = 10,000) constructed 95% confidence intervals for the mean delay difference under each adverse condition, all of which excluded zero — confirming the weather effect is robust and not an artifact of outliers.
+        </p>
+      </div>
+
+      <!-- Research Questions -->
+      <div class="project-section fade-in" style="margin-top: 48px;">
+        <h2>Research Questions & Statistical Results</h2>
+        <p>
+          Seven research questions were tested with formal hypothesis tests. The table below summarizes each question, the statistical method applied, and the key result.
+        </p>
+        <div class="table-scroll" style="margin-top: 16px;">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="width: 30px;">Q</th>
+                <th>Research Question</th>
+                <th style="width: 120px;">Test</th>
+                <th style="width: 200px;">Result</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="highlight-cell">Q1</td><td>What is the overall flight delay rate at DCA?</td><td>Descriptive</td><td>Severe delay prob. rises 17.1% → 26.9% under adverse weather</td></tr>
+              <tr><td class="highlight-cell">Q2</td><td>Do weather conditions significantly affect delay probability?</td><td>Welch's t-test</td><td>p &lt; 0.001; snow cancellation rate 24.58% vs 1.45% baseline</td></tr>
+              <tr><td class="highlight-cell">Q3</td><td>Is there a significant difference in delay rates between airlines?</td><td>ANOVA + Tukey HSD</td><td>F ≈ 441, p ≈ 0; AA highest mean delay 12.77 min, 95% CI [7.58, 18.95]</td></tr>
+              <tr><td class="highlight-cell">Q4</td><td>Do holidays drive higher cancellation rates?</td><td>Chi-squared</td><td>χ² = 421.26, df = 11, p ≈ 0; holiday cancel 2.23% vs 1.52%</td></tr>
+              <tr><td class="highlight-cell">Q5</td><td>What are the primary delay causes and how do they vary by season?</td><td>Decomposition</td><td>Late aircraft ~35–40% of delay min; weather dominates winter</td></tr>
+              <tr><td class="highlight-cell">Q6</td><td>Are there significant weekly patterns in delay and cancellation?</td><td>ARIMA + ACF</td><td>ARIMA(1,0,0): AR(1) = 0.28, AIC = −493.77; sig. lag-1 autocorrelation</td></tr>
+              <tr><td class="highlight-cell">Q7</td><td>Can we identify weather thresholds that trigger disproportionate disruptions?</td><td>Bootstrap (B=10K)</td><td>95% CIs exclude 0 for visibility &lt; 3 mi, wind &gt; 20 kt, precipitation</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Cancellation & Holiday Analysis -->
+      <div class="project-section fade-in" style="margin-top: 48px;">
+        <h2>Cancellation & Holiday Analysis</h2>
+        <p>
+          A Pearson's chi-squared test of independence evaluated whether cancellation rates differ across months. The result was highly significant: χ² = 421.26, df = 11, p ≈ 0, confirming that cancellation probability is not uniformly distributed across the year. Winter months (Dec–Feb) showed 2–3x the cancellation rate of summer months, with weather cancellation code (B) dominating the winter spikes.
+        </p>
+        <p style="margin-top: 16px;">
+          Holiday periods showed a cancellation rate of 2.23% versus 1.52% for non-holiday periods — statistically significant but with a modest practical effect size. In contrast, mean departure delay was nearly identical between holiday (10.53 min) and non-holiday (10.82 min) periods, indicating that holidays primarily affect whether flights operate at all rather than how late they depart.
+        </p>
+      </div>
+
+      <!-- Time Series Analysis -->
+      <div class="project-section fade-in" style="margin-top: 48px;">
+        <h2>Time Series Modeling</h2>
+        <p>
+          Weekly aggregated delay and cancellation series were modeled using ARIMA. For weekly cancellation rates, an ARIMA(1,0,0) was selected via AIC minimization: AR(1) coefficient = 0.28 (significant), mean cancellation rate ≈ 1.5%, AIC = −493.77, BIC = −485.81. The positive AR(1) term indicates that elevated cancellation weeks tend to persist — a disrupted week raises the probability of disruption the following week.
+        </p>
+        <p style="margin-top: 16px;">
+          For weekly average delay, an ARIMA(0,0,1)(0,1,0)<sub>52</sub> model captured both short-term shock effects and annual seasonality: MA(1) = 0.26, AIC = 377.25, BIC = 383.16. At the daily level, a seasonal ARIMA(3,0,1)(1,0,0)<sub>7</sub> model captured day-of-week periodicity with SAR(1) = 0.088. ACF/PACF plots confirmed significant autocorrelation at lags 1–2 for the weekly series and lag 7 for the daily series.
+        </p>
+      </div>
+
+      <div class="grid-2 fade-in" style="margin-top: 24px; align-items: start;">
+        <div>
+          <img src="assets/projects/dca/q6_weekly_avg_delay.png" alt="Weekly average delay trends" style="width: 100%; border-radius: 8px; border: 1px solid var(--border-color);">
+        </div>
+        <div>
+          <img src="assets/projects/dca/q6_weekly_cancel_rate.png" alt="Weekly cancellation rate trends" style="width: 100%; border-radius: 8px; border: 1px solid var(--border-color);">
+        </div>
+      </div>
+
+      <!-- Airline Comparison -->
+      <div class="project-section fade-in" style="margin-top: 48px;">
+        <h2>Airline Performance Comparison</h2>
+        <p>
+          A one-way ANOVA tested the null hypothesis that mean arrival delay is equal across all airlines at DCA. The result was decisive: F ≈ 441, p ≈ 0, rejecting H₀. Tukey's HSD post-hoc test identified specific carrier pairs with statistically significant pairwise differences. American Airlines exhibited the highest mean arrival delay at 12.77 minutes (95% CI: [7.58, 18.95]), while several carriers clustered near the 5–8 minute range.
+        </p>
+        <p style="margin-top: 16px;">
+          A chi-squared test on cancellation counts by carrier (χ² = 421.26, df = 11, p ≈ 0) confirmed that cancellation rates also differ significantly across airlines. However, when cancellations were stratified by cause code, weather-related cancellations (code B) were relatively uniform across carriers, while carrier-related cancellations (code A) showed substantial variation — indicating that the inter-airline performance gap is driven by operational factors (crew scheduling, fleet utilization, turnaround efficiency) rather than differential weather exposure.
+        </p>
+      </div>
+
+      <!-- Bootstrap -->
+      <div class="project-section fade-in" style="margin-top: 48px;">
+        <h2>Bootstrap Resampling & Weather Thresholds</h2>
+        <p>
+          To validate the weather impact findings without relying on normality assumptions, bootstrap resampling (B = 10,000) constructed non-parametric 95% confidence intervals for the mean delay difference between adverse and normal conditions. Three weather thresholds were tested independently: visibility &lt; 3 statute miles, sustained wind &gt; 20 knots, and active precipitation (rain, snow, or freezing rain).
+        </p>
+        <p style="margin-top: 16px;">
+          All three bootstrap confidence intervals excluded zero, confirming the adverse weather effect is robust. The bootstrap distributions were approximately normal (as expected from the CLT at this sample size), and the observed test statistics fell well into the rejection region. Combined with the parametric Welch's t-test results, this dual-method approach provides strong evidence that these measurable weather thresholds serve as reliable early-warning triggers for flight disruption escalation at DCA.
+        </p>
+      </div>
+
+      <!-- Key Findings -->
+      <div class="project-section fade-in" style="margin-top: 48px;">
+        <h2>Key Statistical Findings</h2>
         <ul>
-          <li>FAA flight operational data: monthly CSV files covering 2023–2024, filtered for DCA origin/destination flights</li>
-          <li>METAR weather data: 15+ hourly variables including temperature, wind speed, precipitation, visibility, pressure, humidity, and sky conditions</li>
-          <li>Holiday calendar dataset for seasonal and event-based analysis</li>
+          <li>Snow events produce a 17x increase in cancellation rate (1.45% → 24.58%), while adverse weather overall raises severe delay probability by 57% (17.1% → 26.9%); Welch's t-test p &lt; 0.001</li>
+          <li>Airline delay performance differs significantly (ANOVA F ≈ 441, p ≈ 0); American Airlines had the highest mean arrival delay at 12.77 min (95% CI: [7.58, 18.95])</li>
+          <li>Cancellation rates are not uniformly distributed by month (χ² = 421.26, df = 11, p ≈ 0), with winter months showing 2–3x the cancellation rate of summer</li>
+          <li>Holiday cancellation rate (2.23%) is statistically higher than non-holiday (1.52%), but mean delay is virtually identical (~10.5 vs ~10.8 min) — holidays affect flight availability, not departure punctuality</li>
+          <li>Weekly cancellation series follows an AR(1) process (coeff = 0.28, AIC = −493.77), confirming disruption persistence across consecutive weeks</li>
+          <li>Bootstrap CIs (B = 10,000) for all three weather thresholds exclude zero, validating the parametric results with non-parametric robustness</li>
         </ul>
       </div>
 
-      <div class="grid-2 fade-in">
-        <div class="img-placeholder">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          <span>Delay trend chart</span>
-        </div>
-        <div class="img-placeholder">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          <span>Weather correlation analysis</span>
-        </div>
-      </div>
-
+      <!-- Tools & Methods -->
       <div class="project-section fade-in" style="margin-top: 48px;">
-        <h2>Methodology & Approach</h2>
+        <h2>Tools & Methods</h2>
         <ul>
-          <li>Data integration pipeline merging FAA flight records with hourly METAR weather observations by timestamp and location</li>
-          <li>Feature engineering: delay flag indicators, cancellation reason mapping, delay breakdown by cause (carrier, weather, NAS, security, late aircraft)</li>
-          <li>Statistical hypothesis testing (t-tests) to validate significance of weather and temporal factors on delay probability</li>
-          <li>Power BI interactive dashboards showing weekly delay trends, cancellation rates, and cause-breakdown analysis</li>
-        </ul>
-      </div>
-
-      <div class="grid-2 fade-in">
-        <div class="img-placeholder">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          <span>Delay cause breakdown</span>
-        </div>
-        <div class="img-placeholder">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          <span>Statistical test results</span>
-        </div>
-      </div>
-
-      <div class="project-section fade-in" style="margin-top: 48px;">
-        <h2>Key Outcomes</h2>
-        <ul>
-          <li>Identified weather variables with strongest correlation to flight delays — visibility and wind speed emerged as primary disruption drivers</li>
-          <li>Built comprehensive data cleaning pipeline documenting all transformations for reproducibility</li>
-          <li>Power BI dashboards providing actionable insights for stakeholders on delay patterns by carrier, season, and weather condition</li>
-          <li>Final report synthesizing quantitative findings with practical recommendations for flight disruption mitigation</li>
+          <li>R (tidyverse, dplyr, ggplot2, forecast) for data wrangling, statistical analysis, and visualization</li>
+          <li>Welch's two-sample t-test for comparing mean delays under different weather conditions</li>
+          <li>One-way ANOVA with Tukey HSD post-hoc for pairwise airline delay comparisons</li>
+          <li>Pearson's chi-squared test of independence for cancellation rate × month/holiday associations</li>
+          <li>Bootstrap resampling (B = 10,000) for non-parametric confidence interval construction</li>
+          <li>ARIMA modeling (with seasonal components) for weekly and daily delay/cancellation forecasting</li>
+          <li>ACF/PACF diagnostics for lag structure identification and model order selection</li>
+          <li>Power BI for interactive dashboards; Quarto for reproducible report generation</li>
         </ul>
       </div>
 

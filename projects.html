@@ -36,51 +36,75 @@
 
     <section class="section">
       <div class="section-label fade-in">Projects</div>
-      <h1 class="section-title fade-in fade-in-delay-1">Selected work &<br>case studies.</h1>
-      <p class="fade-in fade-in-delay-2" style="color: var(--text-secondary); max-width: 600px; margin-bottom: 60px; font-size: 1rem; line-height: 1.7;">
-        A collection of academic and personal projects spanning data science, machine learning, and systems engineering. More projects and GitHub links coming soon.
-      </p>
+
+      <!-- Filter Tabs -->
+      <div class="filter-tabs fade-in fade-in-delay-2">
+        <button class="filter-tab filter-tab-active" data-filter="all">All</button>
+        <button class="filter-tab" data-filter="data-science">Data Science</button>
+        <button class="filter-tab" data-filter="digital">Digital Transformation</button>
+        <button class="filter-tab" data-filter="bi">Business Intelligence</button>
+        <button class="filter-tab" data-filter="ml">Machine Learning</button>
+        <button class="filter-tab" data-filter="ai">AI Application</button>
+        <button class="filter-tab" data-filter="marketing">Marketing</button>
+        <button class="filter-tab" data-filter="systems">Systems Engineering</button>
+        <button class="filter-tab" data-filter="webdev">Web Development</button>
+      </div>
 
       <!-- Projects Grid -->
       <div class="grid-2 fade-in fade-in-delay-3">
 
-        <!-- Project 1: Police Incident Modeling -->
-        <a href="project-police.html" class="project-card" style="text-decoration: none; color: inherit;">
-          <div class="project-number">01 / DSAN 5000</div>
-          <h3>Police Incident Patterns & Response Time Modeling</h3>
-          <div class="project-org">Georgetown University — Fall 2025</div>
+        <!-- Project 1: Mercedes-Benz Digital Transformation -->
+        <a href="project-mercedes-digital.html" class="project-card" data-categories="digital bi" style="text-decoration: none; color: inherit;">
+          <div class="project-org"><span>Mercedes-Benz</span><span>Jun 2024 - Sep 2025</span></div>
+          <h3>Mercedes-Benz Digital Transformation Bootcamp</h3>
           <p>
-            Comprehensive analysis of police dispatch patterns and emergency response times in Montgomery County, MD. Built predictive models for call priorities and disposition outcomes using real-world dispatch data.
+            Designed, created, and executed two rounds of hybrid digital transformation training camps within the Mercedes-Benz China HR Department, training 140+ professionals on Power BI, data modeling, and self-service analytics across Greater China.
+          </p>
+          <ul class="highlight-list">
+            <li>Recognized by Mercedes-Benz China HR executive leadership</li>
+            <li>Increased BI tool adoption rate from 13% to 91%</li>
+            <li>Presented to MB Board Member Sabine Kohleisen</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">Digital Transformation</span>
+            <span class="tag">M365</span>
+            <span class="tag">MS Power Platforms</span>
+          </div>
+          <span class="project-arrow">→</span>
+        </a>
+
+        <!-- Project 2: Police Incident Modeling -->
+        <a href="project-police.html" class="project-card" data-categories="data-science ml" style="text-decoration: none; color: inherit;">
+          <div class="project-org"><span>Georgetown University</span><span>Oct 2025 - Dec 2025</span></div>
+          <h3>Police Incident & Response Time Modeling</h3>
+          <p>
+            End-to-end data science project analyzing 300K+ police dispatch records to predict response times, classify call priorities, and identify incident hotspots across Montgomery County, MD. Built regression, classification, and clustering models with interactive visualizations.
           </p>
           <ul class="highlight-list">
             <li>Regression modeling on dispatch-to-arrival response times</li>
             <li>Binary classification of high-priority emergency calls</li>
             <li>Spatial clustering to identify incident hotspots</li>
-            <li>Interactive Quarto-based data storytelling website</li>
           </ul>
           <div class="tags">
-            <span class="tag">R</span>
             <span class="tag">Quarto</span>
-            <span class="tag">Clustering</span>
-            <span class="tag">Regression</span>
-            <span class="tag">Classification</span>
             <span class="tag">EDA</span>
+            <span class="tag">Machine Learning</span>
+            <span class="tag">Spatial Analysis</span>
           </div>
+          <span class="project-arrow">→</span>
         </a>
 
         <!-- Project 2: Flight Disruptions -->
-        <a href="project-dca.html" class="project-card" style="text-decoration: none; color: inherit;">
-          <div class="project-number">02 / DSAN 5200</div>
+        <a href="project-dca.html" class="project-card" data-categories="data-science bi ml" style="text-decoration: none; color: inherit;">
+          <div class="project-org"><span>Georgetown University</span><span>Sep 2025 - Dec 2025</span></div>
           <h3>Drivers of Flight Disruptions at DCA Airport</h3>
-          <div class="project-org">Georgetown University — Fall 2025</div>
           <p>
-            Data analytics project examining factors causing flight delays and cancellations at Reagan National Airport. Integrated 2023–2024 FAA operational data with METAR weather data and holiday calendars.
+            Data analytics project examining factors causing flight delays and cancellations at Reagan National Airport. Integrated 2023–2024 FAA operational data with hourly METAR weather observations and holiday calendars.
           </p>
           <ul class="highlight-list">
-            <li>Integrated FAA flight data with 15+ hourly weather variables</li>
-            <li>Statistical hypothesis testing on delay drivers</li>
+            <li>Integrated 300K+ FAA flight records with 15+ hourly weather variables</li>
+            <li>Welch's t-test, ANOVA, chi-squared, and bootstrap resampling</li>
             <li>Power BI interactive dashboards for stakeholder insights</li>
-            <li>Delay breakdown analysis: carrier, weather, NAS, security</li>
           </ul>
           <div class="tags">
             <span class="tag">R</span>
@@ -88,66 +112,31 @@
             <span class="tag">FAA Data</span>
             <span class="tag">METAR</span>
             <span class="tag">Hypothesis Testing</span>
+            <span class="tag">Time Series</span>
           </div>
+          <span class="project-arrow">→</span>
         </a>
 
         <!-- Project 3: HUBBLE -->
-        <a href="project-hubble.html" class="project-card" style="text-decoration: none; color: inherit;">
-          <div class="project-number">03 / CORNELL SYSEN</div>
-          <h3>HUBBLE — Wearable Heating Device</h3>
-          <div class="project-org">Cornell University — June 2024</div>
+        <a href="project-hubble.html" class="project-card" data-categories="systems marketing" style="text-decoration: none; color: inherit;">
+          <div class="project-org"><span>Cornell University</span><span>Jan 2024 - Jun 2024</span></div>
+          <h3>Hubble — Magnetic Wearable Heating System</h3>
           <p>
-            Led systems engineering and marketing for "Hubble," a rechargeable magnetically-attached wearable heating device. Managed cross-functional coordination across mechanical, electrical, and marketing teams.
+            Led systems engineering and marketing for a Cornell M.Eng capstone project developing "Hubble," a rechargeable magnetically-attached wearable heating device. Managed cross-functional coordination across mechanical, electrical, and marketing teams.
           </p>
           <ul class="highlight-list">
-            <li>Complete SysML modeling: Use Case, BDD, FMEA, AHP, QFD</li>
-            <li>Brand identity development: naming, logo, color palette</li>
-            <li>Business Model Canvas with 500+ survey responses analyzed</li>
-            <li>End-to-end systems engineering lifecycle documentation</li>
+            <li>Complete SysML modeling: Use Case, BDD, IBD, FMEA, AHP, QFD</li>
+            <li>219-response market survey with conjoint analysis</li>
+            <li>Full brand identity development and Business Model Canvas</li>
           </ul>
           <div class="tags">
-            <span class="tag">SysML</span>
-            <span class="tag">CATIA Magic</span>
-            <span class="tag">FMEA</span>
+            <span class="tag">System Engineering</span>
             <span class="tag">Branding</span>
             <span class="tag">Survey Analysis</span>
           </div>
+          <span class="project-arrow">→</span>
         </a>
 
-        <!-- Project 4: Mercedes-Benz AI -->
-        <a href="project-mercedes.html" class="project-card" style="text-decoration: none; color: inherit;">
-          <div class="project-number">04 / PROFESSIONAL</div>
-          <h3>AI-Powered CV Screening & HR Analytics</h3>
-          <div class="project-org">Mercedes-Benz — Summer 2025</div>
-          <p>
-            Architected an AI-powered CV screening prototype leveraging Dify AI, Python, and Power BI. Built a fully automated pipeline from candidate extraction to AI-driven scoring, cutting manual screening time by 90%.
-          </p>
-          <ul class="highlight-list">
-            <li>Enterprise API integrations: Google Cloud, OpenAI, Azure</li>
-            <li>Automated OAuth2 authentication for real-time dashboards</li>
-            <li>M365 training adopted by 140+ HR professionals</li>
-            <li>Presented to Mercedes-Benz Board Member</li>
-          </ul>
-          <div class="tags">
-            <span class="tag">Python</span>
-            <span class="tag">Dify AI</span>
-            <span class="tag">Power BI</span>
-            <span class="tag">Azure</span>
-            <span class="tag">OpenAI</span>
-          </div>
-        </a>
-
-        <!-- Project 5: Placeholder for future -->
-        <div class="project-card" style="border-style: dashed; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 300px; text-align: center;">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color: var(--text-muted); margin-bottom: 16px;">
-            <circle cx="12" cy="12" r="10"/>
-            <path d="M12 8v8M8 12h8"/>
-          </svg>
-          <h3 style="font-size: 1rem; color: var(--text-muted); margin-bottom: 8px;">More Coming Soon</h3>
-          <p style="color: var(--text-muted); font-size: 0.85rem; max-width: 260px;">
-            GitHub repositories, personal projects, and open-source contributions will be added here.
-          </p>
-        </div>
 
       </div>
     </section>

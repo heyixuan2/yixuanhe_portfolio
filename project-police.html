@@ -39,78 +39,162 @@
       </a>
 
       <div class="project-detail-hero fade-in fade-in-delay-1">
-        <div class="project-number">01 / DSAN 5000 — GEORGETOWN UNIVERSITY</div>
-        <h1>Police Incident Patterns & Response Time Modeling</h1>
-        <div class="project-org">Fall 2025 — Data Science & Analytics</div>
+        <div class="project-org"><span>Georgetown University</span><span>Oct 2025 — Dec 2025</span></div>
+        <h1>Police Incident & Response Time Modeling</h1>
         <p>
-          A comprehensive analysis of police dispatch patterns and emergency response times in Montgomery County, Maryland. This project investigates what factors drive dispatch-to-arrival times, how response times vary by time, location, and call type, and builds predictive models for call priorities and disposition outcomes.
+          End-to-end data science project analyzing 300K+ police dispatch records to predict response times, classify call priorities, and identify incident hotspots across Montgomery County, MD. Built regression, classification, and clustering models with interactive visualizations deployed on a Quarto website.
         </p>
         <div class="tags">
-          <span class="tag">R</span>
           <span class="tag">Quarto</span>
-          <span class="tag">Clustering</span>
-          <span class="tag">Regression</span>
-          <span class="tag">Classification</span>
           <span class="tag">EDA</span>
-          <span class="tag">Data Storytelling</span>
+          <span class="tag">Machine Learning</span>
+          <span class="tag">Spatial Analysis</span>
+          <span class="tag">R</span>
+          <span class="tag">Python</span>
         </div>
       </div>
 
-      <!-- Placeholder: Main Visualization -->
-      <div class="img-placeholder fade-in fade-in-delay-2">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-        <span>Project overview visualization — Add screenshot here</span>
-        <span style="font-size: 0.65rem; color: var(--border-accent);">Recommended: 1200 x 675px</span>
+      <!-- Hero Image -->
+      <div class="fade-in fade-in-delay-2" style="margin: 48px 0;">
+        <img src="assets/projects/police/hero.avif" alt="Police incident analysis" style="width: 90%; border-radius: 12px; border: 1px solid var(--border-color);">
       </div>
 
-      <!-- Data & Methodology -->
+      <!-- Overview -->
       <div class="project-section fade-in">
-        <h2>Data Source</h2>
+        <h2>Overview</h2>
         <p>
-          Real-world police dispatch data from Montgomery County's open data API, covering incident records with call types, priority levels, timestamps, geographic coordinates, and disposition outcomes.
+          This project investigates police dispatch patterns and emergency response times in Montgomery County, Maryland using real-world data from the county's open data API. The analysis covers 16,782 incident records with 26 variables spanning call types, priority levels, timestamps, geographic coordinates, and disposition outcomes.
+        </p>
+        <p style="margin-top: 16px;">
+          The project follows a complete data science pipeline — data collection, cleaning, exploratory analysis, unsupervised learning, and supervised learning — answering questions like what drives response times, whether spatial clusters exist, and how accurately we can predict call priority and disposition outcomes.
+        </p>
+        <div style="margin-top: 20px;">
+          <a href="assets/projects/police/full-report.pdf" target="_blank" class="btn" style="display: inline-flex; align-items: center; gap: 8px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            View Full Report (PDF)
+          </a>
+        </div>
+      </div>
+
+      <!-- Data Cleaning -->
+      <div class="project-section fade-in" style="margin-top: 48px;">
+        <h2>Data Cleaning</h2>
+        <p>
+          The raw dataset required extensive cleaning — parsing numeric fields, handling missing values, normalizing categorical labels, and using the Google Geocoding API to fill missing coordinates. Two separate cleaned datasets were produced: one preserving the original structure for exploratory analysis, and a second with z-score normalization and categorical encoding for machine learning.
+        </p>
+        <p style="margin-top: 16px;">
+          A major challenge was the large number of missing geographic coordinates. Since each incident record included a street address, the Google Geocoding API was used to recover accurate longitude and latitude values — enabling the spatial analysis that would later reveal geographic incident patterns across the county.
         </p>
       </div>
 
-      <div class="grid-2 fade-in">
-        <div class="img-placeholder">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          <span>EDA visualization</span>
+      <div class="fade-in" style="margin-top: 24px;">
+        <img src="assets/projects/police/missing-values.png" alt="Missing values heatmap across all variables" style="width: 50%; border-radius: 8px; border: 1px solid var(--border-color);">
+        <p style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); margin-top: 8px;">Missing Values Heatmap Across 26 Variables</p>
+      </div>
+
+      <!-- EDA Section -->
+      <div class="project-section fade-in" style="margin-top: 48px;">
+        <h2>Exploratory Data Analysis</h2>
+        <p>
+          The EDA examined both individual variables and cross-variable relationships. Time-related measures like call-to-dispatch and dispatch-to-arrival are highly right-skewed — most incidents are handled quickly, but a small number take significantly longer, creating extreme outliers. These delays were found to accumulate across the workflow rather than occurring in isolation.
+        </p>
+        <p style="margin-top: 16px;">
+          Property crime is the most frequent incident type and is prominent among high-priority calls alongside violent crime and health & safety incidents. Temporal patterns show most incident types peaking around 4 PM, with public order incidents spiking late at night on weekends. The Silver Spring district (3D) stands out with the highest property crime concentration, while nighttime incidents generally have shorter response times despite lower overall volume.
+        </p>
+      </div>
+
+      <div class="grid-2 fade-in" style="margin-top: 24px; align-items: stretch;">
+        <!-- Left: stacked graphs -->
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <div>
+            <img src="assets/projects/police/incident-type-priority.png" alt="Incident Type vs Priority distribution" style="width: 100%; border-radius: 8px; border: 1px solid var(--border-color);">
+            <p style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); margin-top: 8px; text-align: center;">Incident Type vs Priority Distribution</p>
+          </div>
+          <div>
+            <img src="assets/projects/police/district-priority.png" alt="District vs Priority distribution" style="width: 100%; border-radius: 8px; border: 1px solid var(--border-color);">
+            <p style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); margin-top: 8px; text-align: center;">District vs Priority Distribution</p>
+          </div>
+          <div>
+            <img src="assets/projects/police/sankey-delays.png" alt="Sankey diagram of operational delays" style="width: 100%; border-radius: 8px; border: 1px solid var(--border-color);">
+            <p style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); margin-top: 8px; text-align: center;">Operational Delay Breakdown by Incident Type</p>
+          </div>
         </div>
-        <div class="img-placeholder">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          <span>Spatial clustering map</span>
+        <!-- Right: tall daily heatmap, stretch to match left -->
+        <div style="display: flex; flex-direction: column;">
+          <img src="assets/projects/police/heatmap-daily.png" alt="Daily incident heatmap by hour and incident type" style="width: 100%; height: 100%; object-fit: contain; border-radius: 8px; border: 1px solid var(--border-color);">
+          <p style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); margin-top: 8px; text-align: center;">Daily Incident Heatmap — Hourly Patterns by Day of Week</p>
         </div>
       </div>
 
+      <!-- Unsupervised Learning -->
       <div class="project-section fade-in" style="margin-top: 48px;">
-        <h2>Methodology & Approach</h2>
+        <h2>Unsupervised Learning</h2>
+        <p>
+          Dimensionality reduction using PCA and t-SNE projected the 26-variable dataset into two dimensions for visualization. Clustering algorithms — K-Means, DBSCAN, and Hierarchical Clustering — were applied with varying parameter settings and distance functions to search for natural groupings.
+        </p>
+        <p style="margin-top: 16px;">
+          The results consistently showed that incidents form a single dense cloud with smooth transitions between types and priorities. While algorithms can force partitions, the boundaries don't reflect meaningful operational differences — they cut across incident types without clear interpretive value. This suggests response times are driven by factors unique to each individual incident rather than by broad categorical groupings.
+        </p>
+      </div>
+
+      <div class="grid-2 fade-in" style="margin-top: 24px; align-items: start;">
+        <div>
+          <img src="assets/projects/police/pca-scatter.png" alt="PCA scatter plot by priority level" style="width: 100%; height: 400px; object-fit: contain; border-radius: 8px; border: 1px solid var(--border-color);">
+          <p style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); margin-top: 8px; text-align: center;">PCA Scatter Plot by Priority Level</p>
+        </div>
+        <div>
+          <img src="assets/projects/police/spatial-map.png" alt="Spatial distribution of incidents in Montgomery County" style="width: 100%; height: 400px; object-fit: contain; border-radius: 8px; border: 1px solid var(--border-color);">
+          <p style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); margin-top: 8px; text-align: center;">Spatial Distribution of Incidents by Type</p>
+        </div>
+      </div>
+
+      <!-- Supervised Learning -->
+      <div class="project-section fade-in" style="margin-top: 48px;">
+        <h2>Supervised Learning</h2>
+        <p>
+          Three categories of predictive models were built using Logistic Regression, Random Forest, Gradient Boosting, and KNN. Binary classification predicted whether an incident would be high or low priority. Multiclass classification targeted the final disposition code. Regression estimated the continuous dispatch-to-arrival response time.
+        </p>
+        <p style="margin-top: 16px;">
+          For priority classification, models achieved reasonable accuracy and recall, though many calls lie near the decision boundary. The multiclass disposition models performed well on common codes but struggled with rare categories due to class imbalance. Response time regression showed that even a simple mean-prediction baseline achieves moderate accuracy — more complex models reduced errors but left significant unexplained variation, capturing broad patterns rather than precise per-incident predictions.
+        </p>
+      </div>
+
+      <div class="grid-2 fade-in" style="margin-top: 24px; align-items: start;">
+        <div>
+          <img src="assets/projects/police/parity-plot.png" alt="Parity plot of predicted vs actual response times" style="width: 100%; height: 380px; object-fit: contain; border-radius: 8px; border: 1px solid var(--border-color);">
+          <p style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); margin-top: 8px; text-align: center;">Predicted vs Actual Response Times</p>
+        </div>
+        <div>
+          <img src="assets/projects/police/confusion-matrix.png" alt="Confusion matrix for disposition classification" style="width: 100%; height: 380px; object-fit: contain; border-radius: 8px; border: 1px solid var(--border-color);">
+          <p style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); margin-top: 8px; text-align: center;">Disposition Classification Confusion Matrix</p>
+        </div>
+      </div>
+
+      <!-- Key Findings -->
+      <div class="project-section fade-in" style="margin-top: 48px;">
+        <h2>Key Findings</h2>
+        <p>
+          The analysis surfaced several actionable insights about police operations in Montgomery County:
+        </p>
         <ul>
-          <li>Exploratory Data Analysis with visualizations showing incident distribution by call type, priority, timing, and geography</li>
-          <li>Unsupervised learning (clustering) to identify spatial and temporal incident patterns and hotspots</li>
-          <li>Regression modeling on dispatch-to-arrival response times to understand key delay factors</li>
-          <li>Binary classification of high-priority emergency calls for resource allocation optimization</li>
-          <li>Multiclass classification of incident disposition outcomes</li>
+          <li>High-priority calls have significantly shorter response times with fewer extreme delays, while intermediate priorities share similar distributions and outliers</li>
+          <li>Dispatch delays — not travel time — are the primary bottleneck in the emergency response workflow, contributing disproportionately to long total handling times</li>
+          <li>Peak incident volume occurs around 4 PM, with public order incidents peaking late at night on weekends and traffic incidents concentrated on workdays</li>
+          <li>Silver Spring (3D district) has the highest property crime concentration, pointing to local variation in workload that could inform patrol allocation</li>
+          <li>Incidents form a continuous spectrum rather than distinct clusters — response times appear driven by factors unique to each incident rather than broad categories</li>
+          <li>Predictive models capture broad patterns but leave significant per-incident variation unexplained, suggesting richer context like narrative fields or neighborhood-level data would improve accuracy</li>
         </ul>
       </div>
 
-      <div class="grid-2 fade-in">
-        <div class="img-placeholder">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          <span>Model results / performance</span>
-        </div>
-        <div class="img-placeholder">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          <span>Key findings visualization</span>
-        </div>
-      </div>
-
+      <!-- Tools & Methods -->
       <div class="project-section fade-in" style="margin-top: 48px;">
-        <h2>Key Outcomes</h2>
+        <h2>Tools & Methods</h2>
         <ul>
-          <li>Interactive Quarto-based data storytelling website with multiple sections: Home, Data Collection, Data Cleaning, EDA, Unsupervised Learning, Supervised Learning</li>
-          <li>Identified key factors driving response time variability across different call types and geographic areas</li>
-          <li>Spatial clustering revealed distinct incident hotspot patterns with actionable insights for dispatch optimization</li>
-          <li>Comprehensive report with visualizations designed for non-technical stakeholder communication</li>
+          <li>R for data wrangling, statistical analysis, and visualization (ggplot2, dplyr, tidyr)</li>
+          <li>Python for machine learning models (scikit-learn, pandas, numpy)</li>
+          <li>Quarto for interactive website generation and data storytelling</li>
+          <li>Google Geocoding API for filling missing location coordinates</li>
+          <li>Montgomery County Open Data API for raw data collection</li>
         </ul>
       </div>
 

@@ -172,6 +172,10 @@ html.dark-theme .section-label {
   color: var(--text-primary);
 }
 
+html.dark-theme .filter-tab-active {
+  color: #0a0a0a;
+}
+
 html.dark-theme .project-card {
   background: var(--bg-card);
   border-color: var(--border-color);
@@ -373,7 +377,6 @@ img {
   color: var(--text-secondary);
   font-size: 1rem;
   line-height: 1.8;
-  max-width: 720px;
   margin-bottom: 24px;
 }
 
@@ -419,6 +422,12 @@ img {
 /* Project section blocks */
 .project-section {
   margin-bottom: 48px;
+}
+
+.page-container .section img[src*="projects/police"],
+.page-container .section img[src*="projects/hubble"],
+.page-container .section img[src*="projects/dca"] {
+  background: #ffffff;
 }
 
 .project-section h2 {
@@ -1044,6 +1053,64 @@ img {
   gap: 8px;
 }
 
+/* --- Filter Tabs --- */
+.filter-tabs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 48px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.filter-tab {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.filter-tab:hover {
+  border-color: var(--accent-blue);
+  color: var(--accent-blue);
+}
+
+.filter-tab-active {
+  border-color: var(--accent-blue);
+  background: var(--accent-blue);
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.filter-tab-active:hover {
+  background: var(--accent-blue);
+  color: #ffffff;
+}
+
+.filter-tab:focus-visible {
+  outline: 2px solid var(--accent-blue);
+  outline-offset: 2px;
+}
+
+/* Card hidden state for filtering */
+.project-card {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.project-card.hidden {
+  opacity: 0 !important;
+  pointer-events: none;
+  position: absolute !important;
+  visibility: hidden;
+}
+
 /* --- Projects Page --- */
 .project-card {
   background: var(--bg-card);
@@ -1052,7 +1119,10 @@ img {
   padding: 36px;
   transition: all var(--transition-smooth);
   position: relative;
-  overflow: hidden;
+  overflow: visible;
+  height: 420px;
+  display: flex;
+  flex-direction: column;
 }
 
 .project-card::after {
@@ -1065,6 +1135,20 @@ img {
   background: linear-gradient(90deg, transparent, rgba(0,0,0,0.08), transparent);
   opacity: 0;
   transition: opacity var(--transition-smooth);
+}
+
+.project-arrow {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  transition: all var(--transition-fast);
+}
+
+.project-card:hover .project-arrow {
+  color: var(--accent-blue);
+  transform: translateX(4px);
 }
 
 .project-card:hover {
@@ -1095,14 +1179,17 @@ img {
   font-family: var(--font-mono);
   font-size: 0.75rem;
   color: var(--text-muted);
-  margin-bottom: 16px;
+  margin-bottom: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .project-card p {
   color: var(--text-secondary);
   font-size: 0.9rem;
   line-height: 1.7;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
 }
 
 .project-card .highlight-list {
@@ -1794,6 +1881,10 @@ body.page-loaded {
     grid-template-columns: 1fr;
   }
 
+  .project-card {
+    height: auto;
+  }
+
   .contact-grid {
     grid-template-columns: 1fr;
     gap: 40px;
@@ -1813,6 +1904,16 @@ body.page-loaded {
 
   /* Hide snap arrows on mobile */
   .snap-arrow { display: none; }
+
+  /* Filter tabs mobile */
+  .filter-tabs {
+    gap: 8px;
+    margin-bottom: 36px;
+  }
+  .filter-tab {
+    font-size: 0.65rem;
+    padding: 6px 12px;
+  }
 
   /* Skills grid to 1 column */
   .skills-grid { grid-template-columns: 1fr; }

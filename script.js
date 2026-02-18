@@ -607,7 +607,47 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ==========================================
-  // 12. SMOOTH PAGE LOAD SEQUENCE
+  // 12. PROJECT FILTER TABS
+  // ==========================================
+  const filterTabs = document.querySelectorAll('.filter-tab');
+  const projectGrid = document.querySelector('.grid-2');
+  const projectCards = document.querySelectorAll('.project-card[data-categories]');
+
+  if (filterTabs.length && projectCards.length) {
+    filterTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const filterValue = tab.getAttribute('data-filter');
+
+        // Update active state
+        filterTabs.forEach(t => t.classList.remove('filter-tab-active'));
+        tab.classList.add('filter-tab-active');
+
+        // Filter cards
+        projectCards.forEach(card => {
+          const categories = (card.getAttribute('data-categories') || '').split(' ');
+          const isMatch = filterValue === 'all' || categories.includes(filterValue);
+
+          if (isMatch) {
+            card.classList.remove('hidden');
+            card.style.opacity = '0';
+            requestAnimationFrame(() => {
+              setTimeout(() => {
+                card.style.opacity = '1';
+              }, 50);
+            });
+          } else {
+            card.style.opacity = '0';
+            setTimeout(() => {
+              card.classList.add('hidden');
+            }, 300);
+          }
+        });
+      });
+    });
+  }
+
+  // ==========================================
+  // 13. SMOOTH PAGE LOAD SEQUENCE
   // ==========================================
   document.body.classList.add('page-loaded');
 
