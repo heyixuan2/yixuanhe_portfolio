@@ -617,7 +617,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================
   try {
   const neuralCanvas = document.getElementById('neural-bg');
-  if (neuralCanvas) {
+  if (neuralCanvas && window.innerWidth > 768) {
     const ctx = neuralCanvas.getContext('2d');
     let mouseX = -1000, mouseY = -1000;
 

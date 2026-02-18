@@ -1727,6 +1727,9 @@ body.page-loaded {
 }
 
 @media (max-width: 768px) {
+  #neural-bg { display: none; }
+  .edu-sep { display: none; }
+  .edu-name { display: block; }
   .nav { padding: 0 20px; }
 
   .nav-links {
