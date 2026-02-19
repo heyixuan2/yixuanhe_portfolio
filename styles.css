@@ -1100,10 +1100,6 @@ img {
 }
 
 /* Card hidden state for filtering */
-.project-card {
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
 .project-card.hidden {
   opacity: 0 !important;
   pointer-events: none;
@@ -1117,12 +1113,18 @@ img {
   border: 1px solid var(--border-color);
   border-radius: 12px;
   padding: 36px;
-  transition: all var(--transition-smooth);
   position: relative;
-  overflow: visible;
+  overflow: hidden;
   height: 420px;
   display: flex;
   flex-direction: column;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.project-card.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
 }
 
 .project-card::after {
@@ -1151,13 +1153,16 @@ img {
   transform: translateX(4px);
 }
 
-.project-card:hover {
-  border-color: var(--border-accent);
-  transform: translateY(-4px);
-}
 
 .project-card:hover::after {
   opacity: 1;
+}
+
+.project-card .tag {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.project-card:hover .tag {
+  transform: translateY(-1px);
 }
 
 .project-number {
@@ -1628,7 +1633,6 @@ body.page-loaded {
 }
 
 /* --- Card 3D Tilt Transition --- */
-.project-card,
 .card,
 .cert-card {
   will-change: transform;
@@ -1712,6 +1716,8 @@ body.page-loaded {
 .nav-toggle.active span:nth-child(3) {
   transform: rotate(-45deg) translate(5px, -5px);
 }
+
+/* --- Staggered Card Entrance Animation --- */
 
 /* --- Hover Shimmer for Project Cards --- */
 .project-card::before {

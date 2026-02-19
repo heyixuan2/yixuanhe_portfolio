@@ -134,6 +134,12 @@
           <span class="project-arrow">→</span>
         </a>
 
+        <div class="project-card" data-categories="all" style="display: flex; align-items: center; justify-content: center; min-height: 200px; border: 2px dashed var(--border-color); background: transparent; opacity: 0.5;">
+          <div style="text-align: center;">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="opacity: 0.5; margin-bottom: 8px;"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0;">More projects coming soon</p>
+          </div>
+        </div>
 
       </div>
     </section>
@@ -144,5 +150,31 @@
   </div>
 
   <script src="script.js"></script>
+  <script>
+    var isDark = document.documentElement.classList.contains('dark-theme');
+    document.querySelectorAll('.project-card').forEach(function(card, i) {
+      var delay = 80 + i * 120;
+      setTimeout(function() {
+        card.classList.add('visible');
+      }, delay);
+
+      // Hover effect via inline styles (bypasses all CSS specificity)
+      card.addEventListener('mouseenter', function() {
+        card.style.transition = 'transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease';
+        card.style.transform = 'translateY(-6px) scale(1.01)';
+        card.style.borderColor = 'var(--border-accent)';
+        var shadow = isDark
+          ? '0 12px 40px rgba(0,0,0,0.3), 0 0 0 1px var(--border-accent)'
+          : '0 12px 40px rgba(0,0,0,0.08), 0 0 0 1px var(--border-accent)';
+        card.style.boxShadow = shadow;
+      });
+      card.addEventListener('mouseleave', function() {
+        card.style.transform = '';
+        card.style.borderColor = '';
+        card.style.boxShadow = '';
+        setTimeout(function() { card.style.transition = ''; }, 150);
+      });
+    });
+  </script>
 </body>
 </html>
