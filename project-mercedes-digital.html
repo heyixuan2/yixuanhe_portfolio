@@ -4,8 +4,8 @@
   <script>if(localStorage.getItem('portfolio-theme')==='dark')document.documentElement.classList.add('dark-theme');</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mercedes-Benz Digital Transformation — Yixuan He (Adam)</title>
-  <meta name="description" content="Digital transformation training program at Mercedes-Benz China, training 140+ HR professionals on Power BI and self-service analytics. By Yixuan He (Adam).">
+  <title>Mercedes-Benz Digital Transformation — Yixuan He</title>
+  <meta name="description" content="Digital transformation training program at Mercedes-Benz China, training around 140 HR professionals on Power BI and self-service analytics. By Yixuan He.">
   <link rel="icon" href="assets/favicon.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
@@ -59,6 +59,7 @@
       cursor: pointer;
       border: 1px solid var(--border-color);
       transition: border-color 0.2s, transform 0.2s;
+      background: #0a0a0a;
     }
     .video-thumb:hover {
       border-color: var(--accent);
@@ -66,6 +67,8 @@
     }
     .video-thumb img,
     .video-thumb video {
+      position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -94,10 +97,43 @@
     /* Featured video (Townhall) */
     .featured-video {
       margin-top: 24px;
-      max-width: 720px;
+      max-width: 900px;
     }
     .featured-video .video-thumb {
       border-radius: 12px;
+    }
+    .featured-video .play-overlay {
+      background: rgba(0,0,0,0.3);
+    }
+    .featured-video .play-overlay svg {
+      display: none !important;
+    }
+    .featured-video .play-circle {
+      width: 120px;
+      height: 120px;
+      background: rgba(0,0,0,0.6);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+      pointer-events: none;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+      transition: transform 0.2s, background 0.2s;
+    }
+    .featured-video .video-thumb:hover .play-circle {
+      transform: translate(-50%, -50%) scale(1.08);
+      background: rgba(0,0,0,0.75);
+    }
+    .featured-video .play-circle svg {
+      width: 48px !important;
+      height: 48px !important;
+      color: #fff;
+      margin-left: 6px;
     }
     .featured-video-label {
       font-size: 0.8rem;
@@ -152,11 +188,14 @@
       opacity: 0.5;
     }
     .video-lightbox-title {
+      position: absolute;
+      top: 16px;
+      left: 24px;
       font-size: 0.9rem;
       font-weight: 500;
       color: rgba(255,255,255,0.8);
-      text-align: center;
-      margin-top: 12px;
+      text-align: left;
+      z-index: 1001;
     }
     .video-lightbox-close {
       position: absolute;
@@ -184,6 +223,7 @@
       border-radius: 12px;
       border: 1px solid var(--border-color);
       background: var(--bg-card);
+      max-width: 900px;
     }
     .photo-slider-track {
       display: flex;
@@ -191,17 +231,18 @@
     }
     .photo-slide {
       min-width: 100%;
-      aspect-ratio: 16/9;
+      aspect-ratio: 3/2;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: var(--bg-card);
-      color: var(--text-muted);
-      font-size: 0.85rem;
-      font-family: var(--font-mono);
-      border: 2px dashed var(--border-color);
-      border-radius: 12px;
+      background: #0a0a0a;
+      overflow: hidden;
       box-sizing: border-box;
+    }
+    .photo-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
     .photo-slider-btn {
       position: absolute;
@@ -331,14 +372,19 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 12px;
       margin-top: 12px;
+      align-items: start;
     }
     .video-item {
+      min-width: 0;
+      overflow: hidden;
     }
     .video-item-label {
       font-size: 0.72rem;
       font-weight: 500;
       color: var(--text-secondary);
       margin-bottom: 6px;
+      height: 1.4em;
+      line-height: 1.4em;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -411,12 +457,14 @@
         <div class="project-org"><span>Mercedes-Benz</span><span>Jun 2024 — Sep 2025</span></div>
         <h1>Mercedes-Benz Digital Transformation Bootcamp</h1>
         <p>
-          Designed, created, and executed two rounds of hybrid digital transformation training camps within the Mercedes-Benz China HR Department, training 140+ professionals on Power BI, data modeling, and self-service analytics across Greater China.
+          Designed, built, and delivered a two-phase hybrid digital transformation training program within the Mercedes-Benz Greater China HR Department, upskilling around 140 HR professionals on Microsoft Power BI, Power Automate, and M365 — transitioning the organization from legacy Excel-based reporting to a centralized, self-service BI platform.
         </p>
         <div class="tags">
           <span class="tag">Digital Transformation</span>
+          <span class="tag">Power BI</span>
           <span class="tag">M365</span>
-          <span class="tag">MS Power Platforms</span>
+          <span class="tag">Data Modeling</span>
+          <span class="tag">DAX</span>
         </div>
       </div>
 
@@ -424,16 +472,16 @@
       <div class="fade-in fade-in-delay-2">
         <div class="metric-grid">
           <div class="metric-card">
-            <div class="metric-value">140+</div>
-            <div class="metric-label">Professionals Trained</div>
+            <div class="metric-value">~ 140</div>
+            <div class="metric-label">HR Professionals Involved</div>
           </div>
           <div class="metric-card">
-            <div class="metric-value">13% → 91%</div>
-            <div class="metric-label">BI Adoption Rate</div>
+            <div class="metric-value">~240 <span style="font-size:0.55em;font-weight:500;opacity:0.7;">min</span></div>
+            <div class="metric-label">Training Videos</div>
           </div>
           <div class="metric-card">
-            <div class="metric-value">2</div>
-            <div class="metric-label">Training Rounds</div>
+            <div class="metric-value">26<span style="font-size:0.55em;font-weight:500;opacity:0.7;">%</span> → 94<span style="font-size:0.55em;font-weight:500;opacity:0.7;">%</span></div>
+            <div class="metric-label">PBI Usage Rate</div>
           </div>
           <div class="metric-card">
             <div class="metric-value">Board</div>
@@ -446,10 +494,13 @@
       <div class="project-section fade-in" style="margin-top: 48px;">
         <h2>Overview</h2>
         <p>
-          As part of the Mercedes-Benz China HR digitalization initiative, I designed and led a comprehensive digital transformation bootcamp spanning two phases across 15 months. The program targeted HR professionals across Greater China, equipping them with hands-on Power BI, Power Automate, and Microsoft 365 skills to transition from manual, spreadsheet-based workflows to self-service analytics and automated reporting.
+          As part of the HRGC "Re-Skill and Re-Invent" initiative, I independently designed, developed, and delivered a structured digital transformation program spanning two phases, with the guidance of my mentor Kieso Jan. The program was part of a broader organizational strategy to shut down legacy HR reporting systems and migrate to a centralized Power BI Service cloud environment with semantic models, row-level security, and scheduled data refresh.
         </p>
         <p style="margin-top: 16px;">
-          Phase 1 focused on Power BI fundamentals through advanced analytics across 8 structured sessions, while Phase 2 introduced real-world M365 scenario-based training. The program was recognized by Mercedes-Benz China HR executive leadership and presented directly to Board Member Sabine Kohleisen.
+          Phase I, the MBGC Power BI Insights Bootcamp, ran an 8-session self-paced curriculum covering the full Power BI Desktop-to-Service pipeline: data importing, table relationships, DAX measures, Power Query transformations, report design, row-level security, and Power BI Service publishing with semantic model management. Each week included approximately 30-minute video lectures, cumulative practice sets with 10 to 15 tasks using real HR datasets, lecture quizzes, and practice set quizzes administered via Testportal — with weekly performance scores reported to management.
+        </p>
+        <p style="margin-top: 16px;">
+          Phase II, the MBGC M365 Excellence Lab, extended the program with scenario-based M365 training: cloud file management via SharePoint and OneDrive, workflow automation with Power Automate, project planning with Planner and Whiteboard, and multimedia content production with Clipchamp. The program was recognized by HRGC executive leadership and presented directly to Mercedes-Benz Board Member Sabine Kohleisen.
         </p>
       </div>
 
@@ -457,9 +508,10 @@
       <div class="project-section fade-in" style="margin-top: 32px;">
         <h2>Program Interview</h2>
         <div class="featured-video">
-          <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/811c1cddvodcq1334221380/3388da965145403715854110056/k08qO6oIUUIA.mp4" onclick="openVideo(this)">
-            <img src="https://1334221380.vod-qcloud.com/58060a85vodtranscq1334221380/3388da965145403715854110056/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="MBGC Townhall Interview" loading="lazy">
-            <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+          <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/811c1cddvodcq1334221380/3388da965145403715854110056/k08qO6oIUUIA.mp4" data-fileid="5145403715854110056" onclick="openVideo(this)">
+            <img src="assets/mb_interview_cover.jpg" alt="MBGC Townhall Interview" loading="lazy">
+            <div class="play-overlay"></div>
+            <div class="play-circle"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
           </div>
           <p class="featured-video-label">MBGC Townhall Interview — Program overview and participant feedback</p>
         </div>
@@ -470,14 +522,14 @@
         <span class="phase-badge">Phase 1</span>
         <h2>MBGC Power BI Insights Bootcamp — 8 Sessions, 26 Videos</h2>
         <p>
-          A progressive curriculum moving from data importing basics to advanced DAX, Power Query transformations, row-level security, and Power BI Service deployment. Each session includes hands-on video tutorials building on real HR datasets.
+          A progressive, self-paced curriculum covering the complete Power BI workflow — from data importing and modeling through advanced DAX expressions, Power Query transformations, row-level security, and Power BI Service deployment with semantic models. Each session includes approximately 30-minute self-guided video lectures, cumulative practice sets of 10 to 15 tasks per session built on real HR datasets, and two quizzes per week — one for lecture content and one for the practice set — with scores reported to management. The program included weekly optional walk-in workshops, a Microsoft Teams community with Q&A support, and a competitive prize system with weekly and overall performance awards.
         </p>
       </div>
 
       <!-- Session 1 -->
       <div class="session-accordion fade-in">
         <div class="session-header" onclick="this.parentElement.classList.toggle('open')">
-          <h3>Session 1 — Introduction to Power BI & Importing Data</h3>
+          <h3>Session 1 — Introduction to Power BI and Importing Data</h3>
           <div class="session-meta">
             <span>5 videos</span>
             <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
@@ -488,35 +540,35 @@
             <div class="video-grid">
             <div class="video-item">
               <div class="video-item-label">1.1 — Introduction to Power BI</div>
-              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/811c1cddvodcq1334221380/2bdb0fd75145403717263640314/K4k9on9VkA8A.mp4" onclick="openVideo(this)">
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/811c1cddvodcq1334221380/2bdb0fd75145403717263640314/K4k9on9VkA8A.mp4" data-fileid="5145403717263640314" onclick="openVideo(this)">
                 <img src="https://1334221380.vod-qcloud.com/58060a85vodtranscq1334221380/2bdb0fd75145403717263640314/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="1.1 — Introduction to Power BI" loading="lazy">
                 <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
             </div>
             <div class="video-item">
               <div class="video-item-label">1.2 — Importing Data</div>
-              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/811c1cddvodcq1334221380/157a0bb15145403717266791879/Ki35hdVWN68A.mp4" onclick="openVideo(this)">
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/811c1cddvodcq1334221380/157a0bb15145403717266791879/Ki35hdVWN68A.mp4" data-fileid="5145403717266791879" onclick="openVideo(this)">
                 <img src="https://1334221380.vod-qcloud.com/58060a85vodtranscq1334221380/157a0bb15145403717266791879/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="1.2 — Importing Data" loading="lazy">
                 <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
             </div>
             <div class="video-item">
               <div class="video-item-label">1.3 — Cards</div>
-              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/811c1cddvodcq1334221380/61e627fe5145403717267716214/GhyG5KdvsoUA.mp4" onclick="openVideo(this)">
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/811c1cddvodcq1334221380/61e627fe5145403717267716214/GhyG5KdvsoUA.mp4" data-fileid="5145403717267716214" onclick="openVideo(this)">
                 <img src="https://1334221380.vod-qcloud.com/58060a85vodtranscq1334221380/61e627fe5145403717267716214/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="1.3 — Cards" loading="lazy">
                 <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
             </div>
             <div class="video-item">
               <div class="video-item-label">1.4 — Pie Chart & Donut Chart</div>
-              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/e0efdd045145403717262704777/NHUN7ETgOVcA.mp4" onclick="openVideo(this)">
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/e0efdd045145403717262704777/NHUN7ETgOVcA.mp4" data-fileid="5145403717262704777" onclick="openVideo(this)">
                 <img src="https://1334221380.vod-qcloud.com/b6f9814cvodtranssh1334221380/e0efdd045145403717262704777/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="1.4 — Pie Chart & Donut Chart" loading="lazy">
                 <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
             </div>
             <div class="video-item">
               <div class="video-item-label">1.5 — Stacked Column Chart & Bar Chart</div>
-              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/811c1cddvodcq1334221380/5b1a35975145403717267441122/w4QfdaaUickA.mp4" onclick="openVideo(this)">
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/811c1cddvodcq1334221380/5b1a35975145403717267441122/w4QfdaaUickA.mp4" data-fileid="5145403717267441122" onclick="openVideo(this)">
                 <img src="https://1334221380.vod-qcloud.com/58060a85vodtranscq1334221380/5b1a35975145403717267441122/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="1.5 — Stacked Column Chart & Bar Chart" loading="lazy">
                 <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
@@ -540,42 +592,42 @@
             <div class="video-grid">
             <div class="video-item">
               <div class="video-item-label">2.1 — Table and Matrix</div>
-              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/bea28bc35145403716438005778/e60wd3gwbY8A.mp4" onclick="openVideo(this)">
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/bea28bc35145403716438005778/e60wd3gwbY8A.mp4" data-fileid="5145403716438005778" onclick="openVideo(this)">
                 <img src="https://1334221380.vod-qcloud.com/b6f9814cvodtranssh1334221380/bea28bc35145403716438005778/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="2.1 — Table and Matrix" loading="lazy">
                 <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
             </div>
             <div class="video-item">
               <div class="video-item-label">2.2 — Multi-Row Card</div>
-              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/e1af97135145403716442202525/DbgwhQrv2dwA.mp4" onclick="openVideo(this)">
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/e1af97135145403716442202525/DbgwhQrv2dwA.mp4" data-fileid="5145403716442202525" onclick="openVideo(this)">
                 <img src="https://1334221380.vod-qcloud.com/b6f9814cvodtranssh1334221380/e1af97135145403716442202525/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="2.2 — Multi-Row Card" loading="lazy">
                 <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
             </div>
             <div class="video-item">
               <div class="video-item-label">2.3 — Filters & Slicers</div>
-              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/beb2e9f95145403716438012284/b0AAmQofngoA.mp4" onclick="openVideo(this)">
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/beb2e9f95145403716438012284/b0AAmQofngoA.mp4" data-fileid="5145403716438012284" onclick="openVideo(this)">
                 <img src="https://1334221380.vod-qcloud.com/b6f9814cvodtranssh1334221380/beb2e9f95145403716438012284/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="2.3 — Filters & Slicers" loading="lazy">
                 <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
             </div>
             <div class="video-item">
               <div class="video-item-label">2.4 — Clustered Bar Chart & Clustered Column Chart</div>
-              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/811c1cddvodcq1334221380/37f487175145403715932220742/QX3SoTwkgz8A.mp4" onclick="openVideo(this)">
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/811c1cddvodcq1334221380/37f487175145403715932220742/QX3SoTwkgz8A.mp4" data-fileid="5145403715932220742" onclick="openVideo(this)">
                 <img src="https://1334221380.vod-qcloud.com/58060a85vodtranscq1334221380/37f487175145403715932220742/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="2.4 — Clustered Bar Chart & Clustered Column Chart" loading="lazy">
                 <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
             </div>
             <div class="video-item">
               <div class="video-item-label">2.5 — 100% Stacked Bar Chart & 100% Stacked Column Chart</div>
-              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/811c1cddvodcq1334221380/456db62e5145403717046111403/RtAf3KzmgKIA.mp4" onclick="openVideo(this)">
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/811c1cddvodcq1334221380/456db62e5145403717046111403/RtAf3KzmgKIA.mp4" data-fileid="5145403717046111403" onclick="openVideo(this)">
                 <img src="https://1334221380.vod-qcloud.com/58060a85vodtranscq1334221380/456db62e5145403717046111403/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="2.5 — 100% Stacked Bar Chart & 100% Stacked Column Chart" loading="lazy">
                 <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
             </div>
             <div class="video-item">
               <div class="video-item-label">2.6 — Stacked Bar & Stacked Column Chart</div>
-              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/dffeeb965145403716442195400/Ypa0jIr1OMkA.mp4" onclick="openVideo(this)">
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/dffeeb965145403716442195400/Ypa0jIr1OMkA.mp4" data-fileid="5145403716442195400" onclick="openVideo(this)">
                 <img src="https://1334221380.vod-qcloud.com/b6f9814cvodtranssh1334221380/dffeeb965145403716442195400/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="2.6 — Stacked Bar & Stacked Column Chart" loading="lazy">
                 <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
@@ -599,35 +651,35 @@
             <div class="video-grid">
             <div class="video-item">
               <div class="video-item-label">3.1 — Stacked Area Chart & 100% Stacked Area Chart</div>
-              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/d0484b5e5145403716452305972/C8xKKaj61aUA.mp4" onclick="openVideo(this)">
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/d0484b5e5145403716452305972/C8xKKaj61aUA.mp4" data-fileid="5145403716452305972" onclick="openVideo(this)">
                 <img src="https://1334221380.vod-qcloud.com/b6f9814cvodtranssh1334221380/d0484b5e5145403716452305972/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="3.1 — Stacked Area Chart & 100% Stacked Area Chart" loading="lazy">
                 <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
             </div>
             <div class="video-item">
               <div class="video-item-label">3.2 — Ribbon Chart</div>
-              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/d048b0d75145403716452306028/nc83Dexpc7wA.mp4" onclick="openVideo(this)">
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/d048b0d75145403716452306028/nc83Dexpc7wA.mp4" data-fileid="5145403716452306028" onclick="openVideo(this)">
                 <img src="https://1334221380.vod-qcloud.com/b6f9814cvodtranssh1334221380/d048b0d75145403716452306028/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="3.2 — Ribbon Chart" loading="lazy">
                 <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
             </div>
             <div class="video-item">
               <div class="video-item-label">3.3 — Line Chart & Area Chart</div>
-              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/b21985105145403716465993739/WUVE72c09wUA.mp4" onclick="openVideo(this)">
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/b21985105145403716465993739/WUVE72c09wUA.mp4" data-fileid="5145403716465993739" onclick="openVideo(this)">
                 <img src="https://1334221380.vod-qcloud.com/b6f9814cvodtranssh1334221380/b21985105145403716465993739/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="3.3 — Line Chart & Area Chart" loading="lazy">
                 <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
             </div>
             <div class="video-item">
               <div class="video-item-label">3.4 — Line & Stacked Column Chart / Line & Clustered Column Chart</div>
-              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/1cf65dec5145403716446559747/mAVA3bKsA28A.mp4" onclick="openVideo(this)">
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/1cf65dec5145403716446559747/mAVA3bKsA28A.mp4" data-fileid="5145403716446559747" onclick="openVideo(this)">
                 <img src="https://1334221380.vod-qcloud.com/b6f9814cvodtranssh1334221380/1cf65dec5145403716446559747/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="3.4 — Line & Stacked Column Chart / Line & Clustered Column Chart" loading="lazy">
                 <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
             </div>
             <div class="video-item">
               <div class="video-item-label">3.5 — Decomposition Tree</div>
-              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/ff145bfe5145403716449335630/1N8v0ys0AikA.mp4" onclick="openVideo(this)">
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/ff145bfe5145403716449335630/1N8v0ys0AikA.mp4" data-fileid="5145403716449335630" onclick="openVideo(this)">
                 <img src="https://1334221380.vod-qcloud.com/b6f9814cvodtranssh1334221380/ff145bfe5145403716449335630/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="3.5 — Decomposition Tree" loading="lazy">
                 <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
@@ -651,21 +703,21 @@
             <div class="video-grid">
             <div class="video-item">
               <div class="video-item-label">4.1 — Tooltips</div>
-              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/dc731d075145403717296876016/5Tnf24oT4hAA.mp4" onclick="openVideo(this)">
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/dc731d075145403717296876016/5Tnf24oT4hAA.mp4" data-fileid="5145403717296876016" onclick="openVideo(this)">
                 <img src="https://1334221380.vod-qcloud.com/b6f9814cvodtranssh1334221380/dc731d075145403717296876016/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="4.1 — Tooltips" loading="lazy">
                 <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
             </div>
             <div class="video-item">
               <div class="video-item-label">4.2 — Other Graphs</div>
-              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/71a8c8845145403716454665715/j6ewh1G4gG4A.mp4" onclick="openVideo(this)">
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/71a8c8845145403716454665715/j6ewh1G4gG4A.mp4" data-fileid="5145403716454665715" onclick="openVideo(this)">
                 <img src="https://1334221380.vod-qcloud.com/b6f9814cvodtranssh1334221380/71a8c8845145403716454665715/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="4.2 — Other Graphs" loading="lazy">
                 <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
             </div>
             <div class="video-item">
               <div class="video-item-label">4.3 — Navigators</div>
-              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/0385a1595145403716449500514/mluVCvrEYgYA.mp4" onclick="openVideo(this)">
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/0385a1595145403716449500514/mluVCvrEYgYA.mp4" data-fileid="5145403716449500514" onclick="openVideo(this)">
                 <img src="https://1334221380.vod-qcloud.com/b6f9814cvodtranssh1334221380/0385a1595145403716449500514/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="4.3 — Navigators" loading="lazy">
                 <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
@@ -678,7 +730,7 @@
       <!-- Session 5 -->
       <div class="session-accordion fade-in">
         <div class="session-header" onclick="this.parentElement.classList.toggle('open')">
-          <h3>Session 5 — DAX & Report Design</h3>
+          <h3>Session 5 — DAX and Report Design</h3>
           <div class="session-meta">
             <span>2 videos</span>
             <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
@@ -688,15 +740,15 @@
           <div class="session-content-inner">
             <div class="video-grid">
             <div class="video-item">
-              <div class="video-item-label">5.1 — Data Analysis Expression (DAX)</div>
-              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/5b11fa955145403716457787985/t1mBacj8gbAA.mp4" onclick="openVideo(this)">
-                <img src="https://1334221380.vod-qcloud.com/b6f9814cvodtranssh1334221380/5b11fa955145403716457787985/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="5.1 — Data Analysis Expression (DAX)" loading="lazy">
+              <div class="video-item-label">5.1 — Data Analysis Expression</div>
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/5b11fa955145403716457787985/t1mBacj8gbAA.mp4" data-fileid="5145403716457787985" onclick="openVideo(this)">
+                <img src="https://1334221380.vod-qcloud.com/b6f9814cvodtranssh1334221380/5b11fa955145403716457787985/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="5.1 — Data Analysis Expression" loading="lazy">
                 <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
             </div>
             <div class="video-item">
               <div class="video-item-label">5.2 — Enhancing Report Design</div>
-              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/811c1cddvodcq1334221380/e3fd99475145403717065966292/fjhctZ1M3skA.mp4" onclick="openVideo(this)">
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/811c1cddvodcq1334221380/e3fd99475145403717065966292/fjhctZ1M3skA.mp4" data-fileid="5145403717065966292" onclick="openVideo(this)">
                 <img src="https://1334221380.vod-qcloud.com/58060a85vodtranscq1334221380/e3fd99475145403717065966292/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="5.2 — Enhancing Report Design" loading="lazy">
                 <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
@@ -709,7 +761,7 @@
       <!-- Session 6 -->
       <div class="session-accordion fade-in">
         <div class="session-header" onclick="this.parentElement.classList.toggle('open')">
-          <h3>Session 6 — Data Cleaning & Power Query</h3>
+          <h3>Session 6 — Data Cleaning and Power Query</h3>
           <div class="session-meta">
             <span>2 videos</span>
             <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
@@ -720,14 +772,14 @@
             <div class="video-grid">
             <div class="video-item">
               <div class="video-item-label">6.1 — Basic Transformation</div>
-              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/27bd68605145403716460573149/AYB91YErn0cA.mp4" onclick="openVideo(this)">
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/27bd68605145403716460573149/AYB91YErn0cA.mp4" data-fileid="5145403716460573149" onclick="openVideo(this)">
                 <img src="https://1334221380.vod-qcloud.com/b6f9814cvodtranssh1334221380/27bd68605145403716460573149/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="6.1 — Basic Transformation" loading="lazy">
                 <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
             </div>
             <div class="video-item">
               <div class="video-item-label">6.2 — Advanced Transformation</div>
-              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/f4e21c075145403716459767026/dcARDNrUy54A.mp4" onclick="openVideo(this)">
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/f4e21c075145403716459767026/dcARDNrUy54A.mp4" data-fileid="5145403716459767026" onclick="openVideo(this)">
                 <img src="https://1334221380.vod-qcloud.com/b6f9814cvodtranssh1334221380/f4e21c075145403716459767026/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="6.2 — Advanced Transformation" loading="lazy">
                 <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
@@ -740,7 +792,7 @@
       <!-- Session 7 -->
       <div class="session-accordion fade-in">
         <div class="session-header" onclick="this.parentElement.classList.toggle('open')">
-          <h3>Session 7 — Row-Level Security (RLS)</h3>
+          <h3>Session 7 — Row-Level Security</h3>
           <div class="session-meta">
             <span>1 video</span>
             <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
@@ -751,7 +803,7 @@
             <div class="video-grid">
             <div class="video-item">
               <div class="video-item-label">7.1 — Row-Level Security</div>
-              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/27ae27265145403716460568736/BPvQ4RGVAjwA.mp4" onclick="openVideo(this)">
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/27ae27265145403716460568736/BPvQ4RGVAjwA.mp4" data-fileid="5145403716460568736" onclick="openVideo(this)">
                 <img src="https://1334221380.vod-qcloud.com/b6f9814cvodtranssh1334221380/27ae27265145403716460568736/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="7.1 — Row-Level Security" loading="lazy">
                 <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
@@ -764,7 +816,7 @@
       <!-- Session 8 -->
       <div class="session-accordion fade-in">
         <div class="session-header" onclick="this.parentElement.classList.toggle('open')">
-          <h3>Session 8 — Power BI Service & Semantic Model</h3>
+          <h3>Session 8 — Power BI Service and Semantic Model</h3>
           <div class="session-meta">
             <span>2 videos</span>
             <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
@@ -774,16 +826,16 @@
           <div class="session-content-inner">
             <div class="video-grid">
             <div class="video-item">
-              <div class="video-item-label">8.1 — Power BI Service & Semantic Models Part 1</div>
-              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/f025b2e35145403716459557070/wR3uHUxpycAA.mp4" onclick="openVideo(this)">
-                <img src="https://1334221380.vod-qcloud.com/b6f9814cvodtranssh1334221380/f025b2e35145403716459557070/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="8.1 — Power BI Service & Semantic Models Part 1" loading="lazy">
+              <div class="video-item-label">8.1 — Power BI Service and Semantic Models Part 1</div>
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/f025b2e35145403716459557070/wR3uHUxpycAA.mp4" data-fileid="5145403716459557070" onclick="openVideo(this)">
+                <img src="https://1334221380.vod-qcloud.com/b6f9814cvodtranssh1334221380/f025b2e35145403716459557070/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="8.1 — Power BI Service and Semantic Models Part 1" loading="lazy">
                 <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
             </div>
             <div class="video-item">
-              <div class="video-item-label">8.2 — Power BI Service & Semantic Models Part 2</div>
-              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/c67ff9a75145403716462792934/SsUQjGO4DrkA.mp4" onclick="openVideo(this)">
-                <img src="https://1334221380.vod-qcloud.com/b6f9814cvodtranssh1334221380/c67ff9a75145403716462792934/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="8.2 — Power BI Service & Semantic Models Part 2" loading="lazy">
+              <div class="video-item-label">8.2 — Power BI Service and Semantic Models Part 2</div>
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/c67ff9a75145403716462792934/SsUQjGO4DrkA.mp4" data-fileid="5145403716462792934" onclick="openVideo(this)">
+                <img src="https://1334221380.vod-qcloud.com/b6f9814cvodtranssh1334221380/c67ff9a75145403716462792934/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="8.2 — Power BI Service and Semantic Models Part 2" loading="lazy">
                 <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
             </div>
@@ -797,14 +849,14 @@
         <span class="phase-badge">Phase 2</span>
         <h2>MBGC M365 Excellence Lab — 4 Sessions</h2>
         <p>
-          Real-world scenario-based sessions teaching practical Microsoft 365 workflows — from cloud file management and collaboration to project planning and multimedia content production.
+          Scenario-driven training sessions built around real HR business cases, teaching practical Microsoft 365 workflows end-to-end. Topics include migrating local file systems to SharePoint/OneDrive cloud collaboration, designing automated approval workflows with Power Automate, structuring project kickoffs with Planner and Whiteboard brainstorming tools, and producing internal communications video content with Clipchamp — from script writing to final edit.
         </p>
       </div>
 
       <!-- Phase 2 Session 1 -->
       <div class="session-accordion fade-in">
         <div class="session-header" onclick="this.parentElement.classList.toggle('open')">
-          <h3>Scenario 1 — Local to Cloud File Management & Collaboration</h3>
+          <h3>Scenario 1 — Local to Cloud File Management and Collaboration</h3>
           <div class="session-meta">
             <span>1 video</span>
             <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
@@ -814,9 +866,9 @@
           <div class="session-content-inner">
             <div class="video-grid">
             <div class="video-item">
-              <div class="video-item-label">Local to Cloud File Management & Collaboration</div>
-              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/811c1cddvodcq1334221380/d16435f55145403717065172114/nbn6E4aH4v0A.mp4" onclick="openVideo(this)">
-                <img src="https://1334221380.vod-qcloud.com/58060a85vodtranscq1334221380/d16435f55145403717065172114/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="Local to Cloud File Management & Collaboration" loading="lazy">
+              <div class="video-item-label">Local to Cloud File Management and Collaboration</div>
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/811c1cddvodcq1334221380/d16435f55145403717065172114/nbn6E4aH4v0A.mp4" data-fileid="5145403717065172114" onclick="openVideo(this)">
+                <img src="https://1334221380.vod-qcloud.com/58060a85vodtranscq1334221380/d16435f55145403717065172114/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="Local to Cloud File Management and Collaboration" loading="lazy">
                 <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
             </div>
@@ -839,7 +891,7 @@
             <div class="video-grid">
             <div class="video-item">
               <div class="video-item-label">Designing a Streamlined Employee Termination Checklist</div>
-              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/811c1cddvodcq1334221380/d164c3635145403717065173199/bI13xJiYDtgA.mp4" onclick="openVideo(this)">
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/811c1cddvodcq1334221380/d164c3635145403717065173199/bI13xJiYDtgA.mp4" data-fileid="5145403717065173199" onclick="openVideo(this)">
                 <img src="https://1334221380.vod-qcloud.com/58060a85vodtranscq1334221380/d164c3635145403717065173199/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="Designing a Streamlined Employee Termination Checklist" loading="lazy">
                 <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
@@ -852,7 +904,7 @@
       <!-- Phase 2 Session 3 -->
       <div class="session-accordion fade-in">
         <div class="session-header" onclick="this.parentElement.classList.toggle('open')">
-          <h3>Scenario 3 — Kicking Off a Project with Brainstorming & Planning Tools</h3>
+          <h3>Scenario 3 — Kicking Off a Project with Brainstorming and Planning Tools</h3>
           <div class="session-meta">
             <span>1 video</span>
             <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
@@ -862,9 +914,9 @@
           <div class="session-content-inner">
             <div class="video-grid">
             <div class="video-item">
-              <div class="video-item-label">Kicking Off a Project with Brainstorming & Planning Tools</div>
-              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/811c1cddvodcq1334221380/1ff9531f5145403717059463532/BmufVm6RA1cA.mp4" onclick="openVideo(this)">
-                <img src="https://1334221380.vod-qcloud.com/58060a85vodtranscq1334221380/1ff9531f5145403717059463532/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="Kicking Off a Project with Brainstorming & Planning Tools" loading="lazy">
+              <div class="video-item-label">Kicking Off a Project with Brainstorming and Planning Tools</div>
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/811c1cddvodcq1334221380/1ff9531f5145403717059463532/BmufVm6RA1cA.mp4" data-fileid="5145403717059463532" onclick="openVideo(this)">
+                <img src="https://1334221380.vod-qcloud.com/58060a85vodtranscq1334221380/1ff9531f5145403717059463532/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="Kicking Off a Project with Brainstorming and Planning Tools" loading="lazy">
                 <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
             </div>
@@ -887,7 +939,7 @@
             <div class="video-grid">
             <div class="video-item">
               <div class="video-item-label">From Script to Screen: Preparing the Townhall Video</div>
-              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/811c1cddvodcq1334221380/4a4012af5145403717063997937/90ywKdrAEbAA.mp4" onclick="openVideo(this)">
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/811c1cddvodcq1334221380/4a4012af5145403717063997937/90ywKdrAEbAA.mp4" data-fileid="5145403717063997937" onclick="openVideo(this)">
                 <img src="https://1334221380.vod-qcloud.com/58060a85vodtranscq1334221380/4a4012af5145403717063997937/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="From Script to Screen: Preparing the Townhall Video" loading="lazy">
                 <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
@@ -902,12 +954,15 @@
         <h2>Training Gallery</h2>
         <div class="photo-slider" id="photoSlider">
           <div class="photo-slider-track" id="sliderTrack">
-            <div class="photo-slide">Photo 1</div>
-            <div class="photo-slide">Photo 2</div>
-            <div class="photo-slide">Photo 3</div>
-            <div class="photo-slide">Photo 4</div>
-            <div class="photo-slide">Photo 5</div>
-            <div class="photo-slide">Photo 6</div>
+            <div class="photo-slide"><img src="assets/mb_photo/9.JPG" alt="Training photo 9" loading="lazy"></div>
+            <div class="photo-slide"><img src="assets/mb_photo/1.JPG" alt="Training photo 1" loading="lazy"></div>
+            <div class="photo-slide"><img src="assets/mb_photo/2.JPG" alt="Training photo 2" loading="lazy"></div>
+            <div class="photo-slide"><img src="assets/mb_photo/3.JPG" alt="Training photo 3" loading="lazy"></div>
+            <div class="photo-slide"><img src="assets/mb_photo/4.jpg" alt="Training photo 4" loading="lazy"></div>
+            <div class="photo-slide"><img src="assets/mb_photo/5.JPG" alt="Training photo 5" loading="lazy"></div>
+            <div class="photo-slide"><img src="assets/mb_photo/6.JPG" alt="Training photo 6" loading="lazy"></div>
+            <div class="photo-slide"><img src="assets/mb_photo/7.JPG" alt="Training photo 7" loading="lazy"></div>
+            <div class="photo-slide"><img src="assets/mb_photo/8.JPG" alt="Training photo 8" loading="lazy"></div>
           </div>
           <button class="photo-slider-btn prev" onclick="slidePhoto(-1)">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
@@ -919,15 +974,17 @@
         </div>
       </div>
 
-      <!-- Tools & Technologies -->
+      <!-- Tools and Technologies -->
       <div class="project-section fade-in" style="margin-top: 48px;">
-        <h2>Tools & Technologies</h2>
+        <h2>Tools and Technologies</h2>
         <ul>
-          <li>Power BI (DAX, data modeling, report design, RLS, scheduled refresh, Power BI Service)</li>
-          <li>Power Query (basic & advanced data transformations)</li>
-          <li>Power Automate (approval flows, scheduled triggers, data pipelines)</li>
-          <li>Microsoft 365 (SharePoint, Teams, OneDrive, Forms, Planner, Whiteboard, Clipchamp)</li>
-          <li>Hybrid training delivery (on-site workshops + virtual sessions)</li>
+          <li>Power BI Desktop — data importing, table relationships, DAX measures, report design, decomposition trees, tooltips, navigators</li>
+          <li>Power BI Service — workspace management, semantic models, scheduled refresh, cloud publishing, row-level security enforcement</li>
+          <li>Power Query Editor — basic and advanced data transformations, data cleaning automation, M language</li>
+          <li>Power Automate — approval flows, scheduled triggers, automated data pipelines</li>
+          <li>Microsoft 365 — SharePoint, Teams, OneDrive, Forms, Planner, Whiteboard, Clipchamp</li>
+          <li>Testportal — quiz administration, automated scoring, performance tracking</li>
+          <li>Hybrid training delivery — on-site workshops and virtual sessions</li>
         </ul>
       </div>
 
@@ -941,7 +998,7 @@
     </section>
 
     <footer class="footer">
-      <p class="footer-main">Designed & Built by Yixuan He</p>
+      <p class="footer-main">Designed and Built by Yixuan He</p>
     </footer>
   </div>
 
@@ -954,6 +1011,7 @@
     <div class="video-lightbox-title" id="lbTitle"></div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
   <script src="script.js"></script>
   <script>
     // Photo slider
@@ -974,14 +1032,65 @@
     }
     function slidePhoto(dir) { goToSlide(currentSlide + dir); }
 
-    // Open real video in lightbox
+    // Preload interview HLS manifest in background on page load
+    var currentHls = null;
+    var preloadedHls = null;
+    var interviewFileID = '5145403715854110056';
+    var interviewHlsUrl = 'https://1334221380.vod-qcloud.com/58060a85vodtranscq1334221380/3388da965145403715854110056/adp.10.m3u8';
+    var hlsConfig = {
+      startLevel: 0,              // start at lowest quality for instant playback
+      capLevelToPlayerSize: true,  // never load higher res than the player element
+      maxBufferLength: 60,         // buffer up to 60s ahead
+      maxMaxBufferLength: 120,     // allow up to 120s buffer
+      maxBufferSize: 30 * 1000 * 1000, // 30MB buffer
+      autoStartLoad: true,
+      testBandwidth: true,
+      abrEwmaDefaultEstimate: 500000  // assume 500kbps initially → conservative start
+    };
+    if (typeof Hls !== 'undefined' && Hls.isSupported()) {
+      preloadedHls = new Hls(hlsConfig);
+      preloadedHls.loadSource(interviewHlsUrl);
+    }
+
+    // Open video in lightbox — HLS for featured interview, raw mp4 for others
     function openVideo(el) {
-      const src = el.dataset.src;
-      const title = el.closest('.video-item')?.querySelector('.video-item-label')?.textContent || 'Video';
-      const inner = document.getElementById('lbInner');
-      inner.innerHTML = '<video src="' + src + '" controls autoplay style="width:100%;border-radius:8px;background:#000;"></video>';
+      var fileID = el.dataset.fileid;
+      var src = el.dataset.src;
+      var title = el.closest('.video-item')?.querySelector('.video-item-label')?.textContent
+        || el.closest('.featured-video')?.querySelector('.featured-video-label')?.textContent
+        || 'Video';
+      var inner = document.getElementById('lbInner');
       document.getElementById('lbTitle').textContent = title;
       document.getElementById('videoLightbox').classList.add('active');
+      inner.innerHTML = '<video id="lb-video" controls autoplay style="width:100%;border-radius:8px;background:#000;"></video>';
+      var video = document.getElementById('lb-video');
+      if (fileID === interviewFileID && preloadedHls) {
+        currentHls = preloadedHls;
+        preloadedHls = null;
+        currentHls.attachMedia(video);
+        currentHls.on(Hls.Events.ERROR, function(event, data) {
+          if (data.fatal) {
+            currentHls.destroy();
+            currentHls = null;
+            video.src = src;
+          }
+        });
+      } else if (fileID === interviewFileID && typeof Hls !== 'undefined' && Hls.isSupported()) {
+        currentHls = new Hls(hlsConfig);
+        currentHls.loadSource(interviewHlsUrl);
+        currentHls.attachMedia(video);
+        currentHls.on(Hls.Events.ERROR, function(event, data) {
+          if (data.fatal) {
+            currentHls.destroy();
+            currentHls = null;
+            video.src = src;
+          }
+        });
+      } else if (fileID === interviewFileID && video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.src = interviewHlsUrl;
+      } else {
+        video.src = src;
+      }
     }
 
     // Open placeholder in lightbox (for sessions without real videos)
@@ -996,8 +1105,12 @@
     });
 
     function closeLightbox() {
-      const inner = document.getElementById('lbInner');
-      const vid = inner.querySelector('video');
+      if (currentHls) {
+        currentHls.destroy();
+        currentHls = null;
+      }
+      var inner = document.getElementById('lbInner');
+      var vid = inner.querySelector('video');
       if (vid) vid.pause();
       inner.innerHTML = '';
       document.getElementById('videoLightbox').classList.remove('active');
