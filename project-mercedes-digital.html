@@ -49,6 +49,63 @@
       font-family: var(--font-mono);
     }
 
+    /* Actual video thumbnails */
+    .video-thumb {
+      width: 100%;
+      aspect-ratio: 16/9;
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      border: 1px solid var(--border-color);
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .video-thumb:hover {
+      border-color: var(--accent);
+      transform: scale(1.02);
+    }
+    .video-thumb img,
+    .video-thumb video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+    }
+    .video-thumb .play-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.25);
+      transition: background 0.2s;
+    }
+    .video-thumb:hover .play-overlay {
+      background: rgba(0,0,0,0.4);
+    }
+    .video-thumb .play-overlay svg {
+      width: 36px;
+      height: 36px;
+      color: #fff;
+      opacity: 0.9;
+      filter: drop-shadow(0 1px 3px rgba(0,0,0,0.4));
+    }
+
+    /* Featured video (Townhall) */
+    .featured-video {
+      margin-top: 24px;
+      max-width: 720px;
+    }
+    .featured-video .video-thumb {
+      border-radius: 12px;
+    }
+    .featured-video-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 8px;
+      font-style: italic;
+    }
+
     /* Lightbox overlay for expanded video */
     .video-lightbox {
       position: fixed;
@@ -69,7 +126,16 @@
     }
     .video-lightbox-inner {
       width: 100%;
-      max-width: 900px;
+      max-width: 960px;
+      position: relative;
+    }
+    .video-lightbox-inner video {
+      width: 100%;
+      border-radius: 8px;
+      background: #000;
+    }
+    .video-lightbox-inner .lb-placeholder {
+      width: 100%;
       aspect-ratio: 16/9;
       border: 2px dashed rgba(255,255,255,0.3);
       border-radius: 12px;
@@ -79,21 +145,18 @@
       justify-content: center;
       gap: 12px;
       color: rgba(255,255,255,0.6);
-      position: relative;
     }
-    .video-lightbox-inner svg {
+    .video-lightbox-inner .lb-placeholder svg {
       width: 64px;
       height: 64px;
       opacity: 0.5;
     }
-    .video-lightbox-inner .lb-title {
-      font-size: 1rem;
+    .video-lightbox-title {
+      font-size: 0.9rem;
       font-weight: 500;
       color: rgba(255,255,255,0.8);
-    }
-    .video-lightbox-inner .lb-sub {
-      font-size: 0.8rem;
-      color: rgba(255,255,255,0.5);
+      text-align: center;
+      margin-top: 12px;
     }
     .video-lightbox-close {
       position: absolute;
@@ -390,10 +453,22 @@
         </p>
       </div>
 
+      <!-- Townhall Interview -->
+      <div class="project-section fade-in" style="margin-top: 32px;">
+        <h2>Program Interview</h2>
+        <div class="featured-video">
+          <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/811c1cddvodcq1334221380/3388da965145403715854110056/k08qO6oIUUIA.mp4" onclick="openVideo(this)">
+            <img src="https://1334221380.vod-qcloud.com/58060a85vodtranscq1334221380/3388da965145403715854110056/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="MBGC Townhall Interview" loading="lazy">
+            <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+          </div>
+          <p class="featured-video-label">MBGC Townhall Interview — Program overview and participant feedback</p>
+        </div>
+      </div>
+
       <!-- ===================== PHASE 1 ===================== -->
       <div class="project-section fade-in phase-header">
         <span class="phase-badge">Phase 1</span>
-        <h2>MBGC Power BI Insights Bootcamp — 8 Sessions, 25 Videos</h2>
+        <h2>MBGC Power BI Insights Bootcamp — 8 Sessions, 26 Videos</h2>
         <p>
           A progressive curriculum moving from data importing basics to advanced DAX, Power Query transformations, row-level security, and Power BI Service deployment. Each session includes hands-on video tutorials building on real HR datasets.
         </p>
@@ -413,42 +488,37 @@
             <div class="video-grid">
             <div class="video-item">
               <div class="video-item-label">1.1 — Introduction to Power BI</div>
-              <div class="video-placeholder">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                <span>Video placeholder</span>
-                <span class="expand-hint">Click to expand</span>
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/811c1cddvodcq1334221380/2bdb0fd75145403717263640314/K4k9on9VkA8A.mp4" onclick="openVideo(this)">
+                <img src="https://1334221380.vod-qcloud.com/58060a85vodtranscq1334221380/2bdb0fd75145403717263640314/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="1.1 — Introduction to Power BI" loading="lazy">
+                <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
             </div>
             <div class="video-item">
               <div class="video-item-label">1.2 — Importing Data</div>
-              <div class="video-placeholder">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                <span>Video placeholder</span>
-                <span class="expand-hint">Click to expand</span>
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/811c1cddvodcq1334221380/157a0bb15145403717266791879/Ki35hdVWN68A.mp4" onclick="openVideo(this)">
+                <img src="https://1334221380.vod-qcloud.com/58060a85vodtranscq1334221380/157a0bb15145403717266791879/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="1.2 — Importing Data" loading="lazy">
+                <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
             </div>
             <div class="video-item">
               <div class="video-item-label">1.3 — Cards</div>
-              <div class="video-placeholder">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                <span>Video placeholder</span>
-                <span class="expand-hint">Click to expand</span>
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/811c1cddvodcq1334221380/61e627fe5145403717267716214/GhyG5KdvsoUA.mp4" onclick="openVideo(this)">
+                <img src="https://1334221380.vod-qcloud.com/58060a85vodtranscq1334221380/61e627fe5145403717267716214/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="1.3 — Cards" loading="lazy">
+                <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
             </div>
             <div class="video-item">
               <div class="video-item-label">1.4 — Pie Chart & Donut Chart</div>
-              <div class="video-placeholder">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                <span>Video placeholder</span>
-                <span class="expand-hint">Click to expand</span>
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/e0efdd045145403717262704777/NHUN7ETgOVcA.mp4" onclick="openVideo(this)">
+                <img src="https://1334221380.vod-qcloud.com/b6f9814cvodtranssh1334221380/e0efdd045145403717262704777/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="1.4 — Pie Chart & Donut Chart" loading="lazy">
+                <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
             </div>
             <div class="video-item">
               <div class="video-item-label">1.5 — Stacked Column Chart & Bar Chart</div>
-              <div class="video-placeholder">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                <span>Video placeholder</span>
-                <span class="expand-hint">Click to expand</span>
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/811c1cddvodcq1334221380/5b1a35975145403717267441122/w4QfdaaUickA.mp4" onclick="openVideo(this)">
+                <img src="https://1334221380.vod-qcloud.com/58060a85vodtranscq1334221380/5b1a35975145403717267441122/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="1.5 — Stacked Column Chart & Bar Chart" loading="lazy">
+                <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
             </div>
             </div>
@@ -461,7 +531,7 @@
         <div class="session-header" onclick="this.parentElement.classList.toggle('open')">
           <h3>Session 2 — Basic Visualization</h3>
           <div class="session-meta">
-            <span>5 videos</span>
+            <span>6 videos</span>
             <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
           </div>
         </div>
@@ -470,42 +540,44 @@
             <div class="video-grid">
             <div class="video-item">
               <div class="video-item-label">2.1 — Table and Matrix</div>
-              <div class="video-placeholder">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                <span>Video placeholder</span>
-                <span class="expand-hint">Click to expand</span>
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/bea28bc35145403716438005778/e60wd3gwbY8A.mp4" onclick="openVideo(this)">
+                <img src="https://1334221380.vod-qcloud.com/b6f9814cvodtranssh1334221380/bea28bc35145403716438005778/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="2.1 — Table and Matrix" loading="lazy">
+                <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
             </div>
             <div class="video-item">
               <div class="video-item-label">2.2 — Multi-Row Card</div>
-              <div class="video-placeholder">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                <span>Video placeholder</span>
-                <span class="expand-hint">Click to expand</span>
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/e1af97135145403716442202525/DbgwhQrv2dwA.mp4" onclick="openVideo(this)">
+                <img src="https://1334221380.vod-qcloud.com/b6f9814cvodtranssh1334221380/e1af97135145403716442202525/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="2.2 — Multi-Row Card" loading="lazy">
+                <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
             </div>
             <div class="video-item">
               <div class="video-item-label">2.3 — Filters & Slicers</div>
-              <div class="video-placeholder">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                <span>Video placeholder</span>
-                <span class="expand-hint">Click to expand</span>
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/beb2e9f95145403716438012284/b0AAmQofngoA.mp4" onclick="openVideo(this)">
+                <img src="https://1334221380.vod-qcloud.com/b6f9814cvodtranssh1334221380/beb2e9f95145403716438012284/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="2.3 — Filters & Slicers" loading="lazy">
+                <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
             </div>
             <div class="video-item">
               <div class="video-item-label">2.4 — Clustered Bar Chart & Clustered Column Chart</div>
-              <div class="video-placeholder">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                <span>Video placeholder</span>
-                <span class="expand-hint">Click to expand</span>
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/811c1cddvodcq1334221380/37f487175145403715932220742/QX3SoTwkgz8A.mp4" onclick="openVideo(this)">
+                <img src="https://1334221380.vod-qcloud.com/58060a85vodtranscq1334221380/37f487175145403715932220742/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="2.4 — Clustered Bar Chart & Clustered Column Chart" loading="lazy">
+                <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
             </div>
             <div class="video-item">
               <div class="video-item-label">2.5 — 100% Stacked Bar Chart & 100% Stacked Column Chart</div>
-              <div class="video-placeholder">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                <span>Video placeholder</span>
-                <span class="expand-hint">Click to expand</span>
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/811c1cddvodcq1334221380/456db62e5145403717046111403/RtAf3KzmgKIA.mp4" onclick="openVideo(this)">
+                <img src="https://1334221380.vod-qcloud.com/58060a85vodtranscq1334221380/456db62e5145403717046111403/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="2.5 — 100% Stacked Bar Chart & 100% Stacked Column Chart" loading="lazy">
+                <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+              </div>
+            </div>
+            <div class="video-item">
+              <div class="video-item-label">2.6 — Stacked Bar & Stacked Column Chart</div>
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/dffeeb965145403716442195400/Ypa0jIr1OMkA.mp4" onclick="openVideo(this)">
+                <img src="https://1334221380.vod-qcloud.com/b6f9814cvodtranssh1334221380/dffeeb965145403716442195400/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="2.6 — Stacked Bar & Stacked Column Chart" loading="lazy">
+                <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
             </div>
             </div>
@@ -527,42 +599,37 @@
             <div class="video-grid">
             <div class="video-item">
               <div class="video-item-label">3.1 — Stacked Area Chart & 100% Stacked Area Chart</div>
-              <div class="video-placeholder">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                <span>Video placeholder</span>
-                <span class="expand-hint">Click to expand</span>
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/d0484b5e5145403716452305972/C8xKKaj61aUA.mp4" onclick="openVideo(this)">
+                <img src="https://1334221380.vod-qcloud.com/b6f9814cvodtranssh1334221380/d0484b5e5145403716452305972/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="3.1 — Stacked Area Chart & 100% Stacked Area Chart" loading="lazy">
+                <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
             </div>
             <div class="video-item">
               <div class="video-item-label">3.2 — Ribbon Chart</div>
-              <div class="video-placeholder">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                <span>Video placeholder</span>
-                <span class="expand-hint">Click to expand</span>
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/d048b0d75145403716452306028/nc83Dexpc7wA.mp4" onclick="openVideo(this)">
+                <img src="https://1334221380.vod-qcloud.com/b6f9814cvodtranssh1334221380/d048b0d75145403716452306028/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="3.2 — Ribbon Chart" loading="lazy">
+                <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
             </div>
             <div class="video-item">
               <div class="video-item-label">3.3 — Line Chart & Area Chart</div>
-              <div class="video-placeholder">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                <span>Video placeholder</span>
-                <span class="expand-hint">Click to expand</span>
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/b21985105145403716465993739/WUVE72c09wUA.mp4" onclick="openVideo(this)">
+                <img src="https://1334221380.vod-qcloud.com/b6f9814cvodtranssh1334221380/b21985105145403716465993739/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="3.3 — Line Chart & Area Chart" loading="lazy">
+                <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
             </div>
             <div class="video-item">
               <div class="video-item-label">3.4 — Line & Stacked Column Chart / Line & Clustered Column Chart</div>
-              <div class="video-placeholder">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                <span>Video placeholder</span>
-                <span class="expand-hint">Click to expand</span>
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/1cf65dec5145403716446559747/mAVA3bKsA28A.mp4" onclick="openVideo(this)">
+                <img src="https://1334221380.vod-qcloud.com/b6f9814cvodtranssh1334221380/1cf65dec5145403716446559747/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="3.4 — Line & Stacked Column Chart / Line & Clustered Column Chart" loading="lazy">
+                <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
             </div>
             <div class="video-item">
               <div class="video-item-label">3.5 — Decomposition Tree</div>
-              <div class="video-placeholder">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                <span>Video placeholder</span>
-                <span class="expand-hint">Click to expand</span>
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/ff145bfe5145403716449335630/1N8v0ys0AikA.mp4" onclick="openVideo(this)">
+                <img src="https://1334221380.vod-qcloud.com/b6f9814cvodtranssh1334221380/ff145bfe5145403716449335630/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="3.5 — Decomposition Tree" loading="lazy">
+                <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
             </div>
             </div>
@@ -584,26 +651,23 @@
             <div class="video-grid">
             <div class="video-item">
               <div class="video-item-label">4.1 — Tooltips</div>
-              <div class="video-placeholder">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                <span>Video placeholder</span>
-                <span class="expand-hint">Click to expand</span>
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/dc731d075145403717296876016/5Tnf24oT4hAA.mp4" onclick="openVideo(this)">
+                <img src="https://1334221380.vod-qcloud.com/b6f9814cvodtranssh1334221380/dc731d075145403717296876016/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="4.1 — Tooltips" loading="lazy">
+                <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
             </div>
             <div class="video-item">
               <div class="video-item-label">4.2 — Other Graphs</div>
-              <div class="video-placeholder">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                <span>Video placeholder</span>
-                <span class="expand-hint">Click to expand</span>
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/71a8c8845145403716454665715/j6ewh1G4gG4A.mp4" onclick="openVideo(this)">
+                <img src="https://1334221380.vod-qcloud.com/b6f9814cvodtranssh1334221380/71a8c8845145403716454665715/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="4.2 — Other Graphs" loading="lazy">
+                <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
             </div>
             <div class="video-item">
               <div class="video-item-label">4.3 — Navigators</div>
-              <div class="video-placeholder">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                <span>Video placeholder</span>
-                <span class="expand-hint">Click to expand</span>
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/0385a1595145403716449500514/mluVCvrEYgYA.mp4" onclick="openVideo(this)">
+                <img src="https://1334221380.vod-qcloud.com/b6f9814cvodtranssh1334221380/0385a1595145403716449500514/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="4.3 — Navigators" loading="lazy">
+                <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
             </div>
             </div>
@@ -625,18 +689,16 @@
             <div class="video-grid">
             <div class="video-item">
               <div class="video-item-label">5.1 — Data Analysis Expression (DAX)</div>
-              <div class="video-placeholder">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                <span>Video placeholder</span>
-                <span class="expand-hint">Click to expand</span>
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/5b11fa955145403716457787985/t1mBacj8gbAA.mp4" onclick="openVideo(this)">
+                <img src="https://1334221380.vod-qcloud.com/b6f9814cvodtranssh1334221380/5b11fa955145403716457787985/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="5.1 — Data Analysis Expression (DAX)" loading="lazy">
+                <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
             </div>
             <div class="video-item">
               <div class="video-item-label">5.2 — Enhancing Report Design</div>
-              <div class="video-placeholder">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                <span>Video placeholder</span>
-                <span class="expand-hint">Click to expand</span>
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/811c1cddvodcq1334221380/e3fd99475145403717065966292/fjhctZ1M3skA.mp4" onclick="openVideo(this)">
+                <img src="https://1334221380.vod-qcloud.com/58060a85vodtranscq1334221380/e3fd99475145403717065966292/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="5.2 — Enhancing Report Design" loading="lazy">
+                <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
             </div>
             </div>
@@ -658,18 +720,16 @@
             <div class="video-grid">
             <div class="video-item">
               <div class="video-item-label">6.1 — Basic Transformation</div>
-              <div class="video-placeholder">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                <span>Video placeholder</span>
-                <span class="expand-hint">Click to expand</span>
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/27bd68605145403716460573149/AYB91YErn0cA.mp4" onclick="openVideo(this)">
+                <img src="https://1334221380.vod-qcloud.com/b6f9814cvodtranssh1334221380/27bd68605145403716460573149/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="6.1 — Basic Transformation" loading="lazy">
+                <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
             </div>
             <div class="video-item">
               <div class="video-item-label">6.2 — Advanced Transformation</div>
-              <div class="video-placeholder">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                <span>Video placeholder</span>
-                <span class="expand-hint">Click to expand</span>
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/f4e21c075145403716459767026/dcARDNrUy54A.mp4" onclick="openVideo(this)">
+                <img src="https://1334221380.vod-qcloud.com/b6f9814cvodtranssh1334221380/f4e21c075145403716459767026/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="6.2 — Advanced Transformation" loading="lazy">
+                <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
             </div>
             </div>
@@ -682,7 +742,7 @@
         <div class="session-header" onclick="this.parentElement.classList.toggle('open')">
           <h3>Session 7 — Row-Level Security (RLS)</h3>
           <div class="session-meta">
-            <span>2 videos</span>
+            <span>1 video</span>
             <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
           </div>
         </div>
@@ -690,19 +750,10 @@
           <div class="session-content-inner">
             <div class="video-grid">
             <div class="video-item">
-              <div class="video-item-label">7.1 — Row-Level Security Part 1</div>
-              <div class="video-placeholder">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                <span>Video placeholder</span>
-                <span class="expand-hint">Click to expand</span>
-              </div>
-            </div>
-            <div class="video-item">
-              <div class="video-item-label">7.2 — Row-Level Security Part 2</div>
-              <div class="video-placeholder">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                <span>Video placeholder</span>
-                <span class="expand-hint">Click to expand</span>
+              <div class="video-item-label">7.1 — Row-Level Security</div>
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/27ae27265145403716460568736/BPvQ4RGVAjwA.mp4" onclick="openVideo(this)">
+                <img src="https://1334221380.vod-qcloud.com/b6f9814cvodtranssh1334221380/27ae27265145403716460568736/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="7.1 — Row-Level Security" loading="lazy">
+                <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
             </div>
             </div>
@@ -715,7 +766,7 @@
         <div class="session-header" onclick="this.parentElement.classList.toggle('open')">
           <h3>Session 8 — Power BI Service & Semantic Model</h3>
           <div class="session-meta">
-            <span>1 video</span>
+            <span>2 videos</span>
             <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
           </div>
         </div>
@@ -723,11 +774,17 @@
           <div class="session-content-inner">
             <div class="video-grid">
             <div class="video-item">
-              <div class="video-item-label">8.1 — Power BI Service & Semantic Models</div>
-              <div class="video-placeholder">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                <span>Video placeholder</span>
-                <span class="expand-hint">Click to expand</span>
+              <div class="video-item-label">8.1 — Power BI Service & Semantic Models Part 1</div>
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/f025b2e35145403716459557070/wR3uHUxpycAA.mp4" onclick="openVideo(this)">
+                <img src="https://1334221380.vod-qcloud.com/b6f9814cvodtranssh1334221380/f025b2e35145403716459557070/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="8.1 — Power BI Service & Semantic Models Part 1" loading="lazy">
+                <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+              </div>
+            </div>
+            <div class="video-item">
+              <div class="video-item-label">8.2 — Power BI Service & Semantic Models Part 2</div>
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/e00f93a4vodsh1334221380/c67ff9a75145403716462792934/SsUQjGO4DrkA.mp4" onclick="openVideo(this)">
+                <img src="https://1334221380.vod-qcloud.com/b6f9814cvodtranssh1334221380/c67ff9a75145403716462792934/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="8.2 — Power BI Service & Semantic Models Part 2" loading="lazy">
+                <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
             </div>
             </div>
@@ -758,10 +815,9 @@
             <div class="video-grid">
             <div class="video-item">
               <div class="video-item-label">Local to Cloud File Management & Collaboration</div>
-              <div class="video-placeholder">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                <span>Video placeholder</span>
-                <span class="expand-hint">Click to expand</span>
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/811c1cddvodcq1334221380/d16435f55145403717065172114/nbn6E4aH4v0A.mp4" onclick="openVideo(this)">
+                <img src="https://1334221380.vod-qcloud.com/58060a85vodtranscq1334221380/d16435f55145403717065172114/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="Local to Cloud File Management & Collaboration" loading="lazy">
+                <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
             </div>
             </div>
@@ -783,10 +839,9 @@
             <div class="video-grid">
             <div class="video-item">
               <div class="video-item-label">Designing a Streamlined Employee Termination Checklist</div>
-              <div class="video-placeholder">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                <span>Video placeholder</span>
-                <span class="expand-hint">Click to expand</span>
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/811c1cddvodcq1334221380/d164c3635145403717065173199/bI13xJiYDtgA.mp4" onclick="openVideo(this)">
+                <img src="https://1334221380.vod-qcloud.com/58060a85vodtranscq1334221380/d164c3635145403717065173199/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="Designing a Streamlined Employee Termination Checklist" loading="lazy">
+                <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
             </div>
             </div>
@@ -808,10 +863,9 @@
             <div class="video-grid">
             <div class="video-item">
               <div class="video-item-label">Kicking Off a Project with Brainstorming & Planning Tools</div>
-              <div class="video-placeholder">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                <span>Video placeholder</span>
-                <span class="expand-hint">Click to expand</span>
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/811c1cddvodcq1334221380/1ff9531f5145403717059463532/BmufVm6RA1cA.mp4" onclick="openVideo(this)">
+                <img src="https://1334221380.vod-qcloud.com/58060a85vodtranscq1334221380/1ff9531f5145403717059463532/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="Kicking Off a Project with Brainstorming & Planning Tools" loading="lazy">
+                <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
             </div>
             </div>
@@ -833,10 +887,9 @@
             <div class="video-grid">
             <div class="video-item">
               <div class="video-item-label">From Script to Screen: Preparing the Townhall Video</div>
-              <div class="video-placeholder">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                <span>Video placeholder</span>
-                <span class="expand-hint">Click to expand</span>
+              <div class="video-thumb" data-src="https://1334221380.vod-qcloud.com/811c1cddvodcq1334221380/4a4012af5145403717063997937/90ywKdrAEbAA.mp4" onclick="openVideo(this)">
+                <img src="https://1334221380.vod-qcloud.com/58060a85vodtranscq1334221380/4a4012af5145403717063997937/coverBySnapshot/coverBySnapshot_10_0.jpg" alt="From Script to Screen: Preparing the Townhall Video" loading="lazy">
+                <div class="play-overlay"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
               </div>
             </div>
             </div>
@@ -895,11 +948,10 @@
   <!-- Video lightbox -->
   <div class="video-lightbox" id="videoLightbox">
     <button class="video-lightbox-close" onclick="closeLightbox()">&times;</button>
-    <div class="video-lightbox-inner">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-      <div class="lb-title" id="lbTitle">Video Title</div>
-      <div class="lb-sub">Video embed placeholder — click anywhere to close</div>
+    <div class="video-lightbox-inner" id="lbInner">
+      <!-- Real video or placeholder injected by JS -->
     </div>
+    <div class="video-lightbox-title" id="lbTitle"></div>
   </div>
 
   <script src="script.js"></script>
@@ -922,15 +974,32 @@
     }
     function slidePhoto(dir) { goToSlide(currentSlide + dir); }
 
-    // Expand video placeholder into lightbox
-    document.querySelectorAll('.video-item').forEach(item => {
-      item.querySelector('.video-placeholder').addEventListener('click', () => {
-        const title = item.querySelector('.video-item-label')?.textContent || 'Video';
+    // Open real video in lightbox
+    function openVideo(el) {
+      const src = el.dataset.src;
+      const title = el.closest('.video-item')?.querySelector('.video-item-label')?.textContent || 'Video';
+      const inner = document.getElementById('lbInner');
+      inner.innerHTML = '<video src="' + src + '" controls autoplay style="width:100%;border-radius:8px;background:#000;"></video>';
+      document.getElementById('lbTitle').textContent = title;
+      document.getElementById('videoLightbox').classList.add('active');
+    }
+
+    // Open placeholder in lightbox (for sessions without real videos)
+    document.querySelectorAll('.video-item .video-placeholder').forEach(ph => {
+      ph.addEventListener('click', () => {
+        const title = ph.closest('.video-item')?.querySelector('.video-item-label')?.textContent || 'Video';
+        const inner = document.getElementById('lbInner');
+        inner.innerHTML = '<div class="lb-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg><span style="color:rgba(255,255,255,0.5);">Video coming soon</span></div>';
         document.getElementById('lbTitle').textContent = title;
         document.getElementById('videoLightbox').classList.add('active');
       });
     });
+
     function closeLightbox() {
+      const inner = document.getElementById('lbInner');
+      const vid = inner.querySelector('video');
+      if (vid) vid.pause();
+      inner.innerHTML = '';
       document.getElementById('videoLightbox').classList.remove('active');
     }
     document.getElementById('videoLightbox').addEventListener('click', (e) => {
