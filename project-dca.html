@@ -83,10 +83,10 @@
     <a href="./" class="nav-logo"><span>$</span> yixuan.he</a>
     <ul class="nav-links">
       <li><a href="./">Home</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="experience.html">Experience</a></li>
-      <li><a href="projects.html">Projects</a></li>
-      <li><a href="contact.html">Contact</a></li>
+      <li><a href="about">About</a></li>
+      <li><a href="experience">Experience</a></li>
+      <li><a href="projects">Projects</a></li>
+      <li><a href="contact">Contact</a></li>
     </ul>
     <button class="nav-toggle" aria-label="Toggle navigation">
       <span></span><span></span><span></span>
@@ -96,7 +96,7 @@
   <div class="page-container">
     <section class="section">
 
-      <a href="projects.html" class="project-back fade-in">
+      <a href="projects" class="project-back fade-in">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
         Back to Projects
       </a>
@@ -110,23 +110,17 @@
         <div class="tags">
           <span class="tag">R</span>
           <span class="tag">Power BI</span>
-          <span class="tag">FAA Data</span>
-          <span class="tag">METAR</span>
-          <span class="tag">Hypothesis Testing</span>
+          <span class="tag">Statistical Inference</span>
           <span class="tag">Time Series</span>
+          <span class="tag">Data Visualization</span>
+          <span class="tag">Bootstrap Methods</span>
         </div>
       </div>
 
-      <!-- Power BI Dashboard Placeholder -->
-      <div class="fade-in fade-in-delay-2">
-        <div class="powerbi-placeholder">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <rect x="2" y="3" width="20" height="14" rx="2"/>
-            <path d="M8 21h8M12 17v4"/>
-            <path d="M7 8v5M10 10v3M13 7v6M16 9v4"/>
-          </svg>
-          <span>Power BI Interactive Dashboard</span>
-          <span class="sub">Embed will be added here</span>
+      <!-- Power BI Dashboard -->
+      <div class="fade-in fade-in-delay-2" style="margin-top: 32px;">
+        <div style="position: relative; width: 100%; padding-bottom: 62.25%; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color);">
+          <iframe title="DSAN 5100 Project - Drivers of Flight Disruptions at DCA" src="https://app.powerbi.com/view?r=eyJrIjoiMDRlNjJiMjktNGYzYy00ZWM5LWEwYmItZTEyYzliMGExYTE1IiwidCI6ImZkNTcxMTkzLTM4Y2ItNDM3Yi1iYjU1LTYwZjI4ZDY3YjY0MyIsImMiOjF9" frameborder="0" allowFullScreen="true" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
         </div>
       </div>
 
@@ -157,15 +151,15 @@
           <table class="data-table">
             <thead>
               <tr>
-                <th>Data Source</th>
+                <th style="width: 180px; white-space: nowrap;">Data Source</th>
                 <th>Description</th>
-                <th style="text-align: center;">Records</th>
+                <th style="text-align: center; width: 120px; white-space: nowrap;">Records</th>
               </tr>
             </thead>
             <tbody>
               <tr><td class="highlight-cell">FAA BTS Flight Data</td><td>Monthly CSV files (May 2023 — Dec 2024), departure/arrival times, delay breakdowns by cause, cancellation codes</td><td style="text-align: center;">300K+</td></tr>
-              <tr><td class="highlight-cell">METAR Weather Data</td><td>Hourly observations from Iowa Environmental Mesonet — temperature, wind speed/direction, visibility, precipitation, pressure, humidity, sky conditions</td><td style="text-align: center;">15+ variables</td></tr>
-              <tr><td class="highlight-cell">Holiday Calendar</td><td>U.S. federal holidays and school break periods for seasonal analysis</td><td style="text-align: center;">Custom built</td></tr>
+              <tr><td class="highlight-cell">METAR Weather Data</td><td>Hourly observations from Iowa Environmental Mesonet — temperature, wind speed/direction, visibility, precipitation, pressure, humidity, sky conditions</td><td style="text-align: center;">15+ Variables</td></tr>
+              <tr><td class="highlight-cell">Holiday Calendar</td><td>U.S. federal holidays and school break periods for seasonal analysis</td><td style="text-align: center;">Custom Built</td></tr>
             </tbody>
           </table>
         </div>
@@ -205,18 +199,18 @@
               <tr>
                 <th style="width: 30px;">Q</th>
                 <th>Research Question</th>
-                <th style="width: 120px;">Test</th>
-                <th style="width: 200px;">Result</th>
+                <th style="width: 160px; white-space: nowrap;">Test</th>
+                <th style="width: 400px;">Result</th>
               </tr>
             </thead>
             <tbody>
-              <tr><td class="highlight-cell">Q1</td><td>What is the overall flight delay rate at DCA?</td><td>Descriptive</td><td>Severe delay prob. rises 17.1% → 26.9% under adverse weather</td></tr>
-              <tr><td class="highlight-cell">Q2</td><td>Do weather conditions significantly affect delay probability?</td><td>Welch's t-test</td><td>p &lt; 0.001; snow cancellation rate 24.58% vs 1.45% baseline</td></tr>
-              <tr><td class="highlight-cell">Q3</td><td>Is there a significant difference in delay rates between airlines?</td><td>ANOVA + Tukey HSD</td><td>F ≈ 441, p ≈ 0; AA highest mean delay 12.77 min, 95% CI [7.58, 18.95]</td></tr>
-              <tr><td class="highlight-cell">Q4</td><td>Do holidays drive higher cancellation rates?</td><td>Chi-squared</td><td>χ² = 421.26, df = 11, p ≈ 0; holiday cancel 2.23% vs 1.52%</td></tr>
-              <tr><td class="highlight-cell">Q5</td><td>What are the primary delay causes and how do they vary by season?</td><td>Decomposition</td><td>Late aircraft ~35–40% of delay min; weather dominates winter</td></tr>
-              <tr><td class="highlight-cell">Q6</td><td>Are there significant weekly patterns in delay and cancellation?</td><td>ARIMA + ACF</td><td>ARIMA(1,0,0): AR(1) = 0.28, AIC = −493.77; sig. lag-1 autocorrelation</td></tr>
-              <tr><td class="highlight-cell">Q7</td><td>Can we identify weather thresholds that trigger disproportionate disruptions?</td><td>Bootstrap (B=10K)</td><td>95% CIs exclude 0 for visibility &lt; 3 mi, wind &gt; 20 kt, precipitation</td></tr>
+              <tr><td class="highlight-cell">Q1</td><td>What is the overall flight delay rate at DCA?</td><td>Descriptive</td><td>P(Severe) = 17.1%, Rising to 26.9% in Adverse Weather</td></tr>
+              <tr><td class="highlight-cell">Q2</td><td>Do weather conditions significantly affect delay probability?</td><td>Welch's t-test</td><td>Significant — p &lt; 0.001, Snow Cancellation 17× Baseline</td></tr>
+              <tr><td class="highlight-cell">Q3</td><td>Is there a significant difference in delay rates between airlines?</td><td>ANOVA + Tukey HSD</td><td>Significant — F ≈ 441, AA Highest at 12.77 Min</td></tr>
+              <tr><td class="highlight-cell">Q4</td><td>Do holidays drive higher cancellation rates?</td><td>Chi-squared</td><td>Significant — χ² = 421, Holiday 2.23% vs 1.52%</td></tr>
+              <tr><td class="highlight-cell">Q5</td><td>What are the primary delay causes and how do they vary by season?</td><td>Decomposition</td><td>Late Aircraft 35–40%; Weather Dominates Winter</td></tr>
+              <tr><td class="highlight-cell">Q6</td><td>Are there significant weekly patterns in delay and cancellation?</td><td>ARIMA + ACF</td><td>Significant — AR(1) = 0.28, Disruptions Persist Weekly</td></tr>
+              <tr><td class="highlight-cell">Q7</td><td>Can we identify weather thresholds that trigger disproportionate disruptions?</td><td>Bootstrap (B=10K)</td><td>Confirmed — All 95% CIs Exclude Zero</td></tr>
             </tbody>
           </table>
         </div>
@@ -292,19 +286,17 @@
       <div class="project-section fade-in" style="margin-top: 48px;">
         <h2>Tools & Methods</h2>
         <ul>
-          <li>R (tidyverse, dplyr, ggplot2, forecast) for data wrangling, statistical analysis, and visualization</li>
-          <li>Welch's two-sample t-test for comparing mean delays under different weather conditions</li>
-          <li>One-way ANOVA with Tukey HSD post-hoc for pairwise airline delay comparisons</li>
-          <li>Pearson's chi-squared test of independence for cancellation rate × month/holiday associations</li>
-          <li>Bootstrap resampling (B = 10,000) for non-parametric confidence interval construction</li>
-          <li>ARIMA modeling (with seasonal components) for weekly and daily delay/cancellation forecasting</li>
-          <li>ACF/PACF diagnostics for lag structure identification and model order selection</li>
-          <li>Power BI for interactive dashboards; Quarto for reproducible report generation</li>
+          <li>R — data wrangling, statistical analysis, and visualization with tidyverse, dplyr, ggplot2, forecast</li>
+          <li>Hypothesis Testing — Welch's t-test, one-way ANOVA with Tukey HSD, Pearson's chi-squared test</li>
+          <li>Bootstrap Resampling — non-parametric 95% CIs with B = 10,000 iterations for robustness validation</li>
+          <li>Time Series — ARIMA with seasonal components, ACF/PACF diagnostics for lag structure identification</li>
+          <li>Data Integration — FAA BTS flight records, METAR hourly weather observations, custom holiday calendar</li>
+          <li>Power BI & Quarto — interactive dashboards for stakeholder decision-making and reproducible report generation</li>
         </ul>
       </div>
 
       <div style="margin-top: 40px;" class="fade-in">
-        <a href="projects.html" class="btn">
+        <a href="projects" class="btn">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
           All Projects
         </a>

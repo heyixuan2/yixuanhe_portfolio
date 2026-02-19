@@ -349,6 +349,12 @@
       gap: 8px;
       flex-shrink: 0;
     }
+    .session-header .session-meta .vid-num {
+      display: inline-block;
+      width: 1em;
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
     .session-header .chevron {
       width: 16px;
       height: 16px;
@@ -411,7 +417,7 @@
       padding: 4px 10px;
       border-radius: 4px;
       background: var(--accent);
-      color: #fff;
+      color: var(--bg-primary);
       margin-bottom: 8px;
     }
 
@@ -435,10 +441,10 @@
     <a href="./" class="nav-logo"><span>$</span> yixuan.he</a>
     <ul class="nav-links">
       <li><a href="./">Home</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="experience.html">Experience</a></li>
-      <li><a href="projects.html">Projects</a></li>
-      <li><a href="contact.html">Contact</a></li>
+      <li><a href="about">About</a></li>
+      <li><a href="experience">Experience</a></li>
+      <li><a href="projects">Projects</a></li>
+      <li><a href="contact">Contact</a></li>
     </ul>
     <button class="nav-toggle" aria-label="Toggle navigation">
       <span></span><span></span><span></span>
@@ -448,7 +454,7 @@
   <div class="page-container">
     <section class="section">
 
-      <a href="projects.html" class="project-back fade-in">
+      <a href="projects" class="project-back fade-in">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
         Back to Projects
       </a>
@@ -457,14 +463,15 @@
         <div class="project-org"><span>Mercedes-Benz</span><span>Jun 2024 — Sep 2025</span></div>
         <h1>Mercedes-Benz Digital Transformation Bootcamp</h1>
         <p>
-          Designed, built, and delivered a two-phase hybrid digital transformation training program within the Mercedes-Benz Greater China HR Department, upskilling around 140 HR professionals on Microsoft Power BI, Power Automate, and M365 — transitioning the organization from legacy Excel-based reporting to a centralized, self-service BI platform.
+          Designed and delivered a two-phase digital transformation training program for around 140 HR professionals at Mercedes-Benz Greater China, covering Power BI, Power Automate, and M365 — transitioning the organization from legacy Excel reporting to a centralized, self-service BI platform.
         </p>
         <div class="tags">
-          <span class="tag">Digital Transformation</span>
           <span class="tag">Power BI</span>
-          <span class="tag">M365</span>
-          <span class="tag">Data Modeling</span>
+          <span class="tag">Power Automate</span>
           <span class="tag">DAX</span>
+          <span class="tag">Training Design</span>
+          <span class="tag">Change Management</span>
+          <span class="tag">Stakeholder Management</span>
         </div>
       </div>
 
@@ -472,20 +479,20 @@
       <div class="fade-in fade-in-delay-2">
         <div class="metric-grid">
           <div class="metric-card">
-            <div class="metric-value">~ 140</div>
+            <div class="metric-value"><span style="font-size:0.55em;font-weight:500;opacity:0.7;">~</span> 140</div>
             <div class="metric-label">HR Professionals Involved</div>
           </div>
           <div class="metric-card">
-            <div class="metric-value">~240 <span style="font-size:0.55em;font-weight:500;opacity:0.7;">min</span></div>
+            <div class="metric-value"><span style="font-size:0.55em;font-weight:500;opacity:0.7;">~</span> 240 <span style="font-size:0.55em;font-weight:500;opacity:0.7;">min</span></div>
             <div class="metric-label">Training Videos</div>
           </div>
           <div class="metric-card">
-            <div class="metric-value">26<span style="font-size:0.55em;font-weight:500;opacity:0.7;">%</span> → 94<span style="font-size:0.55em;font-weight:500;opacity:0.7;">%</span></div>
-            <div class="metric-label">PBI Usage Rate</div>
+            <div class="metric-value"><svg style="width:0.6em;height:0.6em;vertical-align:baseline;margin-right:2px;opacity:0.75;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>68<span style="font-size:0.55em;font-weight:500;opacity:0.7;">%</span></div>
+            <div class="metric-label">PBI Usage Rate Increase</div>
           </div>
           <div class="metric-card">
-            <div class="metric-value">Board</div>
-            <div class="metric-label">Presented to MB Board</div>
+            <div class="metric-value">24</div>
+            <div class="metric-label">Quizzes & Practice Sets</div>
           </div>
         </div>
       </div>
@@ -494,13 +501,13 @@
       <div class="project-section fade-in" style="margin-top: 48px;">
         <h2>Overview</h2>
         <p>
-          As part of the HRGC "Re-Skill and Re-Invent" initiative, I independently designed, developed, and delivered a structured digital transformation program spanning two phases, with the guidance of my mentor Kieso Jan. The program was part of a broader organizational strategy to shut down legacy HR reporting systems and migrate to a centralized Power BI Service cloud environment with semantic models, row-level security, and scheduled data refresh.
+          As part of the HRGC "Re-Skill and Re-Invent" initiative, I independently designed and delivered a two-phase digital transformation program with the guidance of my mentor Kieso Jan. The goal was to shut down legacy HR reporting systems and migrate to a centralized Power BI Service cloud environment with semantic models, row-level security, and scheduled data refresh.
         </p>
         <p style="margin-top: 16px;">
-          Phase I, the MBGC Power BI Insights Bootcamp, ran an 8-session self-paced curriculum covering the full Power BI Desktop-to-Service pipeline: data importing, table relationships, DAX measures, Power Query transformations, report design, row-level security, and Power BI Service publishing with semantic model management. Each week included approximately 30-minute video lectures, cumulative practice sets with 10 to 15 tasks using real HR datasets, lecture quizzes, and practice set quizzes administered via Testportal — with weekly performance scores reported to management.
+          Phase I, the MBGC Power BI Insights Bootcamp, was an 8-session self-paced curriculum covering the full Power BI Desktop-to-Service pipeline — from data importing and DAX to row-level security and semantic model publishing. Each week included ~30-minute video lectures, cumulative practice sets using real HR datasets, and quizzes via Testportal with scores reported to management.
         </p>
         <p style="margin-top: 16px;">
-          Phase II, the MBGC M365 Excellence Lab, extended the program with scenario-based M365 training: cloud file management via SharePoint and OneDrive, workflow automation with Power Automate, project planning with Planner and Whiteboard, and multimedia content production with Clipchamp. The program was recognized by HRGC executive leadership and presented directly to Mercedes-Benz Board Member Sabine Kohleisen.
+          Phase II, the MBGC M365 Excellence Lab, extended the program with scenario-based M365 training covering SharePoint, Power Automate, Planner, and Clipchamp. The program was recognized by executive leadership and presented to Mercedes-Benz Board Member Sabine Kohleisen.
         </p>
       </div>
 
@@ -513,16 +520,16 @@
             <div class="play-overlay"></div>
             <div class="play-circle"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
           </div>
-          <p class="featured-video-label">MBGC Townhall Interview — Program overview and participant feedback</p>
+          <p class="featured-video-label">MBGC HR Townhall Interview — Power BI Insights Bootcamp Participant Feedback</p>
         </div>
       </div>
 
       <!-- ===================== PHASE 1 ===================== -->
       <div class="project-section fade-in phase-header">
         <span class="phase-badge">Phase 1</span>
-        <h2>MBGC Power BI Insights Bootcamp — 8 Sessions, 26 Videos</h2>
+        <h2>MBGC Power BI Insights Bootcamp — 8 Sessions</h2>
         <p>
-          A progressive, self-paced curriculum covering the complete Power BI workflow — from data importing and modeling through advanced DAX expressions, Power Query transformations, row-level security, and Power BI Service deployment with semantic models. Each session includes approximately 30-minute self-guided video lectures, cumulative practice sets of 10 to 15 tasks per session built on real HR datasets, and two quizzes per week — one for lecture content and one for the practice set — with scores reported to management. The program included weekly optional walk-in workshops, a Microsoft Teams community with Q&A support, and a competitive prize system with weekly and overall performance awards.
+          A self-paced curriculum covering the complete Power BI workflow — from data importing and modeling through DAX, Power Query, row-level security, and Power BI Service deployment. Each session included ~30-minute video lectures, cumulative practice sets built on real HR datasets, and weekly quizzes with scores reported to management. The program also featured optional walk-in workshops, a Teams Q&A community, and a competitive prize system.
         </p>
       </div>
 
@@ -531,7 +538,7 @@
         <div class="session-header" onclick="this.parentElement.classList.toggle('open')">
           <h3>Session 1 — Introduction to Power BI and Importing Data</h3>
           <div class="session-meta">
-            <span>5 videos</span>
+            <span><span class="vid-num">5</span> videos</span>
             <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
           </div>
         </div>
@@ -583,7 +590,7 @@
         <div class="session-header" onclick="this.parentElement.classList.toggle('open')">
           <h3>Session 2 — Basic Visualization</h3>
           <div class="session-meta">
-            <span>6 videos</span>
+            <span><span class="vid-num">6</span> videos</span>
             <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
           </div>
         </div>
@@ -642,7 +649,7 @@
         <div class="session-header" onclick="this.parentElement.classList.toggle('open')">
           <h3>Session 3 — Advanced Visualization</h3>
           <div class="session-meta">
-            <span>5 videos</span>
+            <span><span class="vid-num">5</span> videos</span>
             <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
           </div>
         </div>
@@ -694,7 +701,7 @@
         <div class="session-header" onclick="this.parentElement.classList.toggle('open')">
           <h3>Session 4 — Intermediate Visualization</h3>
           <div class="session-meta">
-            <span>3 videos</span>
+            <span><span class="vid-num">3</span> videos</span>
             <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
           </div>
         </div>
@@ -732,7 +739,7 @@
         <div class="session-header" onclick="this.parentElement.classList.toggle('open')">
           <h3>Session 5 — DAX and Report Design</h3>
           <div class="session-meta">
-            <span>2 videos</span>
+            <span><span class="vid-num">2</span> videos</span>
             <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
           </div>
         </div>
@@ -763,7 +770,7 @@
         <div class="session-header" onclick="this.parentElement.classList.toggle('open')">
           <h3>Session 6 — Data Cleaning and Power Query</h3>
           <div class="session-meta">
-            <span>2 videos</span>
+            <span><span class="vid-num">2</span> videos</span>
             <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
           </div>
         </div>
@@ -794,7 +801,7 @@
         <div class="session-header" onclick="this.parentElement.classList.toggle('open')">
           <h3>Session 7 — Row-Level Security</h3>
           <div class="session-meta">
-            <span>1 video</span>
+            <span><span class="vid-num">1</span> video&nbsp;</span>
             <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
           </div>
         </div>
@@ -818,7 +825,7 @@
         <div class="session-header" onclick="this.parentElement.classList.toggle('open')">
           <h3>Session 8 — Power BI Service and Semantic Model</h3>
           <div class="session-meta">
-            <span>2 videos</span>
+            <span><span class="vid-num">2</span> videos</span>
             <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
           </div>
         </div>
@@ -849,7 +856,7 @@
         <span class="phase-badge">Phase 2</span>
         <h2>MBGC M365 Excellence Lab — 4 Sessions</h2>
         <p>
-          Scenario-driven training sessions built around real HR business cases, teaching practical Microsoft 365 workflows end-to-end. Topics include migrating local file systems to SharePoint/OneDrive cloud collaboration, designing automated approval workflows with Power Automate, structuring project kickoffs with Planner and Whiteboard brainstorming tools, and producing internal communications video content with Clipchamp — from script writing to final edit.
+          Scenario-driven training sessions built around real HR business cases, covering SharePoint/OneDrive cloud collaboration, Power Automate approval workflows, project planning with Planner and Whiteboard, and video production with Clipchamp.
         </p>
       </div>
 
@@ -858,7 +865,7 @@
         <div class="session-header" onclick="this.parentElement.classList.toggle('open')">
           <h3>Scenario 1 — Local to Cloud File Management and Collaboration</h3>
           <div class="session-meta">
-            <span>1 video</span>
+            <span><span class="vid-num">1</span> video&nbsp;</span>
             <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
           </div>
         </div>
@@ -882,7 +889,7 @@
         <div class="session-header" onclick="this.parentElement.classList.toggle('open')">
           <h3>Scenario 2 — Designing a Streamlined Employee Termination Checklist</h3>
           <div class="session-meta">
-            <span>1 video</span>
+            <span><span class="vid-num">1</span> video&nbsp;</span>
             <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
           </div>
         </div>
@@ -906,7 +913,7 @@
         <div class="session-header" onclick="this.parentElement.classList.toggle('open')">
           <h3>Scenario 3 — Kicking Off a Project with Brainstorming and Planning Tools</h3>
           <div class="session-meta">
-            <span>1 video</span>
+            <span><span class="vid-num">1</span> video&nbsp;</span>
             <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
           </div>
         </div>
@@ -930,7 +937,7 @@
         <div class="session-header" onclick="this.parentElement.classList.toggle('open')">
           <h3>Scenario 4 — From Script to Screen: Preparing the Townhall Video</h3>
           <div class="session-meta">
-            <span>1 video</span>
+            <span><span class="vid-num">1</span> video&nbsp;</span>
             <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
           </div>
         </div>
@@ -976,20 +983,19 @@
 
       <!-- Tools and Technologies -->
       <div class="project-section fade-in" style="margin-top: 48px;">
-        <h2>Tools and Technologies</h2>
+        <h2>Tools and Methodologies</h2>
         <ul>
-          <li>Power BI Desktop — data importing, table relationships, DAX measures, report design, decomposition trees, tooltips, navigators</li>
-          <li>Power BI Service — workspace management, semantic models, scheduled refresh, cloud publishing, row-level security enforcement</li>
-          <li>Power Query Editor — basic and advanced data transformations, data cleaning automation, M language</li>
-          <li>Power Automate — approval flows, scheduled triggers, automated data pipelines</li>
-          <li>Microsoft 365 — SharePoint, Teams, OneDrive, Forms, Planner, Whiteboard, Clipchamp</li>
-          <li>Testportal — quiz administration, automated scoring, performance tracking</li>
-          <li>Hybrid training delivery — on-site workshops and virtual sessions</li>
+          <li>Power BI Desktop & Service — DAX, data modeling, row-level security, semantic models, scheduled refresh, cloud publishing</li>
+          <li>Power Query — data transformations, cleaning automation, M language</li>
+          <li>Power Automate — approval workflows, scheduled triggers, automated pipelines</li>
+          <li>Microsoft 365 — SharePoint, OneDrive, Teams, Planner, Whiteboard, Clipchamp</li>
+          <li>Curriculum Design — independently built an 8-session progressive structure with cumulative practice sets on real HR datasets</li>
+          <li>Hybrid Delivery & Gamification — self-paced video lectures, weekly workshops, Teams Q&A community, and competitive prize system</li>
         </ul>
       </div>
 
       <div style="margin-top: 40px;" class="fade-in">
-        <a href="projects.html" class="btn">
+        <a href="projects" class="btn">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
           All Projects
         </a>
