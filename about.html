@@ -32,10 +32,18 @@
     </button>
   </nav>
 
+  <!-- Side nav dots -->
+  <div class="side-nav" id="side-nav">
+    <a href="#about" class="side-dot active" data-section="about"><span class="side-tooltip">About</span></a>
+    <a href="#education" class="side-dot" data-section="education"><span class="side-tooltip">Education</span></a>
+    <a href="#skills-detail" class="side-dot" data-section="skills-detail"><span class="side-tooltip">Skills</span></a>
+    <a href="#more" class="side-dot" data-section="more"><span class="side-tooltip">More</span></a>
+  </div>
+
   <div class="page-container snap-page">
 
     <!-- About Section -->
-    <section class="section about-section">
+    <section class="section about-section" id="about">
       <div class="section-label fade-in">About Me</div>
 
       <!-- Photo + bio hero -->
@@ -57,130 +65,16 @@
 
           <!-- 4x2 skill domain grid -->
           <div class="about-domains anim-slide-up anim-d4">
-            <span class="domain-tag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/></svg>Programming</span>
-            <span class="domain-tag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a4 4 0 014 4c0 1.95-2 4-4 6-2-2-4-4.05-4-6a4 4 0 014-4z"/><path d="M4.93 13.5C2.6 14.5 1 16.1 1 18c0 3 5 5.5 11 5.5s11-2.5 11-5.5c0-1.9-1.6-3.5-3.93-4.5"/></svg>AI & ML</span>
-            <span class="domain-tag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>BI & Analytics</span>
-            <span class="domain-tag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 10h-4V6"/><path d="M14 10l7.5-7.5"/><circle cx="12" cy="12" r="10"/></svg>Cloud</span>
-            <span class="domain-tag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>Databases</span>
-            <span class="domain-tag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 1v2m0 18v2m8.66-17.66l-1.42 1.42M4.76 19.24l-1.42 1.42M23 12h-2M3 12H1m17.66 8.66l-1.42-1.42M4.76 4.76L3.34 3.34"/></svg>Systems</span>
-            <span class="domain-tag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>Marketing</span>
-            <span class="domain-tag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>Web & Design</span>
+            <a class="domain-tag" data-domain="code" href="#skills-detail"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/></svg>Programming<span class="domain-particles"></span></a>
+            <a class="domain-tag" data-domain="ai" href="#skills-detail"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a4 4 0 014 4c0 1.95-2 4-4 6-2-2-4-4.05-4-6a4 4 0 014-4z"/><path d="M4.93 13.5C2.6 14.5 1 16.1 1 18c0 3 5 5.5 11 5.5s11-2.5 11-5.5c0-1.9-1.6-3.5-3.93-4.5"/></svg>AI & ML<span class="domain-particles"></span></a>
+            <a class="domain-tag" data-domain="bi" href="#skills-detail"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>BI & Analytics<span class="domain-particles"></span></a>
+            <a class="domain-tag" data-domain="cloud" href="#skills-detail"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 10h-4V6"/><path d="M14 10l7.5-7.5"/><circle cx="12" cy="12" r="10"/></svg>Cloud<span class="domain-particles"></span></a>
+            <a class="domain-tag" data-domain="db" href="#skills-detail"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>Databases<span class="domain-particles"></span></a>
+            <a class="domain-tag" data-domain="sys" href="#skills-detail"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 1v2m0 18v2m8.66-17.66l-1.42 1.42M4.76 19.24l-1.42 1.42M23 12h-2M3 12H1m17.66 8.66l-1.42-1.42M4.76 4.76L3.34 3.34"/></svg>Systems<span class="domain-particles"></span></a>
+            <a class="domain-tag" data-domain="mkt" href="#skills-detail"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>Marketing<span class="domain-particles"></span></a>
+            <a class="domain-tag" data-domain="web" href="#skills-detail"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>Web & Design<span class="domain-particles"></span></a>
           </div>
         </div>
-      </div>
-
-      <div class="snap-arrow">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
-      </div>
-    </section>
-
-    <!-- Detailed Skills Section -->
-    <section class="section" id="skills-detail">
-      <div class="section-label fade-in">Skills</div>
-
-      <div class="skills-grid fade-in fade-in-delay-1">
-
-        <div class="card skill-category">
-          <h3>Programming & Data Science</h3>
-          <div class="skill-items">
-            <span class="tag">Python</span>
-            <span class="tag">R</span>
-            <span class="tag">SQL</span>
-            <span class="tag">Pandas</span>
-            <span class="tag">NumPy</span>
-            <span class="tag">Matplotlib</span>
-            <span class="tag">Plotly</span>
-          </div>
-        </div>
-
-        <div class="card skill-category">
-          <h3>Artificial Intelligence & ML</h3>
-          <div class="skill-items">
-            <span class="tag">Deep Learning</span>
-            <span class="tag">Computer Vision</span>
-            <span class="tag">PyTorch</span>
-            <span class="tag">TensorFlow</span>
-            <span class="tag">Dify</span>
-          </div>
-        </div>
-
-        <div class="card skill-category">
-          <h3>Cloud Computing & Infrastructure</h3>
-          <div class="skill-items">
-            <span class="tag">MS Azure</span>
-            <span class="tag">Tencent Cloud</span>
-            <span class="tag">Docker</span>
-            <span class="tag">REST APIs</span>
-            <span class="tag">OAuth2</span>
-          </div>
-        </div>
-
-        <div class="card skill-category">
-          <h3>Database & Data Management</h3>
-          <div class="skill-items">
-            <span class="tag">PostgreSQL</span>
-            <span class="tag">MySQL</span>
-            <span class="tag">Data Modeling</span>
-            <span class="tag">Data Cleaning</span>
-            <span class="tag">Data Warehousing</span>
-          </div>
-        </div>
-
-        <div class="card skill-category">
-          <h3>Business Intelligence & Automation</h3>
-          <div class="skill-items">
-            <span class="tag">MS Power BI</span>
-            <span class="tag">Tableau</span>
-            <span class="tag">DAX</span>
-            <span class="tag">Dashboard Design</span>
-            <span class="tag">MS Power Automate</span>
-          </div>
-        </div>
-
-        <div class="card skill-category">
-          <h3>Marketing & Business Strategy</h3>
-          <div class="skill-items">
-            <span class="tag">Digital Marketing</span>
-            <span class="tag">Branding</span>
-            <span class="tag">Social Media</span>
-            <span class="tag">Market Research</span>
-          </div>
-        </div>
-
-        <div class="card skill-category">
-          <h3>Systems Design & Engineering</h3>
-          <div class="skill-items">
-            <span class="tag">CATIA Magic</span>
-            <span class="tag">SysML</span>
-            <span class="tag">MBSE</span>
-            <span class="tag">FMEA</span>
-            <span class="tag">QFD</span>
-            <span class="tag">System Architecture</span>
-          </div>
-        </div>
-
-        <div class="card skill-category">
-          <h3>Web Development & Design</h3>
-          <div class="skill-items">
-            <span class="tag">HTML</span>
-            <span class="tag">CSS</span>
-            <span class="tag">Git</span>
-            <span class="tag">UI/UX</span>
-            <span class="tag">Prototyping</span>
-            <span class="tag">Web Deployment</span>
-          </div>
-        </div>
-
-        <div class="card skill-category">
-          <h3>Design & Creative Media</h3>
-          <div class="skill-items">
-            <span class="tag">Figma</span>
-            <span class="tag">Adobe PS</span>
-            <span class="tag">Adobe Illustrator</span>
-            <span class="tag">Adobe Premiere Pro</span>
-          </div>
-        </div>
-
       </div>
 
       <div class="snap-arrow">
@@ -189,12 +83,12 @@
     </section>
 
     <!-- Education -->
-    <section class="section">
+    <section class="section" id="education">
       <div class="section-label fade-in">Education</div>
 
       <div style="display: flex; flex-direction: column; gap: 24px;">
 
-        <div class="card fade-in" style="position: relative; overflow: hidden;">
+        <div class="card fade-in edu-glow" data-university="georgetown" style="position: relative; overflow: hidden;">
           <div class="edu-watermark" style="background-image: url('assets/georgetown.png');"></div>
           <div class="edu-card">
             <div class="edu-year">2025 — 2027</div>
@@ -212,7 +106,7 @@
           </div>
         </div>
 
-        <div class="card fade-in fade-in-delay-1" style="position: relative; overflow: hidden;">
+        <div class="card fade-in fade-in-delay-1 edu-glow" data-university="cornell" style="position: relative; overflow: hidden;">
           <div class="edu-watermark" style="background-image: url('assets/cornell.png');"></div>
           <div class="edu-card">
             <div class="edu-year">2023 — 2025</div>
@@ -230,7 +124,7 @@
           </div>
         </div>
 
-        <div class="card fade-in fade-in-delay-2" style="position: relative; overflow: hidden;">
+        <div class="card fade-in fade-in-delay-2 edu-glow" data-university="gwu" style="position: relative; overflow: hidden;">
           <div class="edu-watermark" style="background-image: url('assets/gwu.png');"></div>
           <div class="edu-card">
             <div class="edu-year">2019 — 2023</div>
@@ -248,13 +142,257 @@
           </div>
         </div>
 
-
       </div>
       <div class="snap-arrow">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
       </div>
     </section>
 
+    <!-- Detailed Skills Section -->
+    <section class="section" id="skills-detail">
+      <div class="section-label fade-in">Skills</div>
+
+      <div class="skills-grid fade-in fade-in-delay-1">
+
+        <div class="card skill-category">
+          <div class="skill-watermark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/></svg></div>
+          <h3>Programming & Data Science</h3>
+          <div class="skill-items">
+            <span class="tag">Python</span>
+            <span class="tag">R</span>
+            <span class="tag">SQL</span>
+            <span class="tag">Pandas</span>
+            <span class="tag">NumPy</span>
+            <span class="tag">Matplotlib</span>
+            <span class="tag">Plotly</span>
+          </div>
+        </div>
+
+        <div class="card skill-category">
+          <div class="skill-watermark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M12 2a4 4 0 014 4c0 1.95-2 4-4 6-2-2-4-4.05-4-6a4 4 0 014-4z"/><path d="M4.93 13.5C2.6 14.5 1 16.1 1 18c0 3 5 5.5 11 5.5s11-2.5 11-5.5c0-1.9-1.6-3.5-3.93-4.5"/></svg></div>
+          <h3>Artificial Intelligence & ML</h3>
+          <div class="skill-items">
+            <span class="tag">Deep Learning</span>
+            <span class="tag">Computer Vision</span>
+            <span class="tag">PyTorch</span>
+            <span class="tag">TensorFlow</span>
+            <span class="tag">Dify</span>
+          </div>
+        </div>
+
+        <div class="card skill-category">
+          <div class="skill-watermark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M18 10h-4V6"/><path d="M14 10l7.5-7.5"/><circle cx="12" cy="12" r="10"/></svg></div>
+          <h3>Cloud Computing & Infrastructure</h3>
+          <div class="skill-items">
+            <span class="tag">MS Azure</span>
+            <span class="tag">Tencent Cloud</span>
+            <span class="tag">Docker</span>
+            <span class="tag">REST APIs</span>
+            <span class="tag">OAuth2</span>
+          </div>
+        </div>
+
+        <div class="card skill-category">
+          <div class="skill-watermark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div>
+          <h3>Database & Data Management</h3>
+          <div class="skill-items">
+            <span class="tag">PostgreSQL</span>
+            <span class="tag">MySQL</span>
+            <span class="tag">Data Modeling</span>
+            <span class="tag">Data Cleaning</span>
+            <span class="tag">Data Warehousing</span>
+          </div>
+        </div>
+
+        <div class="card skill-category">
+          <div class="skill-watermark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></div>
+          <h3>Business Intelligence & Automation</h3>
+          <div class="skill-items">
+            <span class="tag">MS Power BI</span>
+            <span class="tag">Tableau</span>
+            <span class="tag">DAX</span>
+            <span class="tag">Dashboard Design</span>
+            <span class="tag">MS Power Automate</span>
+          </div>
+        </div>
+
+        <div class="card skill-category">
+          <div class="skill-watermark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg></div>
+          <h3>Marketing & Business Strategy</h3>
+          <div class="skill-items">
+            <span class="tag">Digital Marketing</span>
+            <span class="tag">Branding</span>
+            <span class="tag">Social Media</span>
+            <span class="tag">Market Research</span>
+          </div>
+        </div>
+
+        <div class="card skill-category">
+          <div class="skill-watermark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="12" r="3"/><path d="M12 1v2m0 18v2m8.66-17.66l-1.42 1.42M4.76 19.24l-1.42 1.42M23 12h-2M3 12H1m17.66 8.66l-1.42-1.42M4.76 4.76L3.34 3.34"/></svg></div>
+          <h3>Systems Design & Engineering</h3>
+          <div class="skill-items">
+            <span class="tag">CATIA Magic</span>
+            <span class="tag">SysML</span>
+            <span class="tag">MBSE</span>
+            <span class="tag">FMEA</span>
+            <span class="tag">QFD</span>
+            <span class="tag">System Architecture</span>
+          </div>
+        </div>
+
+        <div class="card skill-category">
+          <div class="skill-watermark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg></div>
+          <h3>Web Development & Design</h3>
+          <div class="skill-items">
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">Git</span>
+            <span class="tag">UI/UX</span>
+            <span class="tag">Prototyping</span>
+            <span class="tag">Web Deployment</span>
+          </div>
+        </div>
+
+        <div class="card skill-category">
+          <div class="skill-watermark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+          <h3>Design & Creative Media</h3>
+          <div class="skill-items">
+            <span class="tag">Figma</span>
+            <span class="tag">Adobe PS</span>
+            <span class="tag">Adobe Illustrator</span>
+            <span class="tag">Adobe Premiere Pro</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="snap-arrow">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+    </section>
+
+    <!-- More Section -->
+    <section class="section" id="more">
+      <div class="section-label fade-in">More</div>
+
+      <div class="more-row fade-in fade-in-delay-1">
+
+        <!-- Left column: Soft Skills + Languages -->
+        <div class="more-left-col">
+          <!-- Soft Skills -->
+          <div class="more-block">
+            <h3 class="more-block-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+              Soft Skills
+            </h3>
+            <div class="soft-skills-list">
+              <div class="soft-skill-item soft-skill-highlight">Fast Learner</div>
+              <div class="soft-skill-item">Growth Mindset</div>
+              <div class="soft-skill-item">Responsible</div>
+              <div class="soft-skill-item">Strong Multitasker</div>
+              <div class="soft-skill-item">Detail-Oriented</div>
+              <div class="soft-skill-item">Reliable</div>
+              <div class="soft-skill-item">Well-Organized</div>
+            </div>
+          </div>
+
+          <!-- Languages -->
+          <div class="more-block">
+            <h3 class="more-block-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+              Languages
+            </h3>
+            <div class="language-list">
+              <div class="language-item">
+                <span class="language-name">Mandarin Chinese</span>
+                <span class="language-level">Native</span>
+              </div>
+              <div class="language-item">
+                <span class="language-name">English</span>
+                <span class="language-level">Fluent</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CliftonStrengths Full Grid -->
+        <div class="gallup-grid-wrap">
+        <h3 class="more-block-title" style="margin-bottom: 16px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          GALLUP CliftonStrengths 34
+        </h3>
+
+        <!-- Domain distribution bar -->
+        <div class="gallup-bar-wrap">
+          <div class="gallup-bar">
+            <div class="gallup-bar-seg" data-domain="executing" style="flex: 15;"></div>
+            <div class="gallup-bar-seg" data-domain="influencing" style="flex: 22;"></div>
+            <div class="gallup-bar-seg" data-domain="relationship" style="flex: 13;"></div>
+            <div class="gallup-bar-seg" data-domain="strategic-thinking" style="flex: 50;"></div>
+          </div>
+        </div>
+
+        <div class="gallup-domain-grid">
+
+          <!-- Executing -->
+          <div class="gallup-domain-col" data-domain="executing">
+            <div class="gallup-domain-header">Executing</div>
+            <div class="gallup-cell gallup-top" data-rank="4">Arranger</div>
+            <div class="gallup-cell gallup-top" data-rank="5">Focus</div>
+            <div class="gallup-cell gallup-top" data-rank="6">Achiever</div>
+            <div class="gallup-cell" data-rank="19">Consistency</div>
+            <div class="gallup-cell" data-rank="21">Deliberative</div>
+            <div class="gallup-cell" data-rank="23">Restorative</div>
+            <div class="gallup-cell" data-rank="24">Belief</div>
+            <div class="gallup-cell" data-rank="25">Responsibility</div>
+            <div class="gallup-cell" data-rank="26">Discipline</div>
+          </div>
+
+          <!-- Influencing -->
+          <div class="gallup-domain-col" data-domain="influencing">
+            <div class="gallup-domain-header">Influencing</div>
+            <div class="gallup-cell gallup-top" data-rank="2">Activator</div>
+            <div class="gallup-cell gallup-top" data-rank="9">Self-Assurance</div>
+            <div class="gallup-cell" data-rank="11">Competition</div>
+            <div class="gallup-cell" data-rank="13">Command</div>
+            <div class="gallup-cell" data-rank="15">Significance</div>
+            <div class="gallup-cell" data-rank="18">Maximizer</div>
+            <div class="gallup-cell" data-rank="20">Communication</div>
+            <div class="gallup-cell" data-rank="30">Woo</div>
+          </div>
+
+          <!-- Relationship Building -->
+          <div class="gallup-domain-col" data-domain="relationship">
+            <div class="gallup-domain-header">Relationship Building</div>
+            <div class="gallup-cell" data-rank="14">Includer</div>
+            <div class="gallup-cell" data-rank="16">Individualization</div>
+            <div class="gallup-cell" data-rank="22">Connectedness</div>
+            <div class="gallup-cell" data-rank="27">Empathy</div>
+            <div class="gallup-cell" data-rank="28">Positivity</div>
+            <div class="gallup-cell" data-rank="29">Developer</div>
+            <div class="gallup-cell" data-rank="31">Harmony</div>
+            <div class="gallup-cell" data-rank="32">Adaptability</div>
+            <div class="gallup-cell" data-rank="34">Relator</div>
+          </div>
+
+          <!-- Strategic Thinking -->
+          <div class="gallup-domain-col" data-domain="strategic-thinking">
+            <div class="gallup-domain-header">Strategic Thinking</div>
+            <div class="gallup-cell gallup-top" data-rank="1">Futuristic</div>
+            <div class="gallup-cell gallup-top" data-rank="3">Learner</div>
+            <div class="gallup-cell gallup-top" data-rank="7">Analytical</div>
+            <div class="gallup-cell gallup-top" data-rank="8">Strategic</div>
+            <div class="gallup-cell gallup-top" data-rank="10">Input</div>
+            <div class="gallup-cell" data-rank="12">Ideation</div>
+            <div class="gallup-cell" data-rank="17">Intellection</div>
+            <div class="gallup-cell" data-rank="33">Context</div>
+          </div>
+
+        </div>
+      </div>
+
+      </div>
+    </section>
 
     <footer class="footer">
       <p class="footer-main">Designed & Built by Yixuan He</p>
@@ -291,14 +429,67 @@
         });
       }, { threshold: 0.15 });
       domainObserver.observe(domainContainer);
-
-      domainContainer.querySelectorAll('.domain-tag').forEach(function(tag) {
-        var accent = tag.getAttribute('data-accent');
-        tag.style.setProperty('--tag-accent', accent);
-      });
     }
 
-    // Skill detail cards stagger
+    // Unique hover particle animations per domain
+    var particleData = {
+      code:  ['{ }', '< />', 'fn()', '0x', '&&', '[]', '==', '++', '//', '=>'],
+      ai:    ['\\u03B8', '\\u2211', '\\u2207', 'GPU', 'W\\u2093', '\\u03BB', 'ReLU', '0.97', 'f(x)', '\\u0302y'],
+      bi:    ['\\u2191', 'KPI', '%', 'AVG', '\\u0394', '$', '\\u2193', 'Q4', 'ROI', 'SUM'],
+      cloud: ['\\u2601', 'VM', 'S3', 'pod', 'API', '\\u21C4', 'ssh', '443', 'DNS', 'GET'],
+      db:    ['SELECT', 'JOIN', 'NULL', 'INT', 'KEY', 'idx', 'row', 'INSERT', 'WHERE', 'VIEW'],
+      sys:   ['\\u2699', 'SysML', 'req', 'v1.2', 'FMEA', '\\u25A1', '\\u2192', 'spec', 'QFD', 'arch'],
+      mkt:   ['CTR', 'SEO', 'CPC', 'ROI', 'A/B', 'CAC', 'NPS', 'funnel', 'reach', 'CPM'],
+      web:   ['<h1>', 'CSS', '.jsx', 'DOM', 'flex', 'git', 'npm', 'px', 'RGB', '://']
+    };
+
+    // Decode unicode escapes
+    Object.keys(particleData).forEach(function(k) {
+      particleData[k] = particleData[k].map(function(s) {
+        return s.replace(/\\u([0-9A-Fa-f]{4})/g, function(m, hex) {
+          return String.fromCharCode(parseInt(hex, 16));
+        });
+      });
+    });
+
+    // Domain tag click -> scroll to skills
+    document.querySelectorAll('.domain-tag[href="#skills-detail"]').forEach(function(tag) {
+      tag.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById('skills-detail').scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+
+    var domainTags = document.querySelectorAll('.domain-tag[data-domain]');
+    domainTags.forEach(function(tag) {
+      var domain = tag.getAttribute('data-domain');
+      var symbols = particleData[domain] || [];
+      var container = tag.querySelector('.domain-particles');
+      var interval = null;
+
+      tag.addEventListener('mouseenter', function() {
+        if (!container || !symbols.length) return;
+        var spawnCount = 0;
+        interval = setInterval(function() {
+          if (spawnCount >= 12) { clearInterval(interval); interval = null; return; }
+          var p = document.createElement('span');
+          p.className = 'domain-particle';
+          p.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+          p.style.left = (8 + Math.random() * 84) + '%';
+          p.style.top = (50 + Math.random() * 40) + '%';
+          p.style.animationDuration = (1 + Math.random() * 0.6) + 's';
+          container.appendChild(p);
+          spawnCount++;
+          setTimeout(function() { if (p.parentNode) p.parentNode.removeChild(p); }, 1600);
+        }, 100);
+      });
+
+      tag.addEventListener('mouseleave', function() {
+        if (interval) { clearInterval(interval); interval = null; }
+      });
+    });
+
+    // Skill detail cards stagger entrance
     var skillsGrid = document.querySelector('.skills-grid');
     if (skillsGrid) {
       var cardObserver = new IntersectionObserver(function(entries) {
@@ -314,6 +505,84 @@
       }, { threshold: 0.1 });
       cardObserver.observe(skillsGrid);
     }
+
+    // Side nav active tracking
+    var sideDots = document.querySelectorAll('.side-dot');
+    var sections = ['about', 'education', 'skills-detail', 'more'];
+    var pageContainer = document.querySelector('.page-container');
+
+    function updateSideNav() {
+      var scrollTop = pageContainer.scrollTop;
+      var viewH = pageContainer.clientHeight;
+      var activeId = sections[0];
+
+      sections.forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el) {
+          var top = el.offsetTop - pageContainer.offsetTop;
+          if (scrollTop + viewH / 3 >= top) activeId = id;
+        }
+      });
+
+      sideDots.forEach(function(dot) {
+        dot.classList.toggle('active', dot.getAttribute('data-section') === activeId);
+      });
+    }
+
+    pageContainer.addEventListener('scroll', updateSideNav);
+    updateSideNav();
+
+    // Smooth scroll on dot click
+    sideDots.forEach(function(dot) {
+      dot.addEventListener('click', function(e) {
+        e.preventDefault();
+        var id = dot.getAttribute('data-section');
+        var target = document.getElementById(id);
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+
+    // Education glow — set CSS custom properties per university
+    var uniGlowColors = {
+      georgetown: { primary: '#041E42', secondary: '#63666A' },
+      cornell:    { primary: '#B31B1B', secondary: '#D43D3D' },
+      gwu:        { primary: '#033C5A', secondary: '#AA9868' }
+    };
+
+    document.querySelectorAll('[data-university]').forEach(function(card) {
+      var uni = card.getAttribute('data-university');
+      var c = uniGlowColors[uni];
+      if (c) {
+        card.style.setProperty('--uni-primary', c.primary);
+        card.style.setProperty('--uni-secondary', c.secondary);
+      }
+    });
+
+    // Blue sparks around Fast Learner highlight pill
+    var highlightEl = document.querySelector('.soft-skill-highlight');
+    if (highlightEl) {
+      highlightEl.style.overflow = 'visible';
+      function spawnSpark() {
+        var spark = document.createElement('span');
+        spark.className = 'spark-particle';
+        var side = Math.floor(Math.random() * 4);
+        var pos = Math.random() * 100;
+        if (side === 0) { spark.style.left = pos + '%'; spark.style.top = '-2px'; }
+        else if (side === 1) { spark.style.left = pos + '%'; spark.style.bottom = '-2px'; spark.style.top = 'auto'; }
+        else if (side === 2) { spark.style.top = pos + '%'; spark.style.left = '-2px'; }
+        else { spark.style.top = pos + '%'; spark.style.right = '-2px'; spark.style.left = 'auto'; }
+        var dx = (Math.random() - 0.5) * 24;
+        var dy = (Math.random() - 0.5) * 24;
+        spark.style.setProperty('--dx', dx + 'px');
+        spark.style.setProperty('--dy', dy + 'px');
+        highlightEl.appendChild(spark);
+        setTimeout(function() { spark.remove(); }, 800);
+      }
+      setInterval(spawnSpark, 300);
+      setInterval(spawnSpark, 500);
+    }
+
+
   })();
   </script>
 </body>

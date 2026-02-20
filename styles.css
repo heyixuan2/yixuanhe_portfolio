@@ -570,6 +570,28 @@ img {
   50% { transform: translateX(-50%) translateY(6px); }
 }
 
+.snap-arrow-up {
+  position: absolute;
+  top: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0.5;
+  color: var(--text-secondary);
+  animation: arrowBounceUp 1.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.snap-arrow-up svg {
+  width: 28px;
+  height: 28px;
+  stroke-width: 2;
+}
+
+@keyframes arrowBounceUp {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-6px); }
+}
+
 /* --- Section Base --- */
 .section {
   padding: 100px 40px;
@@ -935,6 +957,45 @@ img {
   background: #e0e0e0;
 }
 
+/* Side nav dots */
+.side-nav {
+  position: fixed;
+  left: 28px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  z-index: 100;
+}
+
+.side-dot {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1.5px solid var(--text-muted);
+  background: transparent;
+  cursor: pointer;
+  transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+  text-decoration: none;
+}
+
+.side-dot.active {
+  border-color: var(--accent-blue);
+  background: var(--accent-blue);
+  transform: scale(1.25);
+}
+
+.side-dot:hover {
+  border-color: var(--accent-blue);
+}
+
+.side-tooltip {
+  display: none;
+}
+
 /* --- About Page --- */
 .about-section {
   justify-content: center !important;
@@ -1058,6 +1119,7 @@ img {
 }
 
 .domain-tag {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1066,6 +1128,8 @@ img {
   font-size: 0.78rem;
   font-weight: 500;
   color: var(--text-secondary);
+  text-decoration: none;
+  cursor: pointer;
   background: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: 8px;
@@ -1073,6 +1137,32 @@ img {
   transform: translateY(8px);
   transition: opacity 0.3s ease, transform 0.3s ease, border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
   white-space: nowrap;
+  overflow: hidden;
+}
+
+.domain-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.domain-particle {
+  position: absolute;
+  font-size: 10px;
+  line-height: 1;
+  opacity: 0;
+  pointer-events: none;
+  color: var(--accent-blue);
+  font-family: var(--font-mono);
+  animation: domainFloat 1.4s ease-out forwards;
+}
+
+@keyframes domainFloat {
+  0% { opacity: 0; transform: translateY(0) scale(0.5); }
+  15% { opacity: 0.7; transform: translateY(-2px) scale(1); }
+  100% { opacity: 0; transform: translateY(-28px) scale(0.6); }
 }
 
 .domain-tag.domain-visible {
@@ -1118,8 +1208,8 @@ img {
 /* Skill detail cards entrance */
 #skills-detail .skill-category {
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.4s ease, transform 0.4s ease;
+  transform: translateY(20px) scale(0.97);
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 #skills-detail .skill-category.card-visible {
@@ -1144,8 +1234,13 @@ img {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  opacity: 0.18;
+  opacity: 0.15;
   pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.edu-glow:hover .edu-watermark {
+  opacity: 1;
 }
 
 .edu-year {
@@ -1174,6 +1269,25 @@ img {
   color: var(--text-muted);
 }
 
+/* Education glow aura */
+.edu-glow {
+  --uni-primary: var(--accent-blue);
+  --uni-secondary: var(--accent-blue);
+  transition: border-color 0.4s ease,
+              box-shadow 0.4s ease,
+              background 0.3s ease;
+}
+
+.edu-glow:hover {
+  border-color: var(--uni-primary);
+  box-shadow:
+    0 0 10px color-mix(in srgb, var(--uni-primary) 25%, transparent),
+    0 0 22px color-mix(in srgb, var(--uni-primary) 15%, transparent),
+    0 0 40px color-mix(in srgb, var(--uni-secondary) 8%, transparent),
+    inset 0 0 12px color-mix(in srgb, var(--uni-primary) 4%, transparent);
+}
+
+
 /* Skills section */
 .skills-grid {
   display: grid;
@@ -1181,21 +1295,328 @@ img {
   gap: 16px;
 }
 
+.skill-category {
+  position: relative;
+  overflow: hidden;
+}
+
+.skill-category:hover {
+  transform: none;
+}
+
+/* Watermark icon */
+.skill-watermark {
+  position: absolute;
+  right: -8px;
+  bottom: -8px;
+  width: 80px;
+  height: 80px;
+  color: var(--accent-blue);
+  opacity: 0.06;
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.skill-watermark svg {
+  width: 100%;
+  height: 100%;
+}
+
+.skill-category:hover .skill-watermark {
+  opacity: 0.12;
+  transform: scale(1.1) rotate(-4deg);
+}
+
+/* Top accent bar */
+.skill-category::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--accent-blue);
+  opacity: 0;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.skill-category:hover::after {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
 .skill-category h3 {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--text-primary);
-  margin-bottom: 14px;
-  padding-bottom: 8px;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
   border-bottom: 1px solid var(--border-color);
+  position: relative;
 }
 
 .skill-items {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  position: relative;
+}
+
+.skill-category .tag {
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+
+.skill-category:hover .tag {
+  border-color: color-mix(in srgb, var(--accent-blue) 30%, var(--border-color));
+}
+
+.skill-category .tag:hover {
+  background: color-mix(in srgb, var(--accent-blue) 8%, var(--bg-card));
+  border-color: var(--accent-blue);
+  color: var(--text-primary);
+  transform: translateY(-1px);
+}
+
+/* More section */
+.more-row {
+  display: flex;
+  gap: 20px;
+  align-items: stretch;
+}
+
+.more-left-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.more-left-col .more-block:last-child {
+  flex: 1;
+}
+
+.more-block {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+/* Language styles */
+.language-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.language-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.language-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.language-name {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.language-level {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-secondary);
+}
+
+.more-block-title {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.more-block-title svg {
+  color: var(--accent-blue);
+  flex-shrink: 0;
+}
+
+/* Soft Skills */
+.soft-skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.soft-skill-item {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  transition: border-color 0.3s ease, color 0.3s ease, background 0.3s ease;
+}
+
+.soft-skill-item:hover {
+  border-color: var(--accent-blue);
+  color: var(--text-primary);
+  background: color-mix(in srgb, var(--accent-blue) 5%, var(--bg-card));
+}
+
+.soft-skill-highlight {
+  border-color: var(--accent-blue);
+  color: var(--accent-blue);
+  font-weight: 600;
+  background: transparent;
+  position: relative;
+  animation: gentle-shake 3s ease-in-out infinite;
+}
+
+.soft-skill-highlight::before {
+  content: none;
+}
+
+.spark-particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--accent-blue);
+  box-shadow: 0 0 4px var(--accent-blue), 0 0 8px var(--accent-blue);
+  pointer-events: none;
+  animation: spark-fly 0.8s ease-out forwards;
+  opacity: 1;
+}
+
+@keyframes spark-fly {
+  0% { transform: translate(0, 0) scale(1); opacity: 1; }
+  100% { transform: translate(var(--dx), var(--dy)) scale(0); opacity: 0; }
+}
+
+@keyframes gentle-shake {
+  0%, 100% { transform: translateX(0); }
+  15% { transform: translateX(-1.5px) rotate(-0.5deg); }
+  30% { transform: translateX(1.5px) rotate(0.5deg); }
+  45% { transform: translateX(-1px) rotate(-0.3deg); }
+  60% { transform: translateX(1px) rotate(0.3deg); }
+  75% { transform: translateX(0); }
+}
+
+/* CliftonStrengths 34 Grid */
+.gallup-grid-wrap {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 20px;
+  flex: 2;
+}
+
+/* Gallup domain distribution bar */
+.gallup-bar-wrap {
+  margin-bottom: 14px;
+}
+
+.gallup-bar {
+  display: flex;
+  height: 10px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.gallup-bar-seg {
+  transition: opacity 0.3s ease;
+}
+
+.gallup-bar-seg[data-domain="strategic-thinking"] { background: #3A874F; }
+.gallup-bar-seg[data-domain="executing"]          { background: #7B4FA0; }
+.gallup-bar-seg[data-domain="influencing"]        { background: #D47B2A; }
+.gallup-bar-seg[data-domain="relationship"]       { background: #2A7AB5; }
+
+.gallup-domain-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+/* Domain colors */
+.gallup-domain-col[data-domain="executing"]          { --gallup-color: #7B4FA0; }
+.gallup-domain-col[data-domain="influencing"]        { --gallup-color: #D47B2A; }
+.gallup-domain-col[data-domain="relationship"]       { --gallup-color: #2A7AB5; }
+.gallup-domain-col[data-domain="strategic-thinking"] { --gallup-color: #3A874F; }
+
+.gallup-domain-header {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gallup-color);
+  padding-bottom: 6px;
+  margin-bottom: 10px;
+  border-bottom: 2px solid var(--gallup-color);
+}
+
+.gallup-cell {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 7px 6px;
+  margin-bottom: 3px;
+  border-radius: 4px;
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  transition: background 0.2s ease;
+  line-height: 1.2;
+}
+
+.gallup-cell::before {
+  content: attr(data-rank);
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  min-width: 18px;
+  text-align: right;
+  color: var(--text-muted);
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+
+.gallup-cell:hover {
+  background: color-mix(in srgb, var(--gallup-color) 8%, var(--bg-card));
+}
+
+/* Top 10 strengths — highlighted */
+.gallup-cell.gallup-top {
+  color: var(--text-primary);
+  font-weight: 500;
+  background: color-mix(in srgb, var(--gallup-color) 8%, var(--bg-card));
+  border-left: 2px solid var(--gallup-color);
+}
+
+.gallup-cell.gallup-top::before {
+  color: var(--gallup-color);
+  font-weight: 600;
+  opacity: 1;
+}
+
+.gallup-cell.gallup-top:hover {
+  background: color-mix(in srgb, var(--gallup-color) 14%, var(--bg-card));
 }
 
 /* --- Filter Tabs --- */
@@ -1965,6 +2386,7 @@ body.page-loaded {
 }
 
 @media (max-width: 768px) {
+  .side-nav { display: none; }
   #neural-bg { display: none; }
   .edu-sep { display: none; }
   .edu-name { display: block; }
@@ -2066,6 +2488,7 @@ body.page-loaded {
 
   /* Hide snap arrows on mobile */
   .snap-arrow { display: none; }
+  .snap-arrow-up { display: none; }
 
   /* Filter tabs mobile */
   .filter-tabs {
@@ -2079,6 +2502,10 @@ body.page-loaded {
 
   /* Skills grid to 1 column */
   .skills-grid { grid-template-columns: 1fr; }
+
+  /* More section responsive */
+  .more-row { flex-direction: column; }
+  .gallup-domain-grid { grid-template-columns: repeat(2, 1fr); }
 
   /* Reduce edu watermark on mobile */
   .edu-watermark {

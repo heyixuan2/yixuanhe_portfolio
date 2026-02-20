@@ -439,7 +439,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================
   // 4. 3D CARD TILT EFFECT
   // ==========================================
-  const tiltCards = document.querySelectorAll('.card, .cert-card');
+  const tiltCards = document.querySelectorAll('.card:not(.skill-category):not(.edu-glow), .cert-card');
   tiltCards.forEach(card => {
     card.addEventListener('mousemove', (e) => {
       const rect = card.getBoundingClientRect();
