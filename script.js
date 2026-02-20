@@ -417,8 +417,8 @@ document.addEventListener('DOMContentLoaded', () => {
     gridObserver.observe(grid);
   });
 
-  // Timeline progressive reveal
-  const timelineItems = document.querySelectorAll('.timeline-item');
+  // Timeline progressive reveal (old vertical — kept as fallback)
+  const timelineItems = document.querySelectorAll('.timeline-item, .timeline-group');
   timelineItems.forEach((item, i) => {
     item.style.opacity = '0';
     item.style.transform = 'translateX(-20px)';
@@ -435,6 +435,125 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { threshold: 0.2 });
     tlObserver.observe(item);
   });
+
+  // ==========================================
+  // HORIZONTAL TIMELINE (Experience Page)
+  // ==========================================
+  (function() {
+    var htlScroll = document.querySelector('.htl-scroll');
+    if (!htlScroll) return;
+
+    var slides = document.querySelectorAll('.htl-slide');
+    var dots = document.querySelectorAll('.htl-dot');
+    var prevBtn = document.querySelector('.htl-nav-prev');
+    var nextBtn = document.querySelector('.htl-nav-next');
+    var progressFill = document.querySelector('.htl-progress-fill');
+    var counterCurrent = document.querySelector('.htl-counter-current');
+    var totalSlides = slides.length;
+    var currentIndex = 0;
+    var isScrolling = false;
+    var scrollTimeout;
+
+    // Set first slide active
+    if (slides[0]) slides[0].classList.add('htl-slide-active');
+
+    function updateState(index) {
+      currentIndex = index;
+      slides.forEach(function(s, i) {
+        s.classList.toggle('htl-slide-active', i === index);
+      });
+      dots.forEach(function(d, i) {
+        d.classList.toggle('htl-dot-active', i === index);
+      });
+      if (counterCurrent) counterCurrent.textContent = index + 1;
+      if (progressFill) {
+        progressFill.style.width = ((index + 1) / totalSlides * 100) + '%';
+      }
+    }
+
+    function scrollToSlide(index) {
+      if (index < 0 || index >= totalSlides || isScrolling) return;
+      isScrolling = true;
+      programmaticScroll = true;
+      var target = slides[index];
+      htlScroll.scrollTo({ left: target.offsetLeft, behavior: 'smooth' });
+      updateState(index);
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(function() {
+        isScrolling = false;
+        programmaticScroll = false;
+      }, 1200);
+    }
+
+    // IntersectionObserver to detect active slide on native touch/swipe (not programmatic)
+    var programmaticScroll = false;
+    var observer = new IntersectionObserver(function(entries) {
+      if (programmaticScroll) return;
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+          var idx = parseInt(entry.target.getAttribute('data-slide'));
+          if (!isNaN(idx)) updateState(idx);
+        }
+      });
+    }, { root: htlScroll, threshold: 0.5 });
+    slides.forEach(function(s) { observer.observe(s); });
+
+    // Nav buttons
+    if (prevBtn) prevBtn.addEventListener('click', function() { scrollToSlide(currentIndex - 1); });
+    if (nextBtn) nextBtn.addEventListener('click', function() { scrollToSlide(currentIndex + 1); });
+
+    // Dot click
+    dots.forEach(function(dot) {
+      dot.addEventListener('click', function() {
+        var idx = parseInt(dot.getAttribute('data-slide'));
+        if (!isNaN(idx)) scrollToSlide(idx);
+      });
+    });
+
+    // Keyboard
+    document.addEventListener('keydown', function(e) {
+      if (!document.querySelector('.htl-container')) return;
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+        e.preventDefault();
+        scrollToSlide(currentIndex + 1);
+      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        scrollToSlide(currentIndex - 1);
+      }
+    });
+
+    // Mouse wheel → horizontal scroll (with accumulated delta for trackpad)
+    var wheelAccum = 0;
+    var wheelTimer = null;
+    var WHEEL_THRESHOLD = 50;
+    htlScroll.addEventListener('wheel', function(e) {
+      e.preventDefault();
+      if (isScrolling) return;
+      wheelAccum += (e.deltaY || e.deltaX);
+      clearTimeout(wheelTimer);
+      wheelTimer = setTimeout(function() { wheelAccum = 0; }, 200);
+      if (wheelAccum > WHEEL_THRESHOLD) {
+        wheelAccum = 0;
+        scrollToSlide(currentIndex + 1);
+      } else if (wheelAccum < -WHEEL_THRESHOLD) {
+        wheelAccum = 0;
+        scrollToSlide(currentIndex - 1);
+      }
+    }, { passive: false });
+
+    // Mercedes tab controller
+    var tabs = document.querySelectorAll('.htl-tab');
+    var tabContents = document.querySelectorAll('.htl-tab-content');
+    tabs.forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        tabs.forEach(function(t) { t.classList.remove('htl-tab-active'); });
+        tabContents.forEach(function(c) { c.classList.remove('htl-tab-content-active'); });
+        tab.classList.add('htl-tab-active');
+        var target = document.getElementById(tab.getAttribute('data-tab'));
+        if (target) target.classList.add('htl-tab-content-active');
+      });
+    });
+  })();
 
   // ==========================================
   // 4. 3D CARD TILT EFFECT

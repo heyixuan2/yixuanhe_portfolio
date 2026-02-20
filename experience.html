@@ -32,70 +32,105 @@
     </button>
   </nav>
 
-  <div class="page-container">
+  <!-- Horizontal Timeline -->
+  <div class="htl-container">
 
-    <section class="section">
-      <div class="section-label fade-in">Experience</div>
+    <!-- Progress bar -->
+    <div class="htl-progress"><div class="htl-progress-fill"></div></div>
 
-      <div class="timeline fade-in fade-in-delay-2">
+    <!-- Slide counter -->
+    <div class="htl-counter">
+      <span class="htl-counter-current">1</span>
+      <span class="htl-counter-sep">/</span>
+      <span class="htl-counter-total">4</span>
+    </div>
 
-        <!-- Mercedes-Benz AI -->
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-date">JUL 2025 — SEP 2025</div>
-          <div class="timeline-company">Mercedes-Benz</div>
-          <div class="timeline-role">People Analytics & Artificial Intelligence Intern</div>
-          <div class="timeline-location">Beijing, China</div>
-          <ul class="timeline-details">
-            <li>Built an AI-powered CV screening pipeline using Dify that automated candidate scoring end-to-end, cutting manual screening time by 80%.</li>
-            <li>Deployed API integrations across cloud infrastructures and Dify with OAuth2 authentication, enabling real-time AI-enhanced requisition dashboards.</li>
-            <li>Created M365 training programs focused on MS Power Platforms, adopted by 140+ HR professionals, accelerating digital adoption across MB HR operations.</li>
-          </ul>
-          <div class="tags" style="margin-top: 16px;">
-            <span class="tag">Dify AI</span>
-            <span class="tag">MS Azure</span>
-            <span class="tag">Python</span>
-            <span class="tag">MS Power Platform</span>
-            <span class="tag">Gen AI Application</span>
+    <!-- Nav arrows -->
+    <div class="htl-nav">
+      <button class="htl-nav-btn htl-nav-prev" aria-label="Previous">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <button class="htl-nav-btn htl-nav-next" aria-label="Next">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+
+    <!-- Scrollable slides -->
+    <div class="htl-scroll">
+
+      <!-- Slide 1: Mercedes-Benz -->
+      <div class="htl-slide" data-slide="0" data-company="mercedes">
+        <div class="htl-slide-bg">
+          <img src="assets/company_logo/mercedes.png" alt="" draggable="false">
+        </div>
+        <div class="htl-slide-content">
+          <div class="htl-slide-header">
+            <div class="htl-slide-date">JUN 2024 — SEP 2025</div>
+            <h2 class="htl-slide-company">Mercedes-Benz</h2>
+            <div class="htl-slide-location">Beijing, China</div>
+          </div>
+
+          <div class="htl-tabs">
+            <button class="htl-tab htl-tab-active" data-tab="mb-ai">AI & People Analytics</button>
+            <button class="htl-tab" data-tab="mb-dt">Digital Transformation</button>
+          </div>
+
+          <div class="htl-tab-content htl-tab-content-active" id="mb-ai">
+            <div class="htl-role">People Analytics & Artificial Intelligence Intern</div>
+            <div class="htl-role-date">JUL 2025 — SEP 2025</div>
+            <ul class="htl-details">
+              <li>Built an AI-powered CV screening pipeline using Dify that automated candidate scoring end-to-end, cutting manual screening time by 80%.</li>
+              <li>Deployed API integrations across cloud infrastructures and Dify with OAuth2 authentication, enabling real-time AI-enhanced requisition dashboards.</li>
+              <li>Created M365 training programs focused on MS Power Platforms, adopted by 140+ HR professionals, accelerating digital adoption across MB HR operations.</li>
+            </ul>
+            <div class="tags">
+              <span class="tag">Dify AI</span>
+              <span class="tag">MS Azure</span>
+              <span class="tag">Python</span>
+              <span class="tag">MS Power Platform</span>
+              <span class="tag">Gen AI Application</span>
+            </div>
+          </div>
+
+          <div class="htl-tab-content" id="mb-dt">
+            <div class="htl-role">Data Analytics & Digital Transformation Intern</div>
+            <div class="htl-role-date">JUN 2024 — DEC 2024</div>
+            <ul class="htl-details">
+              <li>Designed and delivered a mandatory Power BI training program for HR across MB Greater China, covering the full Power BI pipeline, including advanced knowledge such as row-level security.</li>
+              <li>Built executive-level Power BI dashboards consolidating data from all Mercedes-Benz China entities, providing real-time insights on various HR metrics.</li>
+              <li>Assisted the MB HR Insights Project (PBI enterprise portal) by collaborating with vendors from Accenture, contributing to workspace design, and UAT.</li>
+              <li>Presented the upskilling methodology to MB Board Member Sabine Kohleisen, recognized as a high-impact contribution to MBGC digital transformation.</li>
+            </ul>
+            <div class="tags">
+              <span class="tag">MS Power BI</span>
+              <span class="tag">Data Modeling</span>
+              <span class="tag">Data Visualization</span>
+              <span class="tag">Training & Enablement</span>
+              <span class="tag">RLS</span>
+            </div>
           </div>
         </div>
+      </div>
 
-        <!-- Mercedes-Benz Digital -->
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-date">JUN 2024 — DEC 2024</div>
-          <div class="timeline-company">Mercedes-Benz</div>
-          <div class="timeline-role">Data Analytics & Digital Transformation Intern</div>
-          <div class="timeline-location">Beijing, China</div>
-          <ul class="timeline-details">
-            <li>Designed and delivered a mandatory Power BI training program for HR across MB Greater China, covering the full Power BI pipeline, including advanced knowledge such as row-level security.</li>
-            <li>Built executive-level Power BI dashboards consolidating data from all Mercedes-Benz China entities, providing real-time insights on various HR metrics.</li>
-            <li>Assisted the MB HR Insights Project (PBI enterprise portal) by collaborating with vendors from Accenture, contributing to workspace design, and UAT.</li>
-            <li>Presented the upskilling methodology to MB Board Member Sabine Kohleisen, recognized as a high-impact contribution to MBGC digital transformation.</li>
-          </ul>
-          <div class="tags" style="margin-top: 16px;">
-            <span class="tag">MS Power BI</span>
-            <span class="tag">Data Modeling</span>
-            <span class="tag">Data Visualization</span>
-            <span class="tag">Training & Enablement</span>
-            <span class="tag">RLS</span>
-          </div>
+      <!-- Slide 2: HB Diamond -->
+      <div class="htl-slide" data-slide="1" data-company="hb">
+        <div class="htl-slide-bg">
+          <img src="assets/company_logo/hb.png" alt="" draggable="false">
         </div>
-
-        <!-- HB Diamond -->
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-date">MAY 2023 — SEP 2023</div>
-          <div class="timeline-company">HB Diamond</div>
-          <div class="timeline-role">Sales & Marketing Assistant</div>
-          <div class="timeline-location">Beijing, China</div>
-          <ul class="timeline-details">
+        <div class="htl-slide-content">
+          <div class="htl-slide-header">
+            <div class="htl-slide-date">MAY 2023 — SEP 2023</div>
+            <h2 class="htl-slide-company">HB Diamond</h2>
+            <div class="htl-slide-location">Beijing, China</div>
+          </div>
+          <div class="htl-role">Sales & Marketing Assistant</div>
+          <ul class="htl-details">
             <li>Prepared legal documentation and processed colored diamonds for auction at China Guardian, handling $12M+ valuations and pricing strategies.</li>
             <li>Closed $400K+ in jewelry sales, managing end-to-end diamond customization from client communication and pricing to design coordination and delivery.</li>
             <li>Managed RedNote, Douyin, and other social media for sub-brand Lustre Diamonds, including video scripting, recording, and editing.</li>
             <li>Led trademark registration for Lustre Diamonds in China and the U.S., including successful USPTO registration of Lustre Diamond LLC.</li>
           </ul>
-          <div class="tags" style="margin-top: 16px;">
+          <div class="tags">
             <span class="tag">Sales & Marketing</span>
             <span class="tag">Social Media</span>
             <span class="tag">Branding</span>
@@ -103,21 +138,27 @@
             <span class="tag">Trademark</span>
           </div>
         </div>
+      </div>
 
-        <!-- Forbes China -->
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-date">APR 2021 — JUL 2021</div>
-          <div class="timeline-company">Forbes China</div>
-          <div class="timeline-role">Business Operation Intern</div>
-          <div class="timeline-location">Shanghai, China</div>
-          <ul class="timeline-details">
+      <!-- Slide 3: Forbes China -->
+      <div class="htl-slide" data-slide="2" data-company="forbes">
+        <div class="htl-slide-bg">
+          <img src="assets/company_logo/forbes.png" alt="" draggable="false">
+        </div>
+        <div class="htl-slide-content">
+          <div class="htl-slide-header">
+            <div class="htl-slide-date">APR 2021 — JUL 2021</div>
+            <h2 class="htl-slide-company">Forbes China</h2>
+            <div class="htl-slide-location">Shanghai, China</div>
+          </div>
+          <div class="htl-role">Business Operation Intern</div>
+          <ul class="htl-details">
             <li>Assisted with the 2021 Forbes China International Education Forum, including scriptwriting, rehearsal coordination, event flow design, and on-site operations.</li>
             <li>Conducted competitive analysis by monitoring industry events, competitor rankings, digital content, and social media activity.</li>
             <li>Researched data from hundreds of sources for Forbes magazine rankings, covering topics from luxury hospitality to real estate leadership.</li>
             <li>Planned panel sessions and focus groups with international school parents, contributing qualitative insights to 2021 Forbes Rankings of International Schools.</li>
           </ul>
-          <div class="tags" style="margin-top: 16px;">
+          <div class="tags">
             <span class="tag">Event Operations</span>
             <span class="tag">Market Research</span>
             <span class="tag">Competitive Analysis</span>
@@ -125,21 +166,27 @@
             <span class="tag">Data Research</span>
           </div>
         </div>
+      </div>
 
-        <!-- Farfetch -->
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-date">NOV 2020 — MAR 2021</div>
-          <div class="timeline-company">Farfetch</div>
-          <div class="timeline-role">Product Analytics & Operations Intern</div>
-          <div class="timeline-location">Beijing, China</div>
-          <ul class="timeline-details">
+      <!-- Slide 4: Farfetch -->
+      <div class="htl-slide" data-slide="3" data-company="farfetch">
+        <div class="htl-slide-bg">
+          <img src="assets/company_logo/farfetch.png" alt="" draggable="false">
+        </div>
+        <div class="htl-slide-content">
+          <div class="htl-slide-header">
+            <div class="htl-slide-date">NOV 2020 — MAR 2021</div>
+            <h2 class="htl-slide-company">Farfetch</h2>
+            <div class="htl-slide-location">Beijing, China</div>
+          </div>
+          <div class="htl-role">Product Analytics & Operations Intern</div>
+          <ul class="htl-details">
             <li>Built the official Curiosity China website (Farfetch B2B subsidiary) and collaborated with the UI/UX team on design feasibility and interface design in Sketch.</li>
             <li>Created monthly Tableau dashboards for Balenciaga, Stone Island, and Ducati, analyzing browsing patterns, click-through rates, and conversion metrics.</li>
             <li>Maintained the customer-facing user manual for Curiosity China's WeChat program management system, keeping docs current with feature releases.</li>
             <li>Managed Farfetch's WeChat mini program by editing homepage banners, linking SKUs to product pages, and publishing weekly content updates.</li>
           </ul>
-          <div class="tags" style="margin-top: 16px;">
+          <div class="tags">
             <span class="tag">Business Intelligence</span>
             <span class="tag">Web Development</span>
             <span class="tag">UI/UX</span>
@@ -147,13 +194,18 @@
             <span class="tag">E-commerce Operations</span>
           </div>
         </div>
-
       </div>
-    </section>
 
-    <footer class="footer">
-      <p class="footer-main">Designed & Built by Yixuan He</p>
-    </footer>
+    </div>
+
+    <!-- Dot indicators -->
+    <div class="htl-dots">
+      <button class="htl-dot htl-dot-active" data-slide="0" aria-label="Mercedes-Benz"></button>
+      <button class="htl-dot" data-slide="1" aria-label="HB Diamond"></button>
+      <button class="htl-dot" data-slide="2" aria-label="Forbes China"></button>
+      <button class="htl-dot" data-slide="3" aria-label="Farfetch"></button>
+    </div>
+
   </div>
 
   <script src="script.js"></script>

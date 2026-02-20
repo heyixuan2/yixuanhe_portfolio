@@ -1786,95 +1786,366 @@ img {
   font-size: 0.75rem;
 }
 
-/* --- Experience Page --- */
-.timeline {
-  position: relative;
-  padding-left: 40px;
-}
-
-.timeline::before {
-  content: '';
-  position: absolute;
-  left: 0;
+/* --- Experience Page: Horizontal Timeline --- */
+.htl-container {
+  position: fixed;
   top: 0;
-  bottom: 0;
-  width: 1px;
-  background: linear-gradient(180deg, var(--border-color), var(--border-accent), var(--border-color));
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 1;
 }
 
-.timeline-item {
+.htl-scroll {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.htl-scroll::-webkit-scrollbar { display: none; }
+
+/* --- Slide --- */
+.htl-slide {
+  flex: 0 0 100vw;
+  height: 100vh;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
   position: relative;
-  padding-bottom: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 100px 80px 80px 120px;
+  overflow: hidden;
 }
 
-.timeline-item:last-child {
-  padding-bottom: 0;
-}
-
-.timeline-dot {
+/* --- Background Logo --- */
+.htl-slide-bg {
   position: absolute;
-  left: -44px;
-  top: 6px;
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: var(--bg-primary);
-  border: 2px solid var(--text-muted);
-  transition: all var(--transition-fast);
+  right: 5%;
+  top: 50%;
+  transform: translateY(-50%) scale(0.95);
+  width: 500px;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.04;
+  pointer-events: none;
+  filter: grayscale(1);
+  transition: opacity 1s ease, transform 1s ease, filter 1s ease;
+  z-index: 0;
+}
+.htl-slide-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.htl-slide.htl-slide-active .htl-slide-bg {
+  opacity: 0.1;
+  transform: translateY(-50%) scale(1);
+  filter: grayscale(0.4);
 }
 
-.timeline-item:hover .timeline-dot {
-  border-color: #111;
-  box-shadow: 0 0 10px rgba(0,0,0,0.15);
+html.dark-theme .htl-slide-bg {
+  filter: grayscale(1) invert(1) brightness(1.5);
+  opacity: 0.03;
+}
+html.dark-theme .htl-slide.htl-slide-active .htl-slide-bg {
+  opacity: 0.08;
+  filter: grayscale(0.4) invert(1) brightness(1.3);
 }
 
-.timeline-date {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  color: var(--text-muted);
-  letter-spacing: 0.08em;
-  margin-bottom: 8px;
+/* Per-company bg sizing */
+[data-company="mercedes"] .htl-slide-bg { width: 450px; height: 450px; }
+[data-company="forbes"] .htl-slide-bg { width: 550px; height: 550px; }
+[data-company="hb"] .htl-slide-bg { width: 520px; height: 520px; }
+[data-company="farfetch"] .htl-slide-bg { width: 480px; height: 480px; }
+
+/* --- Content --- */
+.htl-slide-content {
+  position: relative;
+  z-index: 1;
+  max-width: 700px;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease 0.15s, transform 0.7s ease 0.15s;
+}
+.htl-slide.htl-slide-active .htl-slide-content {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.timeline-company {
-  font-size: 1.3rem;
-  font-weight: 600;
-  margin-bottom: 4px;
-  letter-spacing: -0.02em;
+/* --- Header --- */
+.htl-slide-header {
+  margin-bottom: 28px;
 }
-
-.timeline-role {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-  margin-bottom: 4px;
-}
-
-.timeline-location {
+.htl-slide-date {
   font-family: var(--font-mono);
   font-size: 0.72rem;
+  color: var(--accent-blue);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.htl-slide-company {
+  font-size: 2.8rem;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+  margin: 0 0 8px 0;
+}
+.htl-slide-location {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
   color: var(--text-muted);
+  letter-spacing: 0.08em;
+}
+
+/* --- Role --- */
+.htl-role {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+.htl-role-date {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
   margin-bottom: 16px;
 }
 
-.timeline-details {
+/* --- Details --- */
+.htl-details {
   list-style: none;
+  margin: 0 0 20px 0;
+  padding: 0;
 }
-
-.timeline-details li {
+.htl-details li {
   position: relative;
-  padding-left: 16px;
-  color: var(--text-secondary);
-  font-size: 0.88rem;
+  padding-left: 18px;
   margin-bottom: 10px;
-  line-height: 1.65;
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  opacity: 0;
+  transform: translateX(-12px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
+.htl-slide.htl-slide-active .htl-details li {
+  opacity: 1;
+  transform: translateX(0);
+}
+.htl-slide.htl-slide-active .htl-details li:nth-child(1) { transition-delay: 0.3s; }
+.htl-slide.htl-slide-active .htl-details li:nth-child(2) { transition-delay: 0.4s; }
+.htl-slide.htl-slide-active .htl-details li:nth-child(3) { transition-delay: 0.5s; }
+.htl-slide.htl-slide-active .htl-details li:nth-child(4) { transition-delay: 0.6s; }
 
-.timeline-details li::before {
-  content: '~';
+.htl-details li::before {
+  content: '→';
   position: absolute;
   left: 0;
-  color: var(--text-muted);
+  color: var(--accent-blue);
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+/* --- Tags in slides --- */
+.htl-slide .tags {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.5s ease 0.6s, transform 0.5s ease 0.6s;
+}
+.htl-slide.htl-slide-active .tags {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- Mercedes Tabs --- */
+.htl-tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--border-color);
+}
+.htl-tab {
+  padding: 10px 20px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
   font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.3s ease, border-color 0.3s ease;
+  position: relative;
+  bottom: -1px;
+}
+.htl-tab:hover { color: var(--text-primary); }
+.htl-tab-active {
+  color: var(--accent-blue);
+  border-bottom-color: var(--accent-blue);
+}
+.htl-tab-content {
+  display: none;
+}
+.htl-tab-content-active {
+  display: block;
+  animation: htlTabFade 0.4s ease;
+}
+@keyframes htlTabFade {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Progress Bar --- */
+.htl-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: color-mix(in srgb, var(--border-color) 50%, transparent);
+  z-index: 100;
+}
+.htl-progress-fill {
+  height: 100%;
+  width: 25%;
+  background: linear-gradient(90deg, var(--accent-blue), #5b9fd3);
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 0 2px 2px 0;
+}
+
+/* --- Slide Counter --- */
+.htl-counter {
+  position: fixed;
+  bottom: 32px;
+  right: 40px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  z-index: 100;
+  letter-spacing: 0.1em;
+}
+.htl-counter-current {
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+.htl-counter-sep {
+  margin: 0 4px;
+  opacity: 0.4;
+}
+
+/* --- Nav Arrows --- */
+.htl-nav {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  padding: 0 28px;
+  z-index: 100;
+  pointer-events: none;
+}
+.htl-nav-btn {
+  pointer-events: auto;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border-color);
+  background: color-mix(in srgb, var(--bg-primary) 80%, transparent);
+  backdrop-filter: blur(8px);
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+.htl-nav-btn:hover {
+  border-color: var(--accent-blue);
+  color: var(--accent-blue);
+  box-shadow: 0 0 20px color-mix(in srgb, var(--accent-blue) 25%, transparent);
+  transform: scale(1.08);
+}
+.htl-nav-btn:active { transform: scale(0.95); }
+
+/* --- Dot Indicators --- */
+.htl-dots {
+  position: fixed;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 14px;
+  z-index: 100;
+}
+.htl-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid var(--border-color);
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+.htl-dot:hover {
+  border-color: var(--accent-blue);
+  transform: scale(1.3);
+}
+.htl-dot-active {
+  background: var(--accent-blue);
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--accent-blue) 40%, transparent);
+}
+
+/* --- Horizontal Timeline Responsive --- */
+@media (max-width: 1024px) {
+  .htl-slide { padding: 100px 50px 80px 80px; }
+  .htl-slide-company { font-size: 2.2rem; }
+  .htl-slide-bg { width: 380px; height: 380px; right: 2%; }
+  [data-company="mercedes"] .htl-slide-bg { width: 340px; height: 340px; }
+  [data-company="forbes"] .htl-slide-bg { width: 420px; height: 420px; }
+  [data-company="hb"] .htl-slide-bg { width: 400px; height: 400px; }
+  [data-company="farfetch"] .htl-slide-bg { width: 360px; height: 360px; }
+}
+
+@media (max-width: 768px) {
+  .htl-slide {
+    padding: 110px 28px 80px 28px;
+    align-items: flex-start;
+    padding-top: 120px;
+  }
+  .htl-slide-company { font-size: 1.8rem; }
+  .htl-role { font-size: 1rem; }
+  .htl-details li { font-size: 0.82rem; }
+  .htl-nav-btn { display: none; }
+  .htl-slide-bg { width: 250px; height: 250px; right: -40px; top: 60%; opacity: 0.03; }
+  .htl-counter { bottom: 24px; right: 24px; font-size: 0.75rem; }
+  .htl-counter-current { font-size: 0.95rem; }
+  .htl-dots { bottom: 24px; gap: 10px; }
+  .htl-dot { width: 8px; height: 8px; }
+  .htl-slide-content { max-width: 100%; }
+}
+
+@media (max-width: 480px) {
+  .htl-slide { padding: 100px 20px 70px 20px; }
+  .htl-slide-company { font-size: 1.5rem; }
+  .htl-slide-bg { width: 180px; height: 180px; }
+  .htl-tab { padding: 8px 12px; font-size: 0.68rem; }
 }
 
 /* --- Contact Page --- */
@@ -2515,10 +2786,7 @@ body.page-loaded {
     right: 12px;
   }
 
-  /* Timeline spacing */
-  .timeline { padding-left: 24px; }
-  .timeline-dot { left: -28px; }
-  .timeline-item { padding-bottom: 40px; }
+  /* Old timeline spacing removed — now using horizontal timeline */
 }
 
 @media (max-width: 480px) {
