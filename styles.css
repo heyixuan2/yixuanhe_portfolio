@@ -136,19 +136,6 @@ html.dark-theme .btn-primary:hover {
   background: #e0e0e0;
 }
 
-html.dark-theme .timeline-line {
-  background: var(--border-color);
-}
-
-html.dark-theme .timeline-dot {
-  background: var(--bg-primary);
-  border-color: var(--border-accent);
-}
-
-html.dark-theme .timeline-item:hover .timeline-dot {
-  border-color: var(--accent-blue);
-}
-
 html.dark-theme .footer {
   border-top-color: var(--border-color);
   color: var(--text-muted);
@@ -949,14 +936,36 @@ img {
 }
 
 /* --- About Page --- */
-.about-grid {
-  display: grid;
-  grid-template-columns: 320px 1fr;
-  gap: 60px;
-  align-items: start;
+.about-section {
+  justify-content: center !important;
+  gap: 0 !important;
 }
 
-.about-photo-wrapper {
+/* Slide-up entrance animation system */
+.anim-slide-up {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.anim-slide-up.anim-visible { opacity: 1; transform: none; }
+.anim-d1 { transition-delay: 0.1s; }
+.anim-d2 { transition-delay: 0.2s; }
+.anim-d3 { transition-delay: 0.3s; }
+.anim-d4 { transition-delay: 0.4s; }
+.anim-d5 { transition-delay: 0.5s; }
+.anim-d6 { transition-delay: 0.65s; }
+
+/* Photo + bio hero */
+.about-hero {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 52px;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.about-photo-col {
   position: relative;
 }
 
@@ -964,22 +973,158 @@ img {
   width: 100%;
   aspect-ratio: 3/4;
   object-fit: cover;
-  border-radius: 12px;
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
-.about-photo-border {
+.about-photo:hover {
+  transform: scale(1.02);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+}
+
+.about-photo-glow {
   position: absolute;
-  inset: 12px -12px -12px 12px;
-  border: 1px solid var(--border-accent);
-  border-radius: 12px;
+  inset: -20px;
+  background: radial-gradient(circle at 50% 50%, var(--accent-blue), transparent 70%);
+  opacity: 0.06;
+  border-radius: 20px;
   z-index: -1;
+  pointer-events: none;
 }
 
-.about-text p {
-  color: var(--text-secondary);
+.about-name-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.about-socials {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  top: 2px;
+}
+
+.about-socials a {
+  display: flex;
+  align-items: center;
+  color: var(--text-muted);
+  transition: color 0.2s ease;
+}
+
+.about-socials a:hover {
+  color: var(--accent-blue);
+}
+
+.about-name {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0;
+}
+
+.about-nick {
+  font-weight: 400;
+  color: var(--text-muted);
+  font-size: 1.4rem;
+}
+
+.about-tagline {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--accent-blue);
+  font-weight: 500;
   margin-bottom: 20px;
-  font-size: 1rem;
+  letter-spacing: 0.02em;
+}
+
+.about-bio {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
   line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+
+/* Domain skill tags — 4x2 grid inside bio */
+.about-domains {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.domain-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 9px 0;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.3s ease, transform 0.3s ease, border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+  white-space: nowrap;
+}
+
+.domain-tag.domain-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.domain-tag svg {
+  color: var(--accent-blue);
+  flex-shrink: 0;
+}
+
+.domain-tag:hover {
+  border-color: var(--accent-blue);
+  color: var(--text-primary);
+  background: color-mix(in srgb, var(--accent-blue) 6%, var(--bg-card));
+}
+
+/* Explore skills link */
+.about-skills-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--accent-blue);
+  text-decoration: none;
+  transition: gap 0.2s ease;
+}
+
+.about-skills-link:hover {
+  gap: 10px;
+}
+
+.about-skills-link svg {
+  transition: transform 0.2s ease;
+}
+
+.about-skills-link:hover svg {
+  transform: translateX(3px);
+}
+
+/* Skill detail cards entrance */
+#skills-detail .skill-category {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+#skills-detail .skill-category.card-visible {
+  opacity: 1;
+  transform: none;
 }
 
 /* Education cards */
@@ -1815,7 +1960,7 @@ body.page-loaded {
 /* --- Responsive --- */
 @media (max-width: 1024px) {
   .section { padding: 80px 32px; }
-  .about-grid { grid-template-columns: 260px 1fr; gap: 40px; }
+  .about-hero { grid-template-columns: 250px 1fr; gap: 40px; }
   .grid-3 { grid-template-columns: repeat(2, 1fr); }
 }
 
@@ -1873,15 +2018,26 @@ body.page-loaded {
 
   .hero { padding: 60px 30px; }
 
-  .about-grid {
+  .about-hero {
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: 30px;
+    text-align: center;
   }
 
-  .about-photo-wrapper {
-    max-width: 260px;
+  .about-photo-col {
+    max-width: 200px;
     margin: 0 auto;
   }
+
+  .about-photo-glow { display: none; }
+
+  .about-highlights {
+    padding: 16px 20px;
+    gap: 0;
+  }
+
+  .about-domains { grid-template-columns: repeat(2, 1fr); }
+  .domain-tag { font-size: 0.65rem; padding: 5px 0; }
 
   .grid-2, .grid-3 {
     grid-template-columns: 1fr;
@@ -1950,6 +2106,8 @@ body.page-loaded {
   /* Hide edu watermark on very small screens */
   .edu-watermark { display: none; }
 
-  /* Smaller photo on tiny screens */
-  .about-photo-wrapper { max-width: 220px; }
+  .about-name { font-size: 1.4rem; }
+  .about-domains { grid-template-columns: repeat(2, 1fr); }
+  .domain-tag { font-size: 0.6rem; }
+  .domain-tag svg { width: 11px; height: 11px; }
 }
