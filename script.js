@@ -23,7 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ==========================================
   // 1. TYPEWRITER NAME REVEAL
-  //    Types out hero name character by character
+  //    Types out hero name character by character,
+  //    then hands off to the role typewriter below
   // ==========================================
   const heroName = document.querySelector('.hero-name');
   if (heroName) {
@@ -33,20 +34,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setTimeout(() => {
       let charIndex = 0;
-      const speed = 70;
+      const speed = 110; // slower, more deliberate
 
       function typeChar() {
         if (charIndex < fullText.length) {
           heroName.textContent = fullText.substring(0, charIndex + 1);
           charIndex++;
-          // Slight speed variation for natural feel
-          const nextDelay = speed + Math.random() * 40;
+          const nextDelay = speed + Math.random() * 50;
           setTimeout(typeChar, nextDelay);
         } else {
-          // Typing done — keep cursor blinking for a moment, then remove
+          // Name done — cursor blinks on this line briefly
           setTimeout(() => {
+            // Remove name cursor
             heroName.classList.remove('hero-name-typing');
-          }, 1800);
+            // Short pause, then "hop" cursor to role line
+            setTimeout(() => {
+              const cursor = document.querySelector('.role-cursor');
+              if (cursor) cursor.style.opacity = '1';
+              // Start role typewriter
+              if (typeof window.__startRoleTypewriter === 'function') {
+                window.__startRoleTypewriter();
+              }
+            }, 300);
+          }, 800);
         }
       }
       typeChar();
@@ -100,11 +110,19 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(typeRole, typingSpeed);
     }
 
-    setTimeout(() => {
-      const cursor = document.querySelector('.role-cursor');
-      if (cursor) cursor.style.opacity = '1';
+    // Role typewriter waits for name to finish, then gets triggered
+    window.__startRoleTypewriter = function() {
       typeRole();
-    }, 2200);
+    };
+
+    // Fallback: if hero name doesn't exist, start after delay
+    if (!document.querySelector('.hero-name')) {
+      setTimeout(() => {
+        const cursor = document.querySelector('.role-cursor');
+        if (cursor) cursor.style.opacity = '1';
+        typeRole();
+      }, 2200);
+    }
   }
 
   // ==========================================
