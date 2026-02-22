@@ -55,6 +55,40 @@
       </button>
     </div>
 
+    <!-- Fixed timeline bar at top -->
+    <div class="htl-topbar">
+      <div class="htl-topbar-line"></div>
+      <div class="htl-topbar-fill"></div>
+      <button class="htl-topbar-node htl-topbar-node-active" data-slide="0">
+        <span class="htl-topbar-dot"></span>
+        <span class="htl-topbar-info">
+          <span class="htl-topbar-name">Mercedes-Benz</span>
+          <span class="htl-topbar-year">2024 — 2025</span>
+        </span>
+      </button>
+      <button class="htl-topbar-node" data-slide="1">
+        <span class="htl-topbar-dot"></span>
+        <span class="htl-topbar-info">
+          <span class="htl-topbar-name">HB Diamond</span>
+          <span class="htl-topbar-year">2023</span>
+        </span>
+      </button>
+      <button class="htl-topbar-node" data-slide="2">
+        <span class="htl-topbar-dot"></span>
+        <span class="htl-topbar-info">
+          <span class="htl-topbar-name">Forbes China</span>
+          <span class="htl-topbar-year">2021</span>
+        </span>
+      </button>
+      <button class="htl-topbar-node" data-slide="3">
+        <span class="htl-topbar-dot"></span>
+        <span class="htl-topbar-info">
+          <span class="htl-topbar-name">Farfetch</span>
+          <span class="htl-topbar-year">2020 — 2021</span>
+        </span>
+      </button>
+    </div>
+
     <!-- Scrollable slides -->
     <div class="htl-scroll">
 
@@ -70,43 +104,53 @@
             <div class="htl-slide-location">Beijing, China</div>
           </div>
 
-          <div class="htl-tabs">
-            <button class="htl-tab htl-tab-active" data-tab="mb-ai">AI & People Analytics</button>
-            <button class="htl-tab" data-tab="mb-dt">Digital Transformation</button>
-          </div>
-
-          <div class="htl-tab-content htl-tab-content-active" id="mb-ai">
-            <div class="htl-role">People Analytics & Artificial Intelligence Intern</div>
-            <div class="htl-role-date">JUL 2025 — SEP 2025</div>
-            <ul class="htl-details">
-              <li>Built an AI-powered CV screening pipeline using Dify that automated candidate scoring end-to-end, cutting manual screening time by 80%.</li>
-              <li>Deployed API integrations across cloud infrastructures and Dify with OAuth2 authentication, enabling real-time AI-enhanced requisition dashboards.</li>
-              <li>Created M365 training programs focused on MS Power Platforms, adopted by 140+ HR professionals, accelerating digital adoption across MB HR operations.</li>
-            </ul>
-            <div class="tags">
-              <span class="tag">Dify AI</span>
-              <span class="tag">MS Azure</span>
-              <span class="tag">Python</span>
-              <span class="tag">MS Power Platform</span>
-              <span class="tag">Gen AI Application</span>
+          <!-- Sub-slide container for two roles -->
+          <div class="htl-sub-slider">
+            <div class="htl-sub-nav">
+              <button class="htl-sub-btn htl-sub-prev" aria-label="Previous role">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+              </button>
+              <div class="htl-sub-indicator">
+                <span class="htl-sub-label">Role 1 of 2</span>
+              </div>
+              <button class="htl-sub-btn htl-sub-next" aria-label="Next role">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+              </button>
             </div>
-          </div>
-
-          <div class="htl-tab-content" id="mb-dt">
-            <div class="htl-role">Data Analytics & Digital Transformation Intern</div>
-            <div class="htl-role-date">JUN 2024 — DEC 2024</div>
-            <ul class="htl-details">
-              <li>Designed and delivered a mandatory Power BI training program for HR across MB Greater China, covering the full Power BI pipeline, including advanced knowledge such as row-level security.</li>
-              <li>Built executive-level Power BI dashboards consolidating data from all Mercedes-Benz China entities, providing real-time insights on various HR metrics.</li>
-              <li>Assisted the MB HR Insights Project (PBI enterprise portal) by collaborating with vendors from Accenture, contributing to workspace design, and UAT.</li>
-              <li>Presented the upskilling methodology to MB Board Member Sabine Kohleisen, recognized as a high-impact contribution to MBGC digital transformation.</li>
-            </ul>
-            <div class="tags">
-              <span class="tag">MS Power BI</span>
-              <span class="tag">Data Modeling</span>
-              <span class="tag">Data Visualization</span>
-              <span class="tag">Training & Enablement</span>
-              <span class="tag">RLS</span>
+            <div class="htl-sub-track">
+              <div class="htl-sub-slide htl-sub-slide-active" data-sub="0">
+                <div class="htl-role">People Analytics & Artificial Intelligence Intern</div>
+                <div class="htl-role-date">JUL 2025 — SEP 2025</div>
+                <ul class="htl-details">
+                  <li>Built an AI-powered CV screening pipeline using Dify that automated candidate scoring end-to-end, cutting manual screening time by 80%.</li>
+                  <li>Deployed API integrations across cloud infrastructures and Dify with OAuth2 authentication, enabling real-time AI-enhanced requisition dashboards.</li>
+                  <li>Created M365 training programs focused on MS Power Platforms, adopted by 140+ HR professionals, accelerating digital adoption across MB HR operations.</li>
+                </ul>
+                <div class="tags">
+                  <span class="tag">Dify AI</span>
+                  <span class="tag">MS Azure</span>
+                  <span class="tag">Python</span>
+                  <span class="tag">MS Power Platform</span>
+                  <span class="tag">Gen AI Application</span>
+                </div>
+              </div>
+              <div class="htl-sub-slide" data-sub="1">
+                <div class="htl-role">Data Analytics & Digital Transformation Intern</div>
+                <div class="htl-role-date">JUN 2024 — DEC 2024</div>
+                <ul class="htl-details">
+                  <li>Designed and delivered a mandatory Power BI training program for HR across MB Greater China, covering the full Power BI pipeline, including advanced knowledge such as row-level security.</li>
+                  <li>Built executive-level Power BI dashboards consolidating data from all Mercedes-Benz China entities, providing real-time insights on various HR metrics.</li>
+                  <li>Assisted the MB HR Insights Project (PBI enterprise portal) by collaborating with vendors from Accenture, contributing to workspace design, and UAT.</li>
+                  <li>Presented the upskilling methodology to MB Board Member Sabine Kohleisen, recognized as a high-impact contribution to MBGC digital transformation.</li>
+                </ul>
+                <div class="tags">
+                  <span class="tag">MS Power BI</span>
+                  <span class="tag">Data Modeling</span>
+                  <span class="tag">Data Visualization</span>
+                  <span class="tag">Training & Enablement</span>
+                  <span class="tag">RLS</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -198,13 +242,6 @@
 
     </div>
 
-    <!-- Dot indicators -->
-    <div class="htl-dots">
-      <button class="htl-dot htl-dot-active" data-slide="0" aria-label="Mercedes-Benz"></button>
-      <button class="htl-dot" data-slide="1" aria-label="HB Diamond"></button>
-      <button class="htl-dot" data-slide="2" aria-label="Forbes China"></button>
-      <button class="htl-dot" data-slide="3" aria-label="Farfetch"></button>
-    </div>
 
   </div>
 

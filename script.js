@@ -444,7 +444,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!htlScroll) return;
 
     var slides = document.querySelectorAll('.htl-slide');
-    var dots = document.querySelectorAll('.htl-dot');
+    var topbarNodes = document.querySelectorAll('.htl-topbar-node');
+    var topbarFill = document.querySelector('.htl-topbar-fill');
     var prevBtn = document.querySelector('.htl-nav-prev');
     var nextBtn = document.querySelector('.htl-nav-next');
     var progressFill = document.querySelector('.htl-progress-fill');
@@ -457,17 +458,50 @@ document.addEventListener('DOMContentLoaded', () => {
     // Set first slide active
     if (slides[0]) slides[0].classList.add('htl-slide-active');
 
+    function updateTopbarFill(index) {
+      if (!topbarFill || topbarNodes.length < 2) return;
+      // Nodes are space-between inside padded container
+      // Line spans full inner width (32px to 32px)
+      // Fill percentage = node position / total span
+      var pct = (index / (topbarNodes.length - 1)) * 100;
+      topbarFill.style.width = pct + '%';
+    }
+
+    function retriggerAnimations(index) {
+      // Force re-trigger CSS transitions on the newly active slide
+      var slide = slides[index];
+
+      // Remove active class to reset all transitions to their base state
+      slide.classList.remove('htl-slide-active');
+
+      // Force reflow so the browser registers the removal
+      void slide.offsetHeight;
+
+      // Re-add active class — triggers fresh transitions
+      slide.classList.add('htl-slide-active');
+    }
+
     function updateState(index) {
+      var prevIndex = currentIndex;
       currentIndex = index;
       slides.forEach(function(s, i) {
         s.classList.toggle('htl-slide-active', i === index);
       });
-      dots.forEach(function(d, i) {
-        d.classList.toggle('htl-dot-active', i === index);
+      topbarNodes.forEach(function(node, i) {
+        node.classList.remove('htl-topbar-node-active', 'htl-topbar-node-passed');
+        if (i === index) {
+          node.classList.add('htl-topbar-node-active');
+        } else if (i < index) {
+          node.classList.add('htl-topbar-node-passed');
+        }
       });
       if (counterCurrent) counterCurrent.textContent = index + 1;
       if (progressFill) {
         progressFill.style.width = ((index + 1) / totalSlides * 100) + '%';
+      }
+      updateTopbarFill(index);
+      if (prevIndex !== index) {
+        retriggerAnimations(index);
       }
     }
 
@@ -502,10 +536,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (prevBtn) prevBtn.addEventListener('click', function() { scrollToSlide(currentIndex - 1); });
     if (nextBtn) nextBtn.addEventListener('click', function() { scrollToSlide(currentIndex + 1); });
 
-    // Dot click
-    dots.forEach(function(dot) {
-      dot.addEventListener('click', function() {
-        var idx = parseInt(dot.getAttribute('data-slide'));
+    // Topbar node click
+    topbarNodes.forEach(function(node) {
+      node.addEventListener('click', function() {
+        var idx = parseInt(node.getAttribute('data-slide'));
         if (!isNaN(idx)) scrollToSlide(idx);
       });
     });
@@ -541,18 +575,38 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }, { passive: false });
 
-    // Mercedes tab controller
-    var tabs = document.querySelectorAll('.htl-tab');
-    var tabContents = document.querySelectorAll('.htl-tab-content');
-    tabs.forEach(function(tab) {
-      tab.addEventListener('click', function() {
-        tabs.forEach(function(t) { t.classList.remove('htl-tab-active'); });
-        tabContents.forEach(function(c) { c.classList.remove('htl-tab-content-active'); });
-        tab.classList.add('htl-tab-active');
-        var target = document.getElementById(tab.getAttribute('data-tab'));
-        if (target) target.classList.add('htl-tab-content-active');
-      });
+    // Mercedes sub-slide controller
+    var subSlides = document.querySelectorAll('.htl-sub-slide');
+    var subLabel = document.querySelector('.htl-sub-label');
+    var subPrev = document.querySelector('.htl-sub-prev');
+    var subNext = document.querySelector('.htl-sub-next');
+    var subIndex = 0;
+    var subTotal = subSlides.length;
+
+    function updateSubSlide(newIndex, direction) {
+      if (newIndex < 0 || newIndex >= subTotal || newIndex === subIndex) return;
+      subSlides.forEach(function(s) { s.classList.remove('htl-sub-slide-active'); });
+      var target = subSlides[newIndex];
+      // Set animation direction
+      target.style.animation = 'none';
+      target.offsetHeight; // force reflow
+      target.style.animation = direction === 'next' ? 'htlSubSlideIn 0.45s ease' : 'htlSubSlideInReverse 0.45s ease';
+      target.classList.add('htl-sub-slide-active');
+      subIndex = newIndex;
+      if (subLabel) subLabel.textContent = 'Role ' + (subIndex + 1) + ' of ' + subTotal;
+    }
+
+    if (subPrev) subPrev.addEventListener('click', function(e) {
+      e.stopPropagation();
+      updateSubSlide(subIndex - 1, 'prev');
     });
+    if (subNext) subNext.addEventListener('click', function(e) {
+      e.stopPropagation();
+      updateSubSlide(subIndex + 1, 'next');
+    });
+
+    // Initialize topbar fill
+    updateTopbarFill(0);
   })();
 
   // ==========================================
