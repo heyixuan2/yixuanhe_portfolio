@@ -2460,24 +2460,55 @@ html.dark-theme .htl-slide.htl-slide-active .htl-slide-bg {
 
 /* --- Footer --- */
 .footer {
-  padding: 48px 40px 40px;
+  padding: 60px 40px 40px;
   border-top: 1px solid var(--border-color);
   text-align: center;
 }
 
-.footer-main {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
+.footer-inner {
+  max-width: 560px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.footer-quote {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-style: italic;
   color: var(--text-secondary);
-  letter-spacing: 0.04em;
-  margin-bottom: 16px;
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+  max-width: 420px;
+}
+
+.footer-nav {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.footer-nav a {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+.footer-nav a:hover {
+  color: var(--accent-blue);
 }
 
 .footer-socials {
   display: flex;
   justify-content: center;
   gap: 20px;
-  margin-bottom: 14px;
 }
 
 .footer-socials a {
@@ -2499,9 +2530,10 @@ html.dark-theme .htl-slide.htl-slide-active .htl-slide-bg {
 
 .footer-copy {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   color: var(--text-muted);
   letter-spacing: 0.06em;
+  opacity: 0.7;
 }
 
 /* --- Animations --- */
