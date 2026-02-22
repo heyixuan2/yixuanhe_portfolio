@@ -50,11 +50,10 @@
         <button class="filter-tab" data-filter="webdev">Web Development</button>
       </div>
 
-      <!-- Projects Grid -->
-      <div class="grid-2 fade-in fade-in-delay-3">
-
-        <!-- Project 1: Mercedes-Benz Digital Transformation -->
-        <a href="project-mercedes-digital" class="project-card" data-categories="digital bi" style="text-decoration: none; color: inherit;">
+      <!-- Featured Project: Mercedes-Benz -->
+      <a href="project-mercedes-digital" class="proj-featured proj-card fade-in fade-in-delay-3" data-categories="digital bi" style="text-decoration: none; color: inherit;">
+        <div class="proj-featured-content">
+          <div class="proj-featured-label">Featured Project</div>
           <div class="project-org"><span>Mercedes-Benz</span><span>Jun 2024 - Sep 2025</span></div>
           <h3>Mercedes-Benz Digital Transformation Bootcamp</h3>
           <p>
@@ -70,15 +69,22 @@
             <span class="tag">M365</span>
             <span class="tag">MS Power Platforms</span>
           </div>
-          <span class="project-arrow">→</span>
-        </a>
+          <span class="project-arrow">&rarr;</span>
+        </div>
+        <div class="proj-featured-visual">
+          <img src="assets/company_logo/mercedes.png" alt="" draggable="false">
+        </div>
+      </a>
 
-        <!-- Project 2: Police Incident Modeling -->
-        <a href="project-police" class="project-card" data-categories="data-science ml" style="text-decoration: none; color: inherit;">
-          <div class="project-org"><span>Georgetown University</span><span>Oct 2025 - Dec 2025</span></div>
+      <!-- Compact Projects Grid -->
+      <div class="proj-grid fade-in fade-in-delay-3">
+
+        <!-- Police Incident Modeling -->
+        <a href="project-police" class="proj-compact proj-card" data-categories="data-science ml" style="text-decoration: none; color: inherit;">
+          <div class="project-org"><span>Georgetown University</span><span>Oct - Dec 2025</span></div>
           <h3>Police Incident & Response Time Modeling</h3>
           <p>
-            End-to-end data science project analyzing 300K+ police dispatch records to predict response times, classify call priorities, and identify incident hotspots across Montgomery County, MD. Built regression, classification, and clustering models with interactive visualizations.
+            End-to-end data science project analyzing 300K+ police dispatch records to predict response times, classify call priorities, and identify incident hotspots across Montgomery County, MD.
           </p>
           <ul class="highlight-list">
             <li>Regression modeling on dispatch-to-arrival response times</li>
@@ -91,15 +97,15 @@
             <span class="tag">Machine Learning</span>
             <span class="tag">Spatial Analysis</span>
           </div>
-          <span class="project-arrow">→</span>
+          <span class="project-arrow">&rarr;</span>
         </a>
 
-        <!-- Project 2: Flight Disruptions -->
-        <a href="project-dca" class="project-card" data-categories="data-science bi ml" style="text-decoration: none; color: inherit;">
-          <div class="project-org"><span>Georgetown University</span><span>Sep 2025 - Dec 2025</span></div>
+        <!-- DCA Flight Disruptions -->
+        <a href="project-dca" class="proj-compact proj-card" data-categories="data-science bi ml" style="text-decoration: none; color: inherit;">
+          <div class="project-org"><span>Georgetown University</span><span>Sep - Dec 2025</span></div>
           <h3>DCA Flight Disruptions — Time Series Analysis</h3>
           <p>
-            Analyzed 300K+ FAA flight records merged with hourly METAR weather data to quantify delay and cancellation drivers at Reagan National Airport using hypothesis testing, ARIMA modeling, and bootstrap resampling.
+            Analyzed 300K+ FAA flight records merged with hourly METAR weather data to quantify delay and cancellation drivers at Reagan National Airport.
           </p>
           <ul class="highlight-list">
             <li>Welch's t-test, ANOVA, chi-squared, and bootstrap resampling</li>
@@ -111,15 +117,15 @@
             <span class="tag">Hypothesis Testing</span>
             <span class="tag">Time Series</span>
           </div>
-          <span class="project-arrow">→</span>
+          <span class="project-arrow">&rarr;</span>
         </a>
 
-        <!-- Project 3: HUBBLE -->
-        <a href="project-hubble" class="project-card" data-categories="systems marketing" style="text-decoration: none; color: inherit;">
-          <div class="project-org"><span>Cornell University</span><span>Jan 2024 - Jun 2024</span></div>
+        <!-- Hubble -->
+        <a href="project-hubble" class="proj-compact proj-card" data-categories="systems marketing" style="text-decoration: none; color: inherit;">
+          <div class="project-org"><span>Cornell University</span><span>Jan - Jun 2024</span></div>
           <h3>Hubble — Magnetic Wearable Heating System</h3>
           <p>
-            Led systems engineering and marketing for a Cornell M.Eng capstone project developing "Hubble," a rechargeable magnetically-attached wearable heating device. Managed cross-functional coordination across mechanical, electrical, and marketing teams.
+            Led systems engineering and marketing for a Cornell M.Eng capstone project developing a rechargeable magnetically-attached wearable heating device.
           </p>
           <ul class="highlight-list">
             <li>Complete SysML modeling: Use Case, BDD, IBD, FMEA, AHP, QFD</li>
@@ -131,14 +137,13 @@
             <span class="tag">Branding</span>
             <span class="tag">Survey Analysis</span>
           </div>
-          <span class="project-arrow">→</span>
+          <span class="project-arrow">&rarr;</span>
         </a>
 
-        <div class="project-card" data-categories="all" style="display: flex; align-items: center; justify-content: center; min-height: 200px; border: 2px dashed var(--border-color); background: transparent; opacity: 0.5;">
-          <div style="text-align: center;">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="opacity: 0.5; margin-bottom: 8px;"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
-            <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0;">More projects coming soon</p>
-          </div>
+        <!-- Placeholder -->
+        <div class="proj-compact proj-placeholder" data-categories="all">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="opacity: 0.5; margin-bottom: 8px;"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
+          <p>More projects coming soon</p>
         </div>
 
       </div>
@@ -152,13 +157,20 @@
   <script src="script.js"></script>
   <script>
     var isDark = document.documentElement.classList.contains('dark-theme');
-    document.querySelectorAll('.project-card').forEach(function(card, i) {
-      var delay = 80 + i * 120;
-      setTimeout(function() {
-        card.classList.add('visible');
-      }, delay);
 
-      // Hover effect via inline styles (bypasses all CSS specificity)
+    // Staggered entrance
+    var featuredCard = document.querySelector('.proj-featured');
+    var compactCards = document.querySelectorAll('.proj-compact');
+
+    if (featuredCard) {
+      setTimeout(function() { featuredCard.classList.add('visible'); }, 100);
+    }
+    compactCards.forEach(function(card, i) {
+      setTimeout(function() { card.classList.add('visible'); }, 250 + i * 120);
+    });
+
+    // Hover effects
+    document.querySelectorAll('.proj-card, .proj-compact').forEach(function(card) {
       card.addEventListener('mouseenter', function() {
         card.style.transition = 'transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease';
         card.style.transform = 'translateY(-6px) scale(1.01)';

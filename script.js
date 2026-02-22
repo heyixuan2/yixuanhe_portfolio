@@ -729,10 +729,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // 12. PROJECT FILTER TABS
   // ==========================================
   const filterTabs = document.querySelectorAll('.filter-tab');
-  const projectGrid = document.querySelector('.grid-2');
-  const projectCards = document.querySelectorAll('.project-card[data-categories]');
+  const projCards = document.querySelectorAll('.proj-card[data-categories], .proj-compact[data-categories]');
 
-  if (filterTabs.length && projectCards.length) {
+  if (filterTabs.length && projCards.length) {
     filterTabs.forEach(tab => {
       tab.addEventListener('click', () => {
         const filterValue = tab.getAttribute('data-filter');
@@ -741,8 +740,8 @@ document.addEventListener('DOMContentLoaded', () => {
         filterTabs.forEach(t => t.classList.remove('filter-tab-active'));
         tab.classList.add('filter-tab-active');
 
-        // Filter cards
-        projectCards.forEach(card => {
+        // Filter cards (featured + compact)
+        projCards.forEach(card => {
           const categories = (card.getAttribute('data-categories') || '').split(' ');
           const isMatch = filterValue === 'all' || categories.includes(filterValue);
 
