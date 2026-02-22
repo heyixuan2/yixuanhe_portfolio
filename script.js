@@ -444,8 +444,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!htlScroll) return;
 
     var slides = document.querySelectorAll('.htl-slide');
-    var topbarNodes = document.querySelectorAll('.htl-topbar-node');
-    var topbarFill = document.querySelector('.htl-topbar-fill');
+    var crumbNodes = document.querySelectorAll('.htl-crumb');
     var prevBtn = document.querySelector('.htl-nav-prev');
     var nextBtn = document.querySelector('.htl-nav-next');
     var progressFill = document.querySelector('.htl-progress-fill');
@@ -458,14 +457,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Set first slide active
     if (slides[0]) slides[0].classList.add('htl-slide-active');
 
-    function updateTopbarFill(index) {
-      if (!topbarFill || topbarNodes.length < 2) return;
-      // Nodes are space-between inside padded container
-      // Line spans full inner width (32px to 32px)
-      // Fill percentage = node position / total span
-      var pct = (index / (topbarNodes.length - 1)) * 100;
-      topbarFill.style.width = pct + '%';
-    }
+    // No fill line needed for breadcrumb style
 
     function retriggerAnimations(index) {
       // Force re-trigger CSS transitions on the newly active slide
@@ -487,19 +479,18 @@ document.addEventListener('DOMContentLoaded', () => {
       slides.forEach(function(s, i) {
         s.classList.toggle('htl-slide-active', i === index);
       });
-      topbarNodes.forEach(function(node, i) {
-        node.classList.remove('htl-topbar-node-active', 'htl-topbar-node-passed');
+      crumbNodes.forEach(function(node, i) {
+        node.classList.remove('htl-crumb-active', 'htl-crumb-passed');
         if (i === index) {
-          node.classList.add('htl-topbar-node-active');
+          node.classList.add('htl-crumb-active');
         } else if (i < index) {
-          node.classList.add('htl-topbar-node-passed');
+          node.classList.add('htl-crumb-passed');
         }
       });
       if (counterCurrent) counterCurrent.textContent = index + 1;
       if (progressFill) {
         progressFill.style.width = ((index + 1) / totalSlides * 100) + '%';
       }
-      updateTopbarFill(index);
       if (prevIndex !== index) {
         retriggerAnimations(index);
       }
@@ -536,8 +527,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (prevBtn) prevBtn.addEventListener('click', function() { scrollToSlide(currentIndex - 1); });
     if (nextBtn) nextBtn.addEventListener('click', function() { scrollToSlide(currentIndex + 1); });
 
-    // Topbar node click
-    topbarNodes.forEach(function(node) {
+    // Breadcrumb click
+    crumbNodes.forEach(function(node) {
       node.addEventListener('click', function() {
         var idx = parseInt(node.getAttribute('data-slide'));
         if (!isNaN(idx)) scrollToSlide(idx);
@@ -605,8 +596,7 @@ document.addEventListener('DOMContentLoaded', () => {
       updateSubSlide(subIndex + 1, 'next');
     });
 
-    // Initialize topbar fill
-    updateTopbarFill(0);
+    // Breadcrumb initialized via HTML classes
   })();
 
   // ==========================================
