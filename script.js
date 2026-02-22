@@ -566,34 +566,33 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }, { passive: false });
 
-    // Mercedes sub-slide controller
+    // Mercedes role tab controller
     var subSlides = document.querySelectorAll('.htl-sub-slide');
-    var subLabel = document.querySelector('.htl-sub-label');
-    var subPrev = document.querySelector('.htl-sub-prev');
-    var subNext = document.querySelector('.htl-sub-next');
+    var subTabs = document.querySelectorAll('.htl-sub-tab');
     var subIndex = 0;
-    var subTotal = subSlides.length;
 
-    function updateSubSlide(newIndex, direction) {
-      if (newIndex < 0 || newIndex >= subTotal || newIndex === subIndex) return;
+    function switchSubSlide(newIndex) {
+      if (newIndex < 0 || newIndex >= subSlides.length || newIndex === subIndex) return;
+      var direction = newIndex > subIndex ? 'next' : 'prev';
+      // Update tabs
+      subTabs.forEach(function(t) { t.classList.remove('htl-sub-tab-active'); });
+      subTabs[newIndex].classList.add('htl-sub-tab-active');
+      // Update slides
       subSlides.forEach(function(s) { s.classList.remove('htl-sub-slide-active'); });
       var target = subSlides[newIndex];
-      // Set animation direction
       target.style.animation = 'none';
-      target.offsetHeight; // force reflow
+      target.offsetHeight;
       target.style.animation = direction === 'next' ? 'htlSubSlideIn 0.45s ease' : 'htlSubSlideInReverse 0.45s ease';
       target.classList.add('htl-sub-slide-active');
       subIndex = newIndex;
-      if (subLabel) subLabel.textContent = 'Role ' + (subIndex + 1) + ' of ' + subTotal;
     }
 
-    if (subPrev) subPrev.addEventListener('click', function(e) {
-      e.stopPropagation();
-      updateSubSlide(subIndex - 1, 'prev');
-    });
-    if (subNext) subNext.addEventListener('click', function(e) {
-      e.stopPropagation();
-      updateSubSlide(subIndex + 1, 'next');
+    subTabs.forEach(function(tab) {
+      tab.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var idx = parseInt(tab.getAttribute('data-sub'));
+        if (!isNaN(idx)) switchSubSlide(idx);
+      });
     });
 
     // Breadcrumb initialized via HTML classes

@@ -2133,46 +2133,52 @@ html.dark-theme .htl-slide.htl-slide-active .htl-slide-bg {
   transform: translateY(0);
 }
 
-/* --- Mercedes Tabs --- */
-/* --- Mercedes Sub-Slide System --- */
+/* --- Mercedes Role Tabs --- */
 .htl-sub-slider {
   position: relative;
 }
-.htl-sub-nav {
+.htl-sub-tabs {
   display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-bottom: 20px;
+  gap: 10px;
+  margin-bottom: 24px;
 }
-.htl-sub-btn {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
+.htl-sub-tab {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 12px 16px;
+  border-radius: 8px;
   border: 1.5px solid var(--border-color);
-  background: color-mix(in srgb, var(--bg-primary) 80%, transparent);
-  color: var(--text-secondary);
+  background: transparent;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  text-align: left;
   transition: all 0.3s ease;
-  padding: 0;
 }
-.htl-sub-btn:hover {
+.htl-sub-tab:hover {
+  border-color: color-mix(in srgb, var(--accent-blue) 50%, var(--border-color));
+  background: color-mix(in srgb, var(--accent-blue) 3%, transparent);
+}
+.htl-sub-tab-active {
   border-color: var(--accent-blue);
+  background: color-mix(in srgb, var(--accent-blue) 6%, transparent);
+}
+.htl-sub-tab-title {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  line-height: 1.3;
+  transition: color 0.3s ease;
+}
+.htl-sub-tab-active .htl-sub-tab-title {
   color: var(--accent-blue);
-  transform: scale(1.1);
 }
-.htl-sub-indicator {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.htl-sub-label {
+.htl-sub-tab-date {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.62rem;
   color: var(--text-muted);
-  letter-spacing: 0.06em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 .htl-sub-track {
@@ -2358,7 +2364,9 @@ html.dark-theme .htl-slide.htl-slide-active .htl-slide-bg {
   .htl-breadcrumb { top: 56px; gap: 6px; padding: 0 16px; }
   .htl-crumb { font-size: 0.58rem; padding: 3px 7px; }
   .htl-crumb-sep { font-size: 0.5rem; }
-  .htl-sub-btn { width: 28px; height: 28px; }
+  .htl-sub-tabs { flex-direction: column; gap: 8px; }
+  .htl-sub-tab { padding: 10px 12px; }
+  .htl-sub-tab-title { font-size: 0.72rem; }
   .htl-slide-content { max-width: 100%; }
 }
 
