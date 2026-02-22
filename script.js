@@ -22,203 +22,35 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================
-  // 1. TECH MOSAIC NAME REVEAL
-  //    Wraps chars in-place, no layout shift
+  // 1. TYPEWRITER NAME REVEAL
+  //    Types out hero name character by character
   // ==========================================
   const heroName = document.querySelector('.hero-name');
   if (heroName) {
-    const glyphSets = [
-      '█▓▒░▄▀■□▪▫',
-      '0110100101',
-      '⠁⠂⠄⡀⢀⠈⠐⠠⡁⢁',
-      '╔╗╚╝║═╬╣╠╩╦├┤┬┴┼',
-      'ΞΣΠΩΔΦΨΛABCDEFGHXYZ',
-    ];
-    const allGlyphs = glyphSets.join('');
-    const originalHTML = heroName.innerHTML;
-
-    heroName.style.transform = 'none';
-
-    // Wrap every visible character in a span, preserving structure (.outline etc)
-    function wrapChars(node) {
-      Array.from(node.childNodes).forEach(child => {
-        if (child.nodeType === Node.TEXT_NODE) {
-          const text = child.textContent;
-          if (!text.trim()) return;
-          const frag = document.createDocumentFragment();
-          for (const ch of text) {
-            if (ch === ' ' || ch === '\n') {
-              frag.appendChild(document.createTextNode(ch));
-            } else {
-              const s = document.createElement('span');
-              s.className = 'mc';
-              s.dataset.f = ch;
-              s.textContent = allGlyphs[Math.floor(Math.random() * allGlyphs.length)];
-              frag.appendChild(s);
-            }
-          }
-          child.replaceWith(frag);
-        } else if (child.nodeType === Node.ELEMENT_NODE && !child.classList.contains('mc')) {
-          wrapChars(child);
-        }
-      });
-    }
+    const fullText = heroName.textContent.trim();
+    heroName.textContent = '';
+    heroName.classList.add('hero-name-typing');
 
     setTimeout(() => {
-      wrapChars(heroName);
-      heroName.classList.add('mosaic-active');
+      let charIndex = 0;
+      const speed = 70;
 
-      const chars = heroName.querySelectorAll('.mc');
-      const totalDuration = 1200;
-      const staggerBase = totalDuration / chars.length;
-
-      chars.forEach((span, i) => {
-        const final = span.dataset.f;
-        const resolveAt = 300 + (i * staggerBase * 0.6) + Math.random() * 200;
-        const cycleInterval = 50;
-        let elapsed = 0;
-
-        const timer = setInterval(() => {
-          elapsed += cycleInterval;
-          const phase = Math.min(Math.floor(elapsed / (resolveAt / glyphSets.length)), glyphSets.length - 1);
-          const set = glyphSets[phase];
-          span.textContent = set[Math.floor(Math.random() * set.length)];
-          span.style.opacity = 0.3 + Math.random() * 0.7;
-          // Mix of black, white, and blue for mosaic feel
-          const colorRoll = Math.random();
-          if (colorRoll < 0.45) {
-            span.style.color = 'var(--text-primary)';
-          } else if (colorRoll < 0.7) {
-            span.style.color = '#ccc';
-          } else {
-            span.style.color = 'var(--accent-blue)';
-          }
-
-          if (elapsed >= resolveAt) {
-            clearInterval(timer);
-            span.textContent = final;
-            span.style.opacity = '1';
-            // Brief blue flash, then fade to final black
-            span.style.color = 'var(--accent-blue)';
-            span.style.textShadow = '0 0 12px rgba(37,99,235,0.6)';
-            span.style.transition = 'color 0.4s ease, text-shadow 0.4s ease';
-            requestAnimationFrame(() => {
-              setTimeout(() => {
-                span.style.color = 'var(--text-primary)';
-                span.style.textShadow = 'none';
-              }, 80);
-            });
-          }
-        }, cycleInterval);
-      });
-
-      // After all resolved, clean up
-      setTimeout(() => {
-        heroName.classList.remove('mosaic-active');
-        heroName.innerHTML = originalHTML;
-      }, totalDuration + 300);
-
-      // Start idle glitch after full cleanup
-      setTimeout(() => {
-
-        // Idle glitch: randomly flicker 1-2 chars every few seconds
-        let glitchRunning = false;
-
-        function idleGlitch() {
-          if (glitchRunning) return;
-          glitchRunning = true;
-
-          // Snapshot the full original text so we can always restore cleanly
-          const fullText = heroName.textContent;
-          const textNodes = [];
-
-          // Collect all text nodes
-          function walk(node) {
-            if (node.nodeType === Node.TEXT_NODE && node.textContent.trim()) {
-              textNodes.push(node);
-            } else if (node.nodeType === Node.ELEMENT_NODE) {
-              Array.from(node.childNodes).forEach(walk);
-            }
-          }
-          walk(heroName);
-
-          if (!textNodes.length) { glitchRunning = false; return; }
-
-          // Pick a random text node and a random char in it
-          const node = textNodes[Math.floor(Math.random() * textNodes.length)];
-          const str = node.textContent;
-          const validIndices = [];
-          for (let i = 0; i < str.length; i++) {
-            if (str[i] !== ' ' && str[i] !== '\n') validIndices.push(i);
-          }
-          if (!validIndices.length) { glitchRunning = false; return; }
-
-          const idx = validIndices[Math.floor(Math.random() * validIndices.length)];
-          const originalChar = str[idx];
-
-          // Split text node into 3 parts: before, glitch span, after
-          const before = str.substring(0, idx);
-          const after = str.substring(idx + 1);
-
-          const beforeNode = document.createTextNode(before);
-          const afterNode = document.createTextNode(after);
-          const glitchSpan = document.createElement('span');
-          glitchSpan.style.color = 'var(--accent-blue)';
-          glitchSpan.style.transition = 'color 0.3s ease';
-          glitchSpan.textContent = allGlyphs[Math.floor(Math.random() * allGlyphs.length)];
-
-          const parent = node.parentNode;
-          parent.insertBefore(beforeNode, node);
-          parent.insertBefore(glitchSpan, node);
-          parent.insertBefore(afterNode, node);
-          parent.removeChild(node);
-
-          // Flicker a couple glyphs then restore
-          let flicks = 0;
-          const maxFlicks = 2 + Math.floor(Math.random() * 3);
-          const flickInterval = setInterval(() => {
-            flicks++;
-            glitchSpan.textContent = allGlyphs[Math.floor(Math.random() * allGlyphs.length)];
-            if (flicks >= maxFlicks) {
-              clearInterval(flickInterval);
-              glitchSpan.textContent = originalChar;
-              glitchSpan.style.color = 'inherit';
-              // After transition, merge nodes back safely
-              setTimeout(() => {
-                try {
-                  // Rebuild the full string from the 3 sibling nodes
-                  const merged = document.createTextNode(before + originalChar + after);
-                  if (beforeNode.parentNode === parent) parent.removeChild(beforeNode);
-                  if (glitchSpan.parentNode === parent) parent.removeChild(glitchSpan);
-                  if (afterNode.parentNode === parent) parent.removeChild(afterNode);
-                  // Insert merged node where the group was
-                  // Find the right position — use the next sibling if available
-                  parent.normalize(); // merge adjacent text nodes first
-                  // Re-walk to find where to insert
-                  const existingNodes = Array.from(parent.childNodes);
-                  if (existingNodes.length === 0) {
-                    parent.appendChild(merged);
-                  } else {
-                    // Just set the parent's innerHTML back to the original
-                    heroName.innerHTML = originalHTML;
-                  }
-                } catch (e) {
-                  // Safety fallback: restore original HTML
-                  heroName.innerHTML = originalHTML;
-                }
-                glitchRunning = false;
-              }, 350);
-            }
-          }, 70);
+      function typeChar() {
+        if (charIndex < fullText.length) {
+          heroName.textContent = fullText.substring(0, charIndex + 1);
+          charIndex++;
+          // Slight speed variation for natural feel
+          const nextDelay = speed + Math.random() * 40;
+          setTimeout(typeChar, nextDelay);
+        } else {
+          // Typing done — keep cursor blinking for a moment, then remove
+          setTimeout(() => {
+            heroName.classList.remove('hero-name-typing');
+          }, 1800);
         }
-
-        // Run idle glitch every 3–6 seconds
-        setInterval(() => {
-          idleGlitch();
-        }, 5000 + Math.random() * 5000);
-
-      }, totalDuration + 1200);
-    }, 400);
+      }
+      typeChar();
+    }, 500);
   }
 
   // ==========================================

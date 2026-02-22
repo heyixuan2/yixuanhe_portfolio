@@ -879,6 +879,20 @@ img {
   letter-spacing: -0.04em;
   line-height: 1.05;
   margin-bottom: 16px;
+  min-height: 1.1em;
+}
+
+/* Typewriter cursor */
+.hero-name-typing::after {
+  content: '|';
+  color: var(--accent-blue);
+  font-weight: 400;
+  animation: heroCursorBlink 0.6s step-end infinite;
+  margin-left: 2px;
+}
+@keyframes heroCursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
 .hero-name .outline {
@@ -2644,37 +2658,7 @@ body.page-loaded {
 /* --- Tech Mosaic Name Effect --- */
 
 /* Char spans are inline so they don't shift layout at all */
-.mc {
-  color: var(--accent-blue);
-  transition: color 0.15s ease;
-}
-
-.mc-flash {
-  color: var(--accent-blue) !important;
-  text-shadow: 0 0 12px rgba(37, 99, 235, 0.6), 0 0 4px rgba(37, 99, 235, 0.3);
-}
-
-/* Scanline element */
-.mosaic-scanline {
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: rgba(37, 99, 235, 0.3);
-  animation: scanLine 0.8s linear infinite;
-  pointer-events: none;
-  z-index: 3;
-  transition: opacity 0.4s ease;
-}
-
-.mosaic-scanline.fade-out {
-  opacity: 0;
-}
-
-@keyframes scanLine {
-  0% { top: 0; opacity: 1; }
-  100% { top: 100%; opacity: 0.3; }
-}
+/* (Mosaic styles removed — using typewriter animation now) */
 
 /* --- Tag Ripple Effect --- */
 .tag {
